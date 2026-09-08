@@ -101,7 +101,7 @@ class _AppTextState extends State<AppText> {
   }
 
   TextStyle _textStyle(BuildContext context) {
-    final defaultColor = colors.primaryText;
+    final defaultColor = appColors.primaryText;
 
     return TextStyle(
       color: _isHovered

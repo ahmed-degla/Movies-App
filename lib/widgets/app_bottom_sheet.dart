@@ -92,7 +92,7 @@ class _KeyboardAware extends StatelessWidget {
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(context.r(16)),
           ),
-          color: colors.background,
+          color: appColors.background,
         ),
         width: double.infinity,
         child: child,

@@ -15,7 +15,7 @@ class AppBackButton extends StatelessWidget {
     quarterTurns: AppUtils.isAr ? 0 : 2,
     child: Icon(
       FontAwesomeIcons.chevronRight.data,
-      color: colors.primary,
+      color: appColors.primary,
       size: context.sp(18),
     ),
   );

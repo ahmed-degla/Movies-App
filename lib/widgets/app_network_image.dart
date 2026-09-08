@@ -220,9 +220,9 @@ class _ImageShimmerState extends State<_ImageShimmer>
           begin: Alignment(-1 + position, 0),
           end: Alignment(position, 0),
           colors: [
-            colors.fill.withValues(alpha: .3),
-            colors.fill.withValues(alpha: .1),
-            colors.fill.withValues(alpha: .3),
+            appColors.fill.withValues(alpha: .3),
+            appColors.fill.withValues(alpha: .1),
+            appColors.fill.withValues(alpha: .3),
           ],
           stops: const [0.0, 0.5, 1.0],
         ).createShader(bounds);
@@ -238,7 +238,7 @@ class _ImageError extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     alignment: Alignment.center,
-    color: colors.fill,
+    color: appColors.fill,
     child: Icon(
       Icons.image_not_supported_outlined,
       color: Colors.grey.shade500,

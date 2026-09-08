@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
               width: 120.w,
               height: 118.h,
 
-              color: colors.primary,
+              color: appColors.primary,
             ),
           ),
           Positioned(
@@ -48,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 Assets.images.png.routeLogo.image(
                   width: 180.w,
                   height: 76.h,
-                  color: colors.primary,
+                  color: appColors.primary,
                 ),
                 SizedBox(height: 10.h),
                 AppText(text: 'Supervised by Mohamed Nabil', fontSize: 16.sp),

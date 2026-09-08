@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:movies/core/routing/app_router.dart';
 
-AppColors get colors =>
+AppThemeExtension get appColors =>
     Theme.of(
       AppRouter.instance.navigatorKey.currentContext!,
-    ).extension<AppColors>()!;
+    ).extension<AppThemeExtension>()!;
 
-class AppColors extends ThemeExtension<AppColors> {
-  const AppColors({
+class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
+  const AppThemeExtension({
     required this.primary,
     required this.secondary,
     required this.background,
@@ -23,13 +23,13 @@ class AppColors extends ThemeExtension<AppColors> {
   final Color primaryText;
 
   @override
-  AppColors copyWith({
+  AppThemeExtension copyWith({
     Color? primary,
     Color? secondary,
     Color? background,
     Color? fill,
     Color? primaryText,
-  }) => AppColors(
+  }) => AppThemeExtension(
       primary: primary ?? this.primary,
       secondary: secondary ?? this.secondary,
       background: background ?? this.background,
@@ -38,15 +38,15 @@ class AppColors extends ThemeExtension<AppColors> {
     );
 
   @override
-  AppColors lerp(
-      covariant ThemeExtension<AppColors>? other,
+  AppThemeExtension lerp(
+      covariant ThemeExtension<AppThemeExtension>? other,
       double t,
       ) {
-    if (other is! AppColors) {
+    if (other is! AppThemeExtension) {
       return this;
     }
 
-    return AppColors(
+    return AppThemeExtension(
       primary: Color.lerp(primary, other.primary, t)!,
       secondary: Color.lerp(secondary, other.secondary, t)!,
       background: Color.lerp(background, other.background, t)!,
