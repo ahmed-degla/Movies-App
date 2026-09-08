@@ -1,0 +1,14 @@
+flutter_native_splash:
+  color: "#131832"
+  color_dark: "#131832"
+
+  image: assets/images/png/azhlha.png
+  image_dark: assets/images/png/azhlha.png
+
+  fullscreen: true
+
+  android_12:
+    color: "#131832"
+    image: assets/images/png/azhlha_12.png
+    image_dark: assets/images/png/azhlha_12.png
+    icon_background_color: "#131832"

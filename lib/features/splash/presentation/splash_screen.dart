@@ -1,0 +1,45 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:movies/core/theme/theme_extension.dart';
+import 'package:movies/generated/assets/assets.gen.dart';
+import 'package:movies/widgets/app_text.dart';
+
+@RoutePage()
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    body: SafeArea(
+      child: Stack(
+        children: [
+          Center(
+            child: Assets.images.png.logo.image(
+              width: 120.w,
+              height: 118.h,
+
+              color: colors.primary,
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Column(
+              children: [
+                Assets.images.png.routeLogo.image(
+                  width: 180.w,
+                  height: 76.h,
+                  color: colors.primary,
+                ),
+                SizedBox(height: 10.h),
+                AppText(text: 'Supervised by Mohamed Nabil', fontSize: 16.sp),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
