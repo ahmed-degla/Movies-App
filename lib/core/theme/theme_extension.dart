@@ -7,6 +7,10 @@ AppThemeExtension get appColors =>
       AppRouter.instance.navigatorKey.currentContext!,
     ).extension<AppThemeExtension>()!;
 
+AppThemeExtension get colors => appColors;
+
+typedef AppColors = AppThemeExtension;
+
 class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
   const AppThemeExtension({
     required this.primary,
