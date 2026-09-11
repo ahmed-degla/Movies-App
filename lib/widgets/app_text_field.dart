@@ -59,6 +59,8 @@ class AppTextField extends StatefulWidget {
     this.errorStyle,
 
     this.contentPadding,
+    this.textAlignVertical,
+    this.prefixIconConstraints,
     this.borderRadius,
     this.borderColor,
     this.focusedBorderColor,
@@ -127,6 +129,8 @@ class AppTextField extends StatefulWidget {
   final TextStyle? errorStyle;
 
   final EdgeInsetsGeometry? contentPadding;
+  final TextAlignVertical? textAlignVertical;
+  final BoxConstraints? prefixIconConstraints;
 
   final double? borderRadius;
 
@@ -301,6 +305,7 @@ class _AppTextFieldState extends State<AppTextField> {
       inputFormatters: widget.inputFormatters,
 
       textAlign: widget.textAlign,
+      textAlignVertical: widget.textAlignVertical ?? TextAlignVertical.center,
       style: textStyle,
 
       cursorColor: widget.cursorColor ?? appColors.primary,
@@ -311,6 +316,7 @@ class _AppTextFieldState extends State<AppTextField> {
         errorStyle: widget.errorStyle,
 
         prefixIcon: widget.prefixIcon,
+        prefixIconConstraints: widget.prefixIconConstraints,
         prefix: widget.prefix,
 
         suffix: widget.suffix,

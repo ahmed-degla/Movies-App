@@ -9,7 +9,10 @@
 // ignore_for_file: type=lint
 // ignore_for_file: deprecated_member_use,directives_ordering,implicit_dynamic_list_literal,unnecessary_import
 
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart' as _svg;
+import 'package:vector_graphics/vector_graphics.dart' as _vg;
 
 class $AssetsFontsGen {
   const $AssetsFontsGen();
@@ -60,20 +63,103 @@ class $AssetsImagesGen {
 
   /// Directory path: assets/images/png
   $AssetsImagesPngGen get png => const $AssetsImagesPngGen();
+
+  /// Directory path: assets/images/svg
+  $AssetsImagesSvgGen get svg => const $AssetsImagesSvgGen();
 }
 
 class $AssetsImagesPngGen {
   const $AssetsImagesPngGen();
 
+  /// File path: assets/images/png/empty.png
+  AssetGenImage get empty => const AssetGenImage('assets/images/png/empty.png');
+
   /// File path: assets/images/png/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/png/logo.png');
+
+  /// File path: assets/images/png/profile1.png
+  AssetGenImage get profile1 =>
+      const AssetGenImage('assets/images/png/profile1.png');
+
+  /// File path: assets/images/png/profile10.png
+  AssetGenImage get profile10 =>
+      const AssetGenImage('assets/images/png/profile10.png');
+
+  /// File path: assets/images/png/profile2.png
+  AssetGenImage get profile2 =>
+      const AssetGenImage('assets/images/png/profile2.png');
+
+  /// File path: assets/images/png/profile3.png
+  AssetGenImage get profile3 =>
+      const AssetGenImage('assets/images/png/profile3.png');
+
+  /// File path: assets/images/png/profile4.png
+  AssetGenImage get profile4 =>
+      const AssetGenImage('assets/images/png/profile4.png');
+
+  /// File path: assets/images/png/profile5.png
+  AssetGenImage get profile5 =>
+      const AssetGenImage('assets/images/png/profile5.png');
+
+  /// File path: assets/images/png/profile6.png
+  AssetGenImage get profile6 =>
+      const AssetGenImage('assets/images/png/profile6.png');
+
+  /// File path: assets/images/png/profile7.png
+  AssetGenImage get profile7 =>
+      const AssetGenImage('assets/images/png/profile7.png');
+
+  /// File path: assets/images/png/profile8.png
+  AssetGenImage get profile8 =>
+      const AssetGenImage('assets/images/png/profile8.png');
+
+  /// File path: assets/images/png/profile9.png
+  AssetGenImage get profile9 =>
+      const AssetGenImage('assets/images/png/profile9.png');
 
   /// File path: assets/images/png/route_logo.png
   AssetGenImage get routeLogo =>
       const AssetGenImage('assets/images/png/route_logo.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [logo, routeLogo];
+  List<AssetGenImage> get values => [
+    empty,
+    logo,
+    profile1,
+    profile10,
+    profile2,
+    profile3,
+    profile4,
+    profile5,
+    profile6,
+    profile7,
+    profile8,
+    profile9,
+    routeLogo,
+  ];
+}
+
+class $AssetsImagesSvgGen {
+  const $AssetsImagesSvgGen();
+
+  /// File path: assets/images/svg/exit.svg
+  SvgGenImage get exit => const SvgGenImage('assets/images/svg/exit.svg');
+
+  /// File path: assets/images/svg/history.svg
+  SvgGenImage get history => const SvgGenImage('assets/images/svg/history.svg');
+
+  /// File path: assets/images/svg/phone.svg
+  SvgGenImage get phone => const SvgGenImage('assets/images/svg/phone.svg');
+
+  /// File path: assets/images/svg/user.svg
+  SvgGenImage get user => const SvgGenImage('assets/images/svg/user.svg');
+
+  /// File path: assets/images/svg/watchList.svg
+  SvgGenImage get watchList =>
+      const SvgGenImage('assets/images/svg/watchList.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [exit, history, phone, user, watchList];
 }
 
 abstract final class Assets {
@@ -167,4 +253,78 @@ class AssetGenImageAnimation {
   final bool isAnimation;
   final Duration duration;
   final int frames;
+}
+
+class SvgGenImage {
+  const SvgGenImage(this._assetName, {this.size, this.flavors = const {}})
+    : _isVecFormat = false;
+
+  const SvgGenImage.vec(this._assetName, {this.size, this.flavors = const {}})
+    : _isVecFormat = true;
+
+  final String _assetName;
+  final Size? size;
+  final Set<String> flavors;
+  final bool _isVecFormat;
+
+  _svg.SvgPicture svg({
+    Key? key,
+    bool matchTextDirection = false,
+    AssetBundle? bundle,
+    String? package,
+    double? width,
+    double? height,
+    BoxFit fit = BoxFit.contain,
+    AlignmentGeometry alignment = Alignment.center,
+    bool allowDrawingOutsideViewBox = false,
+    WidgetBuilder? placeholderBuilder,
+    String? semanticsLabel,
+    bool excludeFromSemantics = false,
+    _svg.SvgTheme? theme,
+    _svg.ColorMapper? colorMapper,
+    ColorFilter? colorFilter,
+    Clip clipBehavior = Clip.hardEdge,
+    @deprecated Color? color,
+    @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
+    @deprecated bool cacheColorFilter = false,
+  }) {
+    final _svg.BytesLoader loader;
+    if (_isVecFormat) {
+      loader = _vg.AssetBytesLoader(
+        _assetName,
+        assetBundle: bundle,
+        packageName: package,
+      );
+    } else {
+      loader = _svg.SvgAssetLoader(
+        _assetName,
+        assetBundle: bundle,
+        packageName: package,
+        theme: theme,
+        colorMapper: colorMapper,
+      );
+    }
+    return _svg.SvgPicture(
+      loader,
+      key: key,
+      matchTextDirection: matchTextDirection,
+      width: width,
+      height: height,
+      fit: fit,
+      alignment: alignment,
+      allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
+      placeholderBuilder: placeholderBuilder,
+      semanticsLabel: semanticsLabel,
+      excludeFromSemantics: excludeFromSemantics,
+      colorFilter:
+          colorFilter ??
+          (color == null ? null : ColorFilter.mode(color, colorBlendMode)),
+      clipBehavior: clipBehavior,
+      cacheColorFilter: cacheColorFilter,
+    );
+  }
+
+  String get path => _assetName;
+
+  String get keyName => _assetName;
 }
