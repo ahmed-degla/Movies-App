@@ -6,8 +6,25 @@ import 'package:movies/generated/assets/assets.gen.dart';
 import 'package:movies/widgets/app_text.dart';
 
 @RoutePage()
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _init();
+  }
+
+  Future<void> _init() async {
+    await Future.delayed(const Duration(seconds: 3)).then((_) {
+      // context.router.replace(const HomeRoute());
+    });
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -19,7 +36,7 @@ class SplashScreen extends StatelessWidget {
               width: 120.w,
               height: 118.h,
 
-              color: colors.primary,
+              color: appColors.primary,
             ),
           ),
           Positioned(
@@ -31,7 +48,7 @@ class SplashScreen extends StatelessWidget {
                 Assets.images.png.routeLogo.image(
                   width: 180.w,
                   height: 76.h,
-                  color: colors.primary,
+                  color: appColors.primary,
                 ),
                 SizedBox(height: 10.h),
                 AppText(text: 'Supervised by Mohamed Nabil', fontSize: 16.sp),

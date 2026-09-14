@@ -26,7 +26,7 @@ class AppTheme {
     hoverColor: Colors.transparent,
     focusColor: Colors.transparent,
     extensions: const [
-      AppColors(
+      AppThemeExtension(
         primary: Color(0xFFF6BD00),
         secondary: Color(0xFFE82626),
         background: Color(0xFF121312),
@@ -47,7 +47,7 @@ class AppTheme {
     hoverColor: Colors.transparent,
     focusColor: Colors.transparent,
     extensions: const [
-      AppColors(
+      AppThemeExtension(
         primary: Color(0xFFF6BD00),
         secondary: Color(0xFFE82626),
         background: Color(0xFF121312),

@@ -59,6 +59,8 @@ class AppTextField extends StatefulWidget {
     this.errorStyle,
 
     this.contentPadding,
+    this.textAlignVertical,
+    this.prefixIconConstraints,
     this.borderRadius,
     this.borderColor,
     this.focusedBorderColor,
@@ -127,6 +129,8 @@ class AppTextField extends StatefulWidget {
   final TextStyle? errorStyle;
 
   final EdgeInsetsGeometry? contentPadding;
+  final TextAlignVertical? textAlignVertical;
+  final BoxConstraints? prefixIconConstraints;
 
   final double? borderRadius;
 
@@ -178,7 +182,7 @@ class _AppTextFieldState extends State<AppTextField> {
         ? OutlineInputBorder(
             borderRadius: BorderRadius.circular(radius),
             borderSide: BorderSide(
-              color: widget.borderColor ?? colors.fill,
+              color: widget.borderColor ?? appColors.fill,
               width: widget.borderWidth,
             ),
           )
@@ -187,7 +191,7 @@ class _AppTextFieldState extends State<AppTextField> {
         ? OutlineInputBorder(
             borderRadius: BorderRadius.circular(radius),
             borderSide: BorderSide(
-              color: widget.borderColor ?? colors.fill.withValues(alpha: .2),
+              color: widget.borderColor ?? appColors.fill.withValues(alpha: .2),
               width: widget.borderWidth,
             ),
           )
@@ -199,7 +203,7 @@ class _AppTextFieldState extends State<AppTextField> {
             borderSide: BorderSide(
               color:
                   widget.focusedBorderColor ??
-                  colors.primary.withValues(alpha: .2),
+                  appColors.primary.withValues(alpha: .2),
               width: widget.focusedBorderWidth,
             ),
           )
@@ -209,7 +213,7 @@ class _AppTextFieldState extends State<AppTextField> {
         ? OutlineInputBorder(
             borderRadius: BorderRadius.circular(radius),
             borderSide: BorderSide(
-              color: widget.errorBorderColor ?? colors.secondary,
+              color: widget.errorBorderColor ?? appColors.secondary,
               width: widget.borderWidth,
             ),
           )
@@ -220,8 +224,8 @@ class _AppTextFieldState extends State<AppTextField> {
       color:
           widget.textStyle?.color ??
           (widget.enabled
-              ? colors.primaryText
-              : colors.primaryText.withValues(alpha: .5)),
+              ? appColors.primaryText
+              : appColors.primaryText.withValues(alpha: .5)),
       backgroundColor: widget.textStyle?.backgroundColor,
       fontSize: widget.textStyle?.fontSize ?? context.sp(14),
       fontWeight: widget.textStyle?.fontWeight ?? FontWeight.w500,
@@ -248,7 +252,7 @@ class _AppTextFieldState extends State<AppTextField> {
     final hintStyle = TextStyle(
       inherit: widget.hintStyle?.inherit ?? true,
       color:
-          widget.hintStyle?.color ?? colors.primaryText.withValues(alpha: .5),
+          widget.hintStyle?.color ?? appColors.primaryText.withValues(alpha: .5),
       backgroundColor: widget.hintStyle?.backgroundColor,
       fontSize: widget.hintStyle?.fontSize ?? context.sp(14),
       fontWeight: widget.hintStyle?.fontWeight ?? FontWeight.w400,
@@ -301,9 +305,10 @@ class _AppTextFieldState extends State<AppTextField> {
       inputFormatters: widget.inputFormatters,
 
       textAlign: widget.textAlign,
+      textAlignVertical: widget.textAlignVertical ?? TextAlignVertical.center,
       style: textStyle,
 
-      cursorColor: widget.cursorColor ?? colors.primary,
+      cursorColor: widget.cursorColor ?? appColors.primary,
 
       decoration: InputDecoration(
         hintText: widget.hintText,
@@ -311,6 +316,7 @@ class _AppTextFieldState extends State<AppTextField> {
         errorStyle: widget.errorStyle,
 
         prefixIcon: widget.prefixIcon,
+        prefixIconConstraints: widget.prefixIconConstraints,
         prefix: widget.prefix,
 
         suffix: widget.suffix,
@@ -323,7 +329,7 @@ class _AppTextFieldState extends State<AppTextField> {
                   _isObscured
                       ? Icons.visibility_outlined
                       : Icons.visibility_off_outlined,
-                  color: colors.primaryText.withValues(alpha: .8),
+                  color: appColors.primaryText.withValues(alpha: .8),
                   size: context.w(24),
                 ),
               )
@@ -332,7 +338,7 @@ class _AppTextFieldState extends State<AppTextField> {
         filled: true,
         fillColor:
             widget.fillColor ??
-            (widget.enabled ? colors.fill : colors.fill.withValues(alpha: .2)),
+            (widget.enabled ? appColors.fill : appColors.fill.withValues(alpha: .2)),
 
         contentPadding:
             widget.contentPadding ??
@@ -356,7 +362,7 @@ class _AppTextFieldState extends State<AppTextField> {
       children: [
         AppText(
           text: widget.labelText!,
-          color: widget.labelColor ?? colors.primaryText.withValues(alpha: .8),
+          color: widget.labelColor ?? appColors.primaryText.withValues(alpha: .8),
           fontSize: widget.labelFontSize,
           fontWeight: widget.labelFontWeight ?? .w500,
           height: widget.labelHeight,

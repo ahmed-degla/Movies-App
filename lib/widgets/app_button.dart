@@ -114,9 +114,9 @@ class AppButton extends StatelessWidget {
   @override
   @override
   Widget build(BuildContext context) {
-    final primaryColor = backgroundColor ?? colors.primary;
+    final primaryColor = backgroundColor ?? appColors.primary;
 
-    final textColor = foregroundColor ?? colors.primaryText;
+    final textColor = foregroundColor ?? appColors.primaryText;
 
     final radius = borderRadius ?? context.sp(16);
 
