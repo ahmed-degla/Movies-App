@@ -133,9 +133,7 @@ class AppNetWorkImage extends StatelessWidget {
     BuildContext context,
     Object error,
     StackTrace? stackTrace,
-  ) {
-    return const _ImageError();
-  }
+  ) => const _ImageError();
 
   Widget _buildShape(Widget image) {
     switch (shape) {
@@ -211,7 +209,7 @@ class _ImageShimmerState extends State<_ImageShimmer>
   @override
   Widget build(BuildContext context) => AnimatedBuilder(
     animation: _controller,
-    builder: (_, _) => ShaderMask(
+    builder: (_, __) => ShaderMask(
       blendMode: BlendMode.srcATop,
       shaderCallback: (bounds) {
         final position = _controller.value * 2 - 1;
