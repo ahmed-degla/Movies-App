@@ -6,29 +6,30 @@ import 'package:movies/widgets/app_text.dart';
 
 class MovieCard extends StatelessWidget {
   const MovieCard({
-    super.key,
     required this.imageUrl,
     required this.rating,
+    super.key,
     this.onTap,
   });
 
   final String imageUrl;
-  final double rating;
+  final num rating;
   final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) => InkWell(
     onTap: onTap,
-    borderRadius: BorderRadius.circular(context.r(12)),
     child: Stack(
       children: [
         Container(
           clipBehavior: Clip.antiAlias,
-          width: context.w(146),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(context.r(12)),
           ),
-          child: AppNetWorkImage(imageUrl: imageUrl),
+          child: AppNetWorkImage(
+            imageUrl: imageUrl,
+            borderRadius: BorderRadius.circular(context.r(20)),
+          ),
         ),
         PositionedDirectional(
           top: 6,

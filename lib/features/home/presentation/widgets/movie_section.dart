@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:movies/core/theme/theme_extension.dart';
 import 'package:movies/core/utils/app_utils.dart';
+import 'package:movies/features/home/domain/entity/movie_entity.dart';
 import 'package:movies/generated/assets/assets.gen.dart';
 import 'package:movies/widgets/app/movie_card.dart';
 import 'package:movies/widgets/app_text.dart';
@@ -9,18 +10,15 @@ import 'package:movies/widgets/app_text.dart';
 class MovieSection extends StatelessWidget {
   const MovieSection({
     required this.title,
-    required this.imageUrls,
-    required this.ratings,
+    required this.movies,
+
     super.key,
     this.onSeeMore,
-    this.onItemTap,
   });
 
   final String title;
-  final List<String> imageUrls;
-  final List<double> ratings;
+  final List<MovieEntity> movies;
   final VoidCallback? onSeeMore;
-  final ValueChanged<int>? onItemTap;
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -56,11 +54,11 @@ class MovieSection extends StatelessWidget {
           height: context.h(220),
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
-            itemCount: imageUrls.length,
+            itemCount: movies.length,
             itemBuilder: (context, index) => MovieCard(
-              imageUrl: imageUrls[index],
-              rating: ratings[index],
-              onTap: () => onItemTap?.call(index),
+              imageUrl: movies[index].largeCoverImage,
+              rating: movies[index].rating,
+              onTap: () {},
             ),
             separatorBuilder: (_, _) => SizedBox(width: context.w(12)),
           ),

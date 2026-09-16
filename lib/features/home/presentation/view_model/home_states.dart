@@ -17,7 +17,7 @@ class HomeInit extends HomeStates {
 
   @override
   HomeInit copyWith({int? selectedIndex, int? carouselIndex}) => HomeInit(
-    selectedTapIndex: selectedIndex ?? this.selectedTapIndex,
+    selectedTapIndex: selectedIndex ?? selectedTapIndex,
     carouselIndex: carouselIndex ?? this.carouselIndex,
   );
 }
@@ -27,7 +27,7 @@ class HomeLoading extends HomeStates {
 
   @override
   HomeLoading copyWith({int? selectedIndex, int? carouselIndex}) => HomeLoading(
-    selectedTapIndex: selectedIndex ?? this.selectedTapIndex,
+    selectedTapIndex: selectedIndex ?? selectedTapIndex,
     carouselIndex: carouselIndex ?? this.carouselIndex,
   );
 }
@@ -38,7 +38,7 @@ class HomeTapIndexUpdated extends HomeStates {
   @override
   HomeTapIndexUpdated copyWith({int? selectedIndex, int? carouselIndex}) =>
       HomeTapIndexUpdated(
-        selectedTapIndex: selectedIndex ?? this.selectedTapIndex,
+        selectedTapIndex: selectedIndex ?? selectedTapIndex,
         carouselIndex: carouselIndex ?? this.carouselIndex,
       );
 }
@@ -49,7 +49,30 @@ class HomeCarouselIndexUpdated extends HomeStates {
   @override
   HomeCarouselIndexUpdated copyWith({int? selectedIndex, int? carouselIndex}) =>
       HomeCarouselIndexUpdated(
-        selectedTapIndex: selectedIndex ?? this.selectedTapIndex,
+        selectedTapIndex: selectedIndex ?? selectedTapIndex,
         carouselIndex: carouselIndex ?? this.carouselIndex,
       );
+}
+
+class HomeLoaded extends HomeStates {
+  const HomeLoaded({super.selectedTapIndex, super.carouselIndex});
+
+  @override
+  HomeStates copyWith({int? selectedIndex, int? carouselIndex}) => HomeLoaded(
+    selectedTapIndex: selectedIndex ?? selectedTapIndex,
+    carouselIndex: carouselIndex ?? this.carouselIndex,
+  );
+}
+
+class HomeFailed extends HomeStates {
+  const HomeFailed({required this.message, super.selectedTapIndex, super.carouselIndex});
+
+  final String message;
+
+  @override
+  HomeStates copyWith({int? selectedIndex, int? carouselIndex,String? message}) => HomeFailed(
+    selectedTapIndex: selectedIndex ?? selectedTapIndex,
+    carouselIndex: carouselIndex ?? this.carouselIndex,
+    message: message ?? this.message,
+  );
 }
