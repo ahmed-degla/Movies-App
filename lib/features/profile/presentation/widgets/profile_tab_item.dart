@@ -29,7 +29,7 @@ class ProfileTabItem extends StatelessWidget {
           width: context.w(22),
           height: context.h(22),
           colorFilter: ColorFilter.mode(
-            isSelected ? colors.primary : colors.primaryText,
+            isSelected ? appColors.primary : appColors.primaryText,
             BlendMode.srcIn,
           ),
         ),
@@ -37,14 +37,14 @@ class ProfileTabItem extends StatelessWidget {
         AppText(
           text: label,
           fontSize: context.sp(20),
-          color: isSelected ? colors.primary : colors.primaryText,
+          color: isSelected ? appColors.primary : appColors.primaryText,
         ),
         SizedBox(height: context.h(10)),
         AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           height: context.h(3),
           width: double.infinity,
-          color: isSelected ? colors.primary : Colors.transparent,
+          color: isSelected ? appColors.primary : Colors.transparent,
         ),
       ],
     ),

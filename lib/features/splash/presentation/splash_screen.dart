@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:movies/core/routing/app_router.gr.dart';
 import 'package:movies/core/theme/theme_extension.dart';
 import 'package:movies/generated/assets/assets.gen.dart';
 import 'package:movies/widgets/app_text.dart';
@@ -22,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _init() async {
     await Future.delayed(const Duration(seconds: 3)).then((_) {
-      // context.router.replace(const HomeRoute());
+      unawaited(context.router.replace(const HomeRoute()));
     });
   }
 

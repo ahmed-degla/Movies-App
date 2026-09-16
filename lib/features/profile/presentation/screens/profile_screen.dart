@@ -8,7 +8,6 @@ import 'package:movies/core/resources/app_buttons.dart';
 import 'package:movies/core/resources/assets_manager.dart';
 import 'package:movies/core/resources/strings_manager.dart';
 import 'package:movies/core/routing/app_router.gr.dart';
-import 'package:movies/core/theme/theme_extension.dart';
 import 'package:movies/features/profile/presentation/widgets/history_view.dart';
 import 'package:movies/features/profile/presentation/widgets/profile_avatar.dart';
 import 'package:movies/features/profile/presentation/widgets/profile_stat_item.dart';
@@ -67,7 +66,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    backgroundColor: colors.background,
     body: SafeArea(
       child: Column(
         children: [

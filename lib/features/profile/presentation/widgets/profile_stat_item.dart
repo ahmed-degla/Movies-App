@@ -24,7 +24,7 @@ class ProfileStatItem extends StatelessWidget {
       SizedBox(height: context.h(4)),
       AppText(
         text: label,
-        color: colors.primaryText,
+        color: appColors.primaryText,
         fontSize: context.sp(20),
         fontWeight: .w700,
       ),

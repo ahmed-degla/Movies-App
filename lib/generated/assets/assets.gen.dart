@@ -71,11 +71,23 @@ class $AssetsImagesGen {
 class $AssetsImagesPngGen {
   const $AssetsImagesPngGen();
 
+  /// File path: assets/images/png/avaliable_now.png
+  AssetGenImage get avaliableNow =>
+      const AssetGenImage('assets/images/png/avaliable_now.png');
+
   /// File path: assets/images/png/empty.png
   AssetGenImage get empty => const AssetGenImage('assets/images/png/empty.png');
 
   /// File path: assets/images/png/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/png/logo.png');
+
+  /// File path: assets/images/png/movie_bg.png
+  AssetGenImage get movieBg =>
+      const AssetGenImage('assets/images/png/movie_bg.png');
+
+  /// File path: assets/images/png/movie_cover.png
+  AssetGenImage get movieCover =>
+      const AssetGenImage('assets/images/png/movie_cover.png');
 
   /// File path: assets/images/png/profile1.png
   AssetGenImage get profile1 =>
@@ -121,10 +133,17 @@ class $AssetsImagesPngGen {
   AssetGenImage get routeLogo =>
       const AssetGenImage('assets/images/png/route_logo.png');
 
+  /// File path: assets/images/png/watch_now.png
+  AssetGenImage get watchNow =>
+      const AssetGenImage('assets/images/png/watch_now.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
+    avaliableNow,
     empty,
     logo,
+    movieBg,
+    movieCover,
     profile1,
     profile10,
     profile2,
@@ -136,20 +155,36 @@ class $AssetsImagesPngGen {
     profile8,
     profile9,
     routeLogo,
+    watchNow,
   ];
 }
 
 class $AssetsImagesSvgGen {
   const $AssetsImagesSvgGen();
 
+  /// File path: assets/images/svg/arrow.svg
+  SvgGenImage get arrow => const SvgGenImage('assets/images/svg/arrow.svg');
+
   /// File path: assets/images/svg/exit.svg
   SvgGenImage get exit => const SvgGenImage('assets/images/svg/exit.svg');
+
+  /// File path: assets/images/svg/explore.svg
+  SvgGenImage get explore => const SvgGenImage('assets/images/svg/explore.svg');
 
   /// File path: assets/images/svg/history.svg
   SvgGenImage get history => const SvgGenImage('assets/images/svg/history.svg');
 
+  /// File path: assets/images/svg/home.svg
+  SvgGenImage get home => const SvgGenImage('assets/images/svg/home.svg');
+
   /// File path: assets/images/svg/phone.svg
   SvgGenImage get phone => const SvgGenImage('assets/images/svg/phone.svg');
+
+  /// File path: assets/images/svg/profile.svg
+  SvgGenImage get profile => const SvgGenImage('assets/images/svg/profile.svg');
+
+  /// File path: assets/images/svg/search.svg
+  SvgGenImage get search => const SvgGenImage('assets/images/svg/search.svg');
 
   /// File path: assets/images/svg/user.svg
   SvgGenImage get user => const SvgGenImage('assets/images/svg/user.svg');
@@ -159,7 +194,18 @@ class $AssetsImagesSvgGen {
       const SvgGenImage('assets/images/svg/watchList.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [exit, history, phone, user, watchList];
+  List<SvgGenImage> get values => [
+    arrow,
+    exit,
+    explore,
+    history,
+    home,
+    phone,
+    profile,
+    search,
+    user,
+    watchList,
+  ];
 }
 
 abstract final class Assets {
