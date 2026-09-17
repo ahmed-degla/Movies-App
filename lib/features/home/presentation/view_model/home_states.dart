@@ -1,78 +1,157 @@
 part of 'home_cubit.dart';
 
 sealed class HomeStates {
-  const HomeStates({this.selectedTapIndex = 0, this.carouselIndex = 0});
+  const HomeStates({
+    this.selectedTapIndex = 0,
+    this.carouselIndex = 0,
+    this.selectedGenre,
+  });
 
-  /// Bottom navigation index.
   final int selectedTapIndex;
-
-  /// Carousel current index.
   final int carouselIndex;
+  final String? selectedGenre;
 
-  HomeStates copyWith({int? selectedIndex, int? carouselIndex});
+  HomeStates copyWith({
+    int? selectedTapIndex,
+    int? carouselIndex,
+    String? selectedGenre,
+  });
 }
 
 class HomeInit extends HomeStates {
-  const HomeInit({super.selectedTapIndex, super.carouselIndex});
+  const HomeInit({
+    super.selectedTapIndex,
+    super.carouselIndex,
+    super.selectedGenre,
+  });
 
   @override
-  HomeInit copyWith({int? selectedIndex, int? carouselIndex}) => HomeInit(
-    selectedTapIndex: selectedIndex ?? selectedTapIndex,
-    carouselIndex: carouselIndex ?? this.carouselIndex,
-  );
+  HomeInit copyWith({
+    int? selectedTapIndex,
+    int? carouselIndex,
+    String? selectedGenre,
+  }) => HomeInit(
+      selectedTapIndex: selectedTapIndex ?? this.selectedTapIndex,
+      carouselIndex: carouselIndex ?? this.carouselIndex,
+      selectedGenre: selectedGenre ?? this.selectedGenre,
+    );
 }
 
 class HomeLoading extends HomeStates {
-  const HomeLoading({super.selectedTapIndex, super.carouselIndex});
+  const HomeLoading({
+    super.selectedTapIndex,
+    super.carouselIndex,
+    super.selectedGenre,
+  });
 
   @override
-  HomeLoading copyWith({int? selectedIndex, int? carouselIndex}) => HomeLoading(
-    selectedTapIndex: selectedIndex ?? selectedTapIndex,
-    carouselIndex: carouselIndex ?? this.carouselIndex,
-  );
-}
-
-class HomeTapIndexUpdated extends HomeStates {
-  const HomeTapIndexUpdated({super.selectedTapIndex, super.carouselIndex});
-
-  @override
-  HomeTapIndexUpdated copyWith({int? selectedIndex, int? carouselIndex}) =>
-      HomeTapIndexUpdated(
-        selectedTapIndex: selectedIndex ?? selectedTapIndex,
-        carouselIndex: carouselIndex ?? this.carouselIndex,
-      );
-}
-
-class HomeCarouselIndexUpdated extends HomeStates {
-  const HomeCarouselIndexUpdated({super.selectedTapIndex, super.carouselIndex});
-
-  @override
-  HomeCarouselIndexUpdated copyWith({int? selectedIndex, int? carouselIndex}) =>
-      HomeCarouselIndexUpdated(
-        selectedTapIndex: selectedIndex ?? selectedTapIndex,
-        carouselIndex: carouselIndex ?? this.carouselIndex,
-      );
+  HomeLoading copyWith({
+    int? selectedTapIndex,
+    int? carouselIndex,
+    String? selectedGenre,
+  }) => HomeLoading(
+      selectedTapIndex: selectedTapIndex ?? this.selectedTapIndex,
+      carouselIndex: carouselIndex ?? this.carouselIndex,
+      selectedGenre: selectedGenre ?? this.selectedGenre,
+    );
 }
 
 class HomeLoaded extends HomeStates {
-  const HomeLoaded({super.selectedTapIndex, super.carouselIndex});
+  const HomeLoaded({
+    super.selectedTapIndex,
+    super.carouselIndex,
+    super.selectedGenre,
+  });
 
   @override
-  HomeStates copyWith({int? selectedIndex, int? carouselIndex}) => HomeLoaded(
-    selectedTapIndex: selectedIndex ?? selectedTapIndex,
-    carouselIndex: carouselIndex ?? this.carouselIndex,
-  );
+  HomeLoaded copyWith({
+    int? selectedTapIndex,
+    int? carouselIndex,
+    String? selectedGenre,
+  }) => HomeLoaded(
+      selectedTapIndex: selectedTapIndex ?? this.selectedTapIndex,
+      carouselIndex: carouselIndex ?? this.carouselIndex,
+      selectedGenre: selectedGenre ?? this.selectedGenre,
+    );
+}
+
+class HomeTapIndexUpdated extends HomeStates {
+  const HomeTapIndexUpdated({
+    super.selectedTapIndex,
+    super.carouselIndex,
+    super.selectedGenre,
+  });
+
+  @override
+  HomeTapIndexUpdated copyWith({
+    int? selectedTapIndex,
+    int? carouselIndex,
+    String? selectedGenre,
+  }) => HomeTapIndexUpdated(
+      selectedTapIndex: selectedTapIndex ?? this.selectedTapIndex,
+      carouselIndex: carouselIndex ?? this.carouselIndex,
+      selectedGenre: selectedGenre ?? this.selectedGenre,
+    );
+}
+
+class HomeCarouselIndexUpdated extends HomeStates {
+  const HomeCarouselIndexUpdated({
+    super.selectedTapIndex,
+    super.carouselIndex,
+    super.selectedGenre,
+  });
+
+  @override
+  HomeCarouselIndexUpdated copyWith({
+    int? selectedTapIndex,
+    int? carouselIndex,
+    String? selectedGenre,
+  }) => HomeCarouselIndexUpdated(
+      selectedTapIndex: selectedTapIndex ?? this.selectedTapIndex,
+      carouselIndex: carouselIndex ?? this.carouselIndex,
+      selectedGenre: selectedGenre ?? this.selectedGenre,
+    );
+}
+
+class HomeGenreSelected extends HomeStates {
+  const HomeGenreSelected({
+    super.selectedTapIndex,
+    super.carouselIndex,
+    super.selectedGenre,
+  });
+
+  @override
+  HomeGenreSelected copyWith({
+    int? selectedTapIndex,
+    int? carouselIndex,
+    String? selectedGenre,
+  }) => HomeGenreSelected(
+      selectedTapIndex: selectedTapIndex ?? this.selectedTapIndex,
+      carouselIndex: carouselIndex ?? this.carouselIndex,
+      selectedGenre: selectedGenre ?? this.selectedGenre,
+    );
 }
 
 class HomeFailed extends HomeStates {
-  const HomeFailed({required this.message, super.selectedTapIndex, super.carouselIndex});
+  const HomeFailed({
+    required this.message,
+    super.selectedTapIndex,
+    super.carouselIndex,
+    super.selectedGenre,
+  });
 
   final String message;
 
   @override
-  HomeStates copyWith({int? selectedIndex, int? carouselIndex,String? message}) => HomeFailed(
-    selectedTapIndex: selectedIndex ?? selectedTapIndex,
-    carouselIndex: carouselIndex ?? this.carouselIndex,
-    message: message ?? this.message,
-  );
+  HomeFailed copyWith({
+    int? selectedTapIndex,
+    int? carouselIndex,
+    String? selectedGenre,
+    String? message,
+  }) => HomeFailed(
+      selectedTapIndex: selectedTapIndex ?? this.selectedTapIndex,
+      carouselIndex: carouselIndex ?? this.carouselIndex,
+      selectedGenre: selectedGenre ?? this.selectedGenre,
+      message: message ?? this.message,
+    );
 }

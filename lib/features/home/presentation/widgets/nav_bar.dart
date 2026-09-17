@@ -29,7 +29,7 @@ class BottomNavBar extends StatelessWidget {
             return Expanded(
               child: InkWell(
                 onTap: () {
-                  context.read<HomeCubit>().changeIndex(index);
+                  context.read<HomeCubit>().changeNavIndex(index);
                 },
                 borderRadius: BorderRadius.circular(context.r(16)),
                 child: Center(
