@@ -22,6 +22,8 @@ abstract class ApiService {
     @Query('order_by') String? orderBy,
   });
 
+}
+/*
   @GET('movie_details.json')
   Future<dynamic> getMovieDetails({
     @Query('movie_id') required int movieId,
@@ -32,5 +34,4 @@ abstract class ApiService {
   @GET('movie_suggestions.json')
   Future<dynamic> getMovieSuggestions({
     @Query('movie_id') required int movieId,
-  });
-}
+  });*/
