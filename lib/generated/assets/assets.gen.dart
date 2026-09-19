@@ -9,7 +9,10 @@
 // ignore_for_file: type=lint
 // ignore_for_file: deprecated_member_use,directives_ordering,implicit_dynamic_list_literal,unnecessary_import
 
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart' as _svg;
+import 'package:vector_graphics/vector_graphics.dart' as _vg;
 
 class $AssetsFontsGen {
   const $AssetsFontsGen();
@@ -60,10 +63,53 @@ class $AssetsImagesGen {
 
   /// Directory path: assets/images/png
   $AssetsImagesPngGen get png => const $AssetsImagesPngGen();
+
+  /// Directory path: assets/images/svg
+  $AssetsImagesSvgGen get svg => const $AssetsImagesSvgGen();
 }
 
 class $AssetsImagesPngGen {
   const $AssetsImagesPngGen();
+
+  /// File path: assets/images/png/Avatar1.png
+  AssetGenImage get avatar1 =>
+      const AssetGenImage('assets/images/png/Avatar1.png');
+
+  /// File path: assets/images/png/Avatar2.png
+  AssetGenImage get avatar2 =>
+      const AssetGenImage('assets/images/png/Avatar2.png');
+
+  /// File path: assets/images/png/Avatar3.png
+  AssetGenImage get avatar3 =>
+      const AssetGenImage('assets/images/png/Avatar3.png');
+
+  /// File path: assets/images/png/Avatar4.png
+  AssetGenImage get avatar4 =>
+      const AssetGenImage('assets/images/png/Avatar4.png');
+
+  /// File path: assets/images/png/Avatar5.png
+  AssetGenImage get avatar5 =>
+      const AssetGenImage('assets/images/png/Avatar5.png');
+
+  /// File path: assets/images/png/Avatar6.png
+  AssetGenImage get avatar6 =>
+      const AssetGenImage('assets/images/png/Avatar6.png');
+
+  /// File path: assets/images/png/Avatar7.png
+  AssetGenImage get avatar7 =>
+      const AssetGenImage('assets/images/png/Avatar7.png');
+
+  /// File path: assets/images/png/Avatar8.png
+  AssetGenImage get avatar8 =>
+      const AssetGenImage('assets/images/png/Avatar8.png');
+
+  /// File path: assets/images/png/Avatar9.png
+  AssetGenImage get avatar9 =>
+      const AssetGenImage('assets/images/png/Avatar9.png');
+
+  /// File path: assets/images/png/forgot_password.png
+  AssetGenImage get forgotPassword =>
+      const AssetGenImage('assets/images/png/forgot_password.png');
 
   /// File path: assets/images/png/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/png/logo.png');
@@ -73,7 +119,63 @@ class $AssetsImagesPngGen {
       const AssetGenImage('assets/images/png/route_logo.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [logo, routeLogo];
+  List<AssetGenImage> get values => [
+    avatar1,
+    avatar2,
+    avatar3,
+    avatar4,
+    avatar5,
+    avatar6,
+    avatar7,
+    avatar8,
+    avatar9,
+    forgotPassword,
+    logo,
+    routeLogo,
+  ];
+}
+
+class $AssetsImagesSvgGen {
+  const $AssetsImagesSvgGen();
+
+  /// File path: assets/images/svg/ar_flag.svg
+  SvgGenImage get arFlag => const SvgGenImage('assets/images/svg/ar_flag.svg');
+
+  /// File path: assets/images/svg/back_arrow.svg
+  SvgGenImage get backArrow =>
+      const SvgGenImage('assets/images/svg/back_arrow.svg');
+
+  /// File path: assets/images/svg/email.svg
+  SvgGenImage get email => const SvgGenImage('assets/images/svg/email.svg');
+
+  /// File path: assets/images/svg/en_flag.svg
+  SvgGenImage get enFlag => const SvgGenImage('assets/images/svg/en_flag.svg');
+
+  /// File path: assets/images/svg/icon _google.svg
+  SvgGenImage get iconGoogle =>
+      const SvgGenImage('assets/images/svg/icon _google.svg');
+
+  /// File path: assets/images/svg/lock.svg
+  SvgGenImage get lock => const SvgGenImage('assets/images/svg/lock.svg');
+
+  /// File path: assets/images/svg/name_icon.svg
+  SvgGenImage get nameIcon =>
+      const SvgGenImage('assets/images/svg/name_icon.svg');
+
+  /// File path: assets/images/svg/phone.svg
+  SvgGenImage get phone => const SvgGenImage('assets/images/svg/phone.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [
+    arFlag,
+    backArrow,
+    email,
+    enFlag,
+    iconGoogle,
+    lock,
+    nameIcon,
+    phone,
+  ];
 }
 
 abstract final class Assets {
@@ -167,4 +269,78 @@ class AssetGenImageAnimation {
   final bool isAnimation;
   final Duration duration;
   final int frames;
+}
+
+class SvgGenImage {
+  const SvgGenImage(this._assetName, {this.size, this.flavors = const {}})
+    : _isVecFormat = false;
+
+  const SvgGenImage.vec(this._assetName, {this.size, this.flavors = const {}})
+    : _isVecFormat = true;
+
+  final String _assetName;
+  final Size? size;
+  final Set<String> flavors;
+  final bool _isVecFormat;
+
+  _svg.SvgPicture svg({
+    Key? key,
+    bool matchTextDirection = false,
+    AssetBundle? bundle,
+    String? package,
+    double? width,
+    double? height,
+    BoxFit fit = BoxFit.contain,
+    AlignmentGeometry alignment = Alignment.center,
+    bool allowDrawingOutsideViewBox = false,
+    WidgetBuilder? placeholderBuilder,
+    String? semanticsLabel,
+    bool excludeFromSemantics = false,
+    _svg.SvgTheme? theme,
+    _svg.ColorMapper? colorMapper,
+    ColorFilter? colorFilter,
+    Clip clipBehavior = Clip.hardEdge,
+    @deprecated Color? color,
+    @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
+    @deprecated bool cacheColorFilter = false,
+  }) {
+    final _svg.BytesLoader loader;
+    if (_isVecFormat) {
+      loader = _vg.AssetBytesLoader(
+        _assetName,
+        assetBundle: bundle,
+        packageName: package,
+      );
+    } else {
+      loader = _svg.SvgAssetLoader(
+        _assetName,
+        assetBundle: bundle,
+        packageName: package,
+        theme: theme,
+        colorMapper: colorMapper,
+      );
+    }
+    return _svg.SvgPicture(
+      loader,
+      key: key,
+      matchTextDirection: matchTextDirection,
+      width: width,
+      height: height,
+      fit: fit,
+      alignment: alignment,
+      allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
+      placeholderBuilder: placeholderBuilder,
+      semanticsLabel: semanticsLabel,
+      excludeFromSemantics: excludeFromSemantics,
+      colorFilter:
+          colorFilter ??
+          (color == null ? null : ColorFilter.mode(color, colorBlendMode)),
+      clipBehavior: clipBehavior,
+      cacheColorFilter: cacheColorFilter,
+    );
+  }
+
+  String get path => _assetName;
+
+  String get keyName => _assetName;
 }

@@ -1,3 +1,18 @@
 {
-
+  "email": "Email",
+  "password": "Password",
+  "name": "Name",
+  "confirmPassword": "Confirm Password",
+  "phoneNumber": "Phone number",
+  "login": "Login",
+  "forgotPassword": "Forgot Password ?",
+  "dontHaveAccount": "Don't have an account?",
+  "createOne": "Create One",
+  "or": "OR",
+  "loginWithGoogle": "Login With Google",
+  "createAccount": "Create Account",
+  "alreadyHaveAccount": "Already have an account?",
+  "register": "Register",
+  "verifyEmail": "Verify Email",
+  "avatar": "Avatar"
 }
