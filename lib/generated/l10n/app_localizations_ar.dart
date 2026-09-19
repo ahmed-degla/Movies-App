@@ -56,4 +56,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get avatar => 'الصورة الشخصية';
+
+  @override
+  String get action => 'الاكشن';
+
+  @override
+  String get seeMore => 'المزيد';
 }

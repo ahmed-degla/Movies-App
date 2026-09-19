@@ -193,6 +193,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Avatar'**
   String get avatar;
+
+  /// No description provided for @action.
+  ///
+  /// In en, this message translates to:
+  /// **'Action'**
+  String get action;
+
+  /// No description provided for @seeMore.
+  ///
+  /// In en, this message translates to:
+  /// **'See More'**
+  String get seeMore;
 }
 
 class _AppLocalizationsDelegate

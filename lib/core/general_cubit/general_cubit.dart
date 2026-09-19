@@ -17,10 +17,13 @@ class GeneralState {
 
   bool get isArabic => locale.languageCode == 'ar';
 
-  GeneralState copyWith({ThemeMode? themeMode, Locale? locale}) => GeneralState(
-    themeMode: themeMode ?? this.themeMode,
-    locale: locale ?? this.locale,
-  );
+  GeneralState copyWith({
+    ThemeMode? themeMode,
+    Locale? locale,
+  }) => GeneralState(
+      themeMode: themeMode ?? this.themeMode,
+      locale: locale ?? this.locale,
+    );
 }
 
 class GeneralCubit extends Cubit<GeneralState> {
@@ -29,7 +32,9 @@ class GeneralCubit extends Cubit<GeneralState> {
   }
 
   static GeneralCubit of(BuildContext context) => context.read<GeneralCubit>();
+
   static final GeneralCubit instance = GeneralCubit._();
+
   static const String _themeModeKey = 'theme_mode';
   static const String _languageKey = 'language';
 
@@ -41,28 +46,66 @@ class GeneralCubit extends Cubit<GeneralState> {
     final theme = _prefs.getString(_themeModeKey);
     final language = _prefs.getString(_languageKey);
 
-    final themeMode = switch (theme) {
-      'light' => ThemeMode.light,
-      'dark' => ThemeMode.dark,
-      'system' => ThemeMode.system,
-      _ => ThemeMode.dark,
-    };
+    ThemeMode themeMode;
 
-    final locale = switch (language) {
-      'ar' => const Locale('ar'),
-      'en' => const Locale('en'),
-      _ => const Locale('en'),
-    };
+    switch (theme) {
+      case 'light':
+        themeMode = ThemeMode.light;
+        break;
 
-    emit(state.copyWith(themeMode: themeMode, locale: locale));
+      case 'dark':
+        themeMode = ThemeMode.dark;
+        break;
+
+      case 'system':
+        themeMode = ThemeMode.system;
+        break;
+
+      default:
+        themeMode = ThemeMode.dark;
+    }
+
+    Locale locale;
+
+    switch (language) {
+      case 'ar':
+        locale = const Locale('ar');
+        break;
+
+      case 'en':
+        locale = const Locale('en');
+        break;
+
+      default:
+        locale = const Locale('en');
+    }
+
+    emit(
+      state.copyWith(
+        themeMode: themeMode,
+        locale: locale,
+      ),
+    );
   }
 
   Future<void> changeTheme(ThemeMode mode) async {
-    await _prefs.setString(_themeModeKey, switch (mode) {
-      ThemeMode.light => 'light',
-      ThemeMode.dark => 'dark',
-      ThemeMode.system => 'system',
-    });
+    String theme;
+
+    switch (mode) {
+      case ThemeMode.light:
+        theme = 'light';
+        break;
+
+      case ThemeMode.dark:
+        theme = 'dark';
+        break;
+
+      case ThemeMode.system:
+        theme = 'system';
+        break;
+    }
+
+    await _prefs.setString(_themeModeKey, theme);
 
     emit(state.copyWith(themeMode: mode));
   }

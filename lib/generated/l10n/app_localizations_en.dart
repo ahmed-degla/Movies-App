@@ -56,4 +56,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get avatar => 'Avatar';
+
+  @override
+  String get action => 'Action';
+
+  @override
+  String get seeMore => 'See More';
 }

@@ -15,4 +15,7 @@
   "register": "Register",
   "verifyEmail": "Verify Email",
   "avatar": "Avatar"
+"action":"Action",
+"seeMore":"See More"
+
 }
