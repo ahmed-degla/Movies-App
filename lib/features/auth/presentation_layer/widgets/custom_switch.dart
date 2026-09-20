@@ -59,55 +59,58 @@ class _CustomSwitchState extends State<CustomSwitch> {
             width: 2.r,
           ),
         ),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            AnimatedAlign(
-              duration: const Duration(milliseconds: 250),
-              curve: Curves.easeInOut,
-              alignment:
-              _isEnglish ? Alignment.centerLeft : Alignment.centerRight,
-              child: Container(
-                width: 38.06.h,
-                height: 38.06.h,
-                decoration: BoxDecoration(
-                  color: appColors.primary,
-                  shape: BoxShape.circle,
+        child: Directionality(
+          textDirection: TextDirection.ltr,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              AnimatedAlign(
+                duration: const Duration(milliseconds: 250),
+                curve: Curves.easeInOut,
+                alignment:
+                _isEnglish ? Alignment.centerLeft : Alignment.centerRight,
+                child: Container(
+                  width: 38.06.h,
+                  height: 38.06.h,
+                  decoration: BoxDecoration(
+                    color: appColors.primary,
+                    shape: BoxShape.circle,
+                  ),
                 ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: 38.06.h,
-                  height: 38.06.h,
-                  child: Center(
-                    child: ClipOval(
-                      child: Assets.images.svg.enFlag.svg(
-                        width: 26.86.w,
-                        height: 26.86.h,
-                        fit: BoxFit.cover,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 38.06.h,
+                    height: 38.06.h,
+                    child: Center(
+                      child: ClipOval(
+                        child: Assets.images.svg.enFlag.svg(
+                          width: 26.86.w,
+                          height: 26.86.h,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  width: 38.06.h,
-                  height: 38.06.h,
-                  child: Center(
-                    child: ClipOval(
-                      child: Assets.images.svg.arFlag.svg(
-                        width: 26.86.w,
-                        height: 26.86.h,
-                        fit: BoxFit.cover,
+                  SizedBox(
+                    width: 38.06.h,
+                    height: 38.06.h,
+                    child: Center(
+                      child: ClipOval(
+                        child: Assets.images.svg.arFlag.svg(
+                          width: 26.86.w,
+                          height: 26.86.h,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -79,8 +79,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   SizedBox(height: 33.h),
                   CustomButton(
                     title: AppLocalizations.of(context)!.login,
-                    onTap: () {
+                    onTap: () async {
                       if (_formKey.currentState!.validate()) {
+                        await context.router.push(const HomeRoute());
                       }
                     },
                   ),

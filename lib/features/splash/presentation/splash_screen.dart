@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _init() async {
     await Future.delayed(const Duration(seconds: 3)).then((_) {
-      unawaited(context.router.replace(const HomeRoute()));
+      unawaited(context.router.replace(const SignInRoute()));
     });
   }
 
