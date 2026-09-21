@@ -13,7 +13,6 @@ analyzer:
   errors:
     # Treat important issues as errors.
     invalid_assignment: error
-    invalid_return_type: error
     missing_return: error
     dead_code: warning
     unused_import: error

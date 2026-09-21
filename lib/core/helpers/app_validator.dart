@@ -45,10 +45,7 @@ class AppValidators {
     return null;
   }
 
-  static String? confirmPassword(
-      String? value,
-      String? password,
-      ) {
+  static String? confirmPassword(String? value, String? password) {
     if (value == null || value.isEmpty) {
       return 'Please confirm your password';
     }
@@ -65,9 +62,7 @@ class AppValidators {
       return 'Name is required';
     }
 
-    final nameRegex = RegExp(
-      r'^[a-zA-Z\u0600-\u06FF\s]{2,}$',
-    );
+    final nameRegex = RegExp(r'^[a-zA-Z\u0600-\u06FF\s]{2,}$');
 
     if (!nameRegex.hasMatch(value.trim())) {
       return 'Enter a valid name';
@@ -81,9 +76,7 @@ class AppValidators {
       return 'Phone number is required';
     }
 
-    final phoneRegex = RegExp(
-      r'^\+?[0-9]{8,15}$',
-    );
+    final phoneRegex = RegExp(r'^\+?[0-9]{8,15}$');
 
     if (!phoneRegex.hasMatch(value.trim())) {
       return 'Enter a valid phone number';
