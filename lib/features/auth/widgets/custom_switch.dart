@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:movies/core/general_cubit/general_cubit.dart';
@@ -39,7 +41,7 @@ class _CustomSwitchState extends State<CustomSwitch> {
     setState(() {
       _isEnglish = nextIsEnglish;
     });
-    GeneralCubit.instance.changeLanguage(nextIsEnglish ? 'en' : 'ar');
+    unawaited(GeneralCubit.instance.changeLanguage(nextIsEnglish ? 'en' : 'ar'));
     widget.onChanged?.call(nextIsEnglish);
   }
 

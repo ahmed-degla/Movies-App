@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "680170815249",
+    "project_id": "movies-app-cffae",
+    "storage_bucket": "movies-app-cffae.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:680170815249:android:90e290af2cd3e19a5056b0",
+        "android_client_info": {
+          "package_name": "com.example.movies"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5eh_uLUrVE8mjBT4k8IftqE8GnFAf80Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
