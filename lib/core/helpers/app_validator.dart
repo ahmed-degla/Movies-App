@@ -66,7 +66,7 @@ class AppValidators {
     }
 
     final nameRegex = RegExp(
-      r"^[a-zA-Z\u0600-\u06FF\s]{2,}$",
+      r'^[a-zA-Z\u0600-\u06FF\s]{2,}$',
     );
 
     if (!nameRegex.hasMatch(value.trim())) {

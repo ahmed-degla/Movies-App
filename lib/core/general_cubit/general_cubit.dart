@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GeneralState {
@@ -17,23 +18,17 @@ class GeneralState {
 
   bool get isArabic => locale.languageCode == 'ar';
 
-  GeneralState copyWith({
-    ThemeMode? themeMode,
-    Locale? locale,
-  }) => GeneralState(
-      themeMode: themeMode ?? this.themeMode,
-      locale: locale ?? this.locale,
-    );
+  GeneralState copyWith({ThemeMode? themeMode, Locale? locale}) => GeneralState(
+    themeMode: themeMode ?? this.themeMode,
+    locale: locale ?? this.locale,
+  );
 }
 
+@singleton
 class GeneralCubit extends Cubit<GeneralState> {
-  GeneralCubit._() : super(const GeneralState()) {
-    unawaited(init());
-  }
+  GeneralCubit() : super(const GeneralState());
 
   static GeneralCubit of(BuildContext context) => context.read<GeneralCubit>();
-
-  static final GeneralCubit instance = GeneralCubit._();
 
   static const String _themeModeKey = 'theme_mode';
   static const String _languageKey = 'language';
@@ -46,64 +41,36 @@ class GeneralCubit extends Cubit<GeneralState> {
     final theme = _prefs.getString(_themeModeKey);
     final language = _prefs.getString(_languageKey);
 
-    ThemeMode themeMode;
+    final themeMode = switch (theme) {
+      'light' => ThemeMode.light,
+      'dark' => ThemeMode.dark,
+      'system' => ThemeMode.system,
+      _ => ThemeMode.dark,
+    };
 
-    switch (theme) {
-      case 'light':
-        themeMode = ThemeMode.light;
-        break;
+    final locale = switch (language) {
+      'ar' => const Locale('ar'),
+      'en' => const Locale('en'),
+      _ => const Locale('en'),
+    };
 
-      case 'dark':
-        themeMode = ThemeMode.dark;
-        break;
+    emit(state.copyWith(themeMode: themeMode, locale: locale));
+  }
 
-      case 'system':
-        themeMode = ThemeMode.system;
-        break;
+  Future<void> changeLanguage(String code) async {
+    final locale = Locale(code);
 
-      default:
-        themeMode = ThemeMode.dark;
-    }
+    emit(state.copyWith(locale: locale));
 
-    Locale locale;
-
-    switch (language) {
-      case 'ar':
-        locale = const Locale('ar');
-        break;
-
-      case 'en':
-        locale = const Locale('en');
-        break;
-
-      default:
-        locale = const Locale('en');
-    }
-
-    emit(
-      state.copyWith(
-        themeMode: themeMode,
-        locale: locale,
-      ),
-    );
+    await _prefs.setString(_languageKey, code);
   }
 
   Future<void> changeTheme(ThemeMode mode) async {
-    String theme;
-
-    switch (mode) {
-      case ThemeMode.light:
-        theme = 'light';
-        break;
-
-      case ThemeMode.dark:
-        theme = 'dark';
-        break;
-
-      case ThemeMode.system:
-        theme = 'system';
-        break;
-    }
+    final theme = switch (mode) {
+      ThemeMode.light => 'light',
+      ThemeMode.dark => 'dark',
+      ThemeMode.system => 'system',
+    };
 
     await _prefs.setString(_themeModeKey, theme);
 
@@ -116,14 +83,6 @@ class GeneralCubit extends Cubit<GeneralState> {
         : ThemeMode.dark;
 
     await changeTheme(newTheme);
-  }
-
-  Future<void> changeLanguage(String code) async {
-    final locale = Locale(code);
-
-    await _prefs.setString(_languageKey, code);
-
-    emit(state.copyWith(locale: locale));
   }
 
   bool get isDark => state.isDark;

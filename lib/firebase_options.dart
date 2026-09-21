@@ -56,13 +56,14 @@ class DefaultFirebaseOptions {
     projectId: 'movies-app-cffae',
     storageBucket: 'movies-app-cffae.firebasestorage.app',
   );
-
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCaAj3Sbj6HazQ85FyWmra3zlKL49O9eBY',
     appId: '1:680170815249:ios:bdeeef9786bb34455056b0',
     messagingSenderId: '680170815249',
     projectId: 'movies-app-cffae',
     storageBucket: 'movies-app-cffae.firebasestorage.app',
+    androidClientId: '680170815249-q6d075kv8f4f0s5m3q3trvqns5q1cp2a.apps.googleusercontent.com',
+    iosClientId: '680170815249-ros3275b23uqk121lkb045dq05l5hg3r.apps.googleusercontent.com',
     iosBundleId: 'com.example.movies',
   );
 }

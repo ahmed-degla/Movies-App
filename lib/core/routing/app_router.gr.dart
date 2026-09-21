@@ -11,10 +11,12 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 
 import 'package:auto_route/auto_route.dart' as _i8;
-import 'package:movies/features/auth/forgot_password/forgot_password_screen.dart'
+import 'package:movies/features/auth/forgot_password/presentation/forgot_password_screen.dart'
     as _i1;
-import 'package:movies/features/auth/sign_in/sign_in_screen.dart' as _i4;
-import 'package:movies/features/auth/sign_up/sign_up_screen.dart' as _i5;
+import 'package:movies/features/auth/sign_in/presentation/sign_in_screen.dart'
+    as _i4;
+import 'package:movies/features/auth/sign_up/presentation/sign_up_screen.dart'
+    as _i5;
 import 'package:movies/features/home/presentation/home_screen.dart' as _i2;
 import 'package:movies/features/profile/presentation/screens/profile_screen.dart'
     as _i3;
