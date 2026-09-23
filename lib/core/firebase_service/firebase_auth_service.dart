@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movies/core/models/user_model.dart';
+import 'package:movies/features/home/domain/entity/movie_entity.dart';
 
 /// Handles Firebase Authentication and user profile synchronization.
 @singleton
@@ -12,6 +13,8 @@ class FirebaseAuthService {
   final GoogleSignIn _googleSignIn = GoogleSignIn.instance;
 
   static const String _usersCollection = 'users';
+  static const String _watchlistCollection = 'watchlist';
+  static const String _historyCollection = 'history';
 
   // Web OAuth client ID.
   static const String _serverClientId =
@@ -156,6 +159,74 @@ class FirebaseAuthService {
 
     return getUserData(user.uid);
   }
+
+  CollectionReference<Map<String, dynamic>> _userMoviesRef(String collection) {
+    final user = currentUser;
+    if (user == null) {
+      throw StateError('A signed-in user is required.');
+    }
+
+    return _firestore
+        .collection(_usersCollection)
+        .doc(user.uid)
+        .collection(collection);
+  }
+
+  Map<String, dynamic> _movieData(MovieEntity movie) => {
+    'movieId': movie.id,
+    'rating': movie.rating,
+    'genres': movie.genres,
+    'backgroundImage': movie.backgroundImage,
+    'backgroundImageOriginal': movie.backgroundImageOriginal,
+    'smallCoverImage': movie.smallCoverImage,
+    'mediumCoverImage': movie.mediumCoverImage,
+    'largeCoverImage': movie.largeCoverImage,
+    'updatedAt': FieldValue.serverTimestamp(),
+  };
+
+  MovieEntity _movieFromSnapshot(
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+  ) {
+    final data = snapshot.data() ?? <String, dynamic>{};
+
+    return MovieEntity(
+      id: data['movieId'] as String? ?? snapshot.id,
+      rating: data['rating'] as num? ?? 0,
+      genres: List<String>.from(data['genres'] as List? ?? const []),
+      backgroundImage: data['backgroundImage'] as String? ?? '',
+      backgroundImageOriginal: data['backgroundImageOriginal'] as String? ?? '',
+      smallCoverImage: data['smallCoverImage'] as String? ?? '',
+      mediumCoverImage: data['mediumCoverImage'] as String? ?? '',
+      largeCoverImage: data['largeCoverImage'] as String? ?? '',
+    );
+  }
+
+  Future<void> addToWatchlist(MovieEntity movie) async {
+    await _userMoviesRef(_watchlistCollection).doc(movie.id).set({
+      ..._movieData(movie),
+      'createdAt': FieldValue.serverTimestamp(),
+    }, SetOptions(merge: true));
+  }
+
+  Future<void> removeFromWatchlist(String movieId) =>
+      _userMoviesRef(_watchlistCollection).doc(movieId).delete();
+
+  Stream<List<MovieEntity>> watchlistStream() =>
+      _userMoviesRef(_watchlistCollection)
+          .snapshots()
+          .map((snapshot) => snapshot.docs.map(_movieFromSnapshot).toList());
+
+  Future<void> addToHistory(MovieEntity movie) async {
+    await _userMoviesRef(_historyCollection).doc(movie.id).set({
+      ..._movieData(movie),
+      'createdAt': FieldValue.serverTimestamp(),
+    }, SetOptions(merge: true));
+  }
+
+  Stream<List<MovieEntity>> historyStream() =>
+      _userMoviesRef(_historyCollection)
+          .snapshots()
+          .map((snapshot) => snapshot.docs.map(_movieFromSnapshot).toList());
 
   Future<void> updateUserData(UserModel user) => _usersRef
       .doc(user.uid)

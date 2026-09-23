@@ -5,6 +5,7 @@ import 'package:movies/core/di/injection.dart';
 import 'package:movies/core/firebase_service/firebase_auth_service.dart';
 import 'package:movies/features/home/presentation/taps/explore_tap/explore_tap.dart';
 import 'package:movies/features/home/presentation/taps/home_tap/home_tap.dart';
+import 'package:movies/features/home/presentation/taps/profile_tap/profile_tap.dart';
 import 'package:movies/features/home/presentation/taps/search_tap/search_tap.dart';
 import 'package:movies/features/home/presentation/view_model/home_cubit.dart';
 import 'package:movies/features/home/presentation/widgets/nav_bar.dart';
@@ -23,7 +24,7 @@ class HomeScreen extends StatelessWidget {
           const HomeTap(),
           const SearchTap(),
           const ExploreTap(),
-          const SizedBox(height: 100),
+          const ProfileTap(),
         ][state.selectedTapIndex],
       ),
       bottomNavigationBar: const BottomNavBar(),
@@ -31,7 +32,6 @@ class HomeScreen extends StatelessWidget {
         onPressed: getIt.get<FirebaseAuthService>().signOut,
         child: const Icon(Icons.add),
       ),
-
     ),
   );
 }

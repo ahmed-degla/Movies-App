@@ -129,7 +129,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i604.GetMoviesUseCase(gh<_i287.MoviesRepo>()),
     );
     gh.factory<_i217.HomeCubit>(
-      () => _i217.HomeCubit(gh<_i604.GetMoviesUseCase>()),
+      () => _i217.HomeCubit(
+        gh<_i604.GetMoviesUseCase>(),
+        gh<_i348.FirebaseAuthService>(),
+      ),
     );
     return this;
   }

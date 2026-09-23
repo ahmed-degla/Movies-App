@@ -31,10 +31,10 @@ class HomeInit extends HomeStates {
     int? carouselIndex,
     String? selectedGenre,
   }) => HomeInit(
-      selectedTapIndex: selectedTapIndex ?? this.selectedTapIndex,
-      carouselIndex: carouselIndex ?? this.carouselIndex,
-      selectedGenre: selectedGenre ?? this.selectedGenre,
-    );
+    selectedTapIndex: selectedTapIndex ?? this.selectedTapIndex,
+    carouselIndex: carouselIndex ?? this.carouselIndex,
+    selectedGenre: selectedGenre ?? this.selectedGenre,
+  );
 }
 
 class HomeLoading extends HomeStates {
@@ -50,10 +50,10 @@ class HomeLoading extends HomeStates {
     int? carouselIndex,
     String? selectedGenre,
   }) => HomeLoading(
-      selectedTapIndex: selectedTapIndex ?? this.selectedTapIndex,
-      carouselIndex: carouselIndex ?? this.carouselIndex,
-      selectedGenre: selectedGenre ?? this.selectedGenre,
-    );
+    selectedTapIndex: selectedTapIndex ?? this.selectedTapIndex,
+    carouselIndex: carouselIndex ?? this.carouselIndex,
+    selectedGenre: selectedGenre ?? this.selectedGenre,
+  );
 }
 
 class HomeLoaded extends HomeStates {
@@ -69,10 +69,10 @@ class HomeLoaded extends HomeStates {
     int? carouselIndex,
     String? selectedGenre,
   }) => HomeLoaded(
-      selectedTapIndex: selectedTapIndex ?? this.selectedTapIndex,
-      carouselIndex: carouselIndex ?? this.carouselIndex,
-      selectedGenre: selectedGenre ?? this.selectedGenre,
-    );
+    selectedTapIndex: selectedTapIndex ?? this.selectedTapIndex,
+    carouselIndex: carouselIndex ?? this.carouselIndex,
+    selectedGenre: selectedGenre ?? this.selectedGenre,
+  );
 }
 
 class HomeTapIndexUpdated extends HomeStates {
@@ -88,10 +88,10 @@ class HomeTapIndexUpdated extends HomeStates {
     int? carouselIndex,
     String? selectedGenre,
   }) => HomeTapIndexUpdated(
-      selectedTapIndex: selectedTapIndex ?? this.selectedTapIndex,
-      carouselIndex: carouselIndex ?? this.carouselIndex,
-      selectedGenre: selectedGenre ?? this.selectedGenre,
-    );
+    selectedTapIndex: selectedTapIndex ?? this.selectedTapIndex,
+    carouselIndex: carouselIndex ?? this.carouselIndex,
+    selectedGenre: selectedGenre ?? this.selectedGenre,
+  );
 }
 
 class HomeCarouselIndexUpdated extends HomeStates {
@@ -107,10 +107,10 @@ class HomeCarouselIndexUpdated extends HomeStates {
     int? carouselIndex,
     String? selectedGenre,
   }) => HomeCarouselIndexUpdated(
-      selectedTapIndex: selectedTapIndex ?? this.selectedTapIndex,
-      carouselIndex: carouselIndex ?? this.carouselIndex,
-      selectedGenre: selectedGenre ?? this.selectedGenre,
-    );
+    selectedTapIndex: selectedTapIndex ?? this.selectedTapIndex,
+    carouselIndex: carouselIndex ?? this.carouselIndex,
+    selectedGenre: selectedGenre ?? this.selectedGenre,
+  );
 }
 
 class HomeGenreSelected extends HomeStates {
@@ -126,10 +126,10 @@ class HomeGenreSelected extends HomeStates {
     int? carouselIndex,
     String? selectedGenre,
   }) => HomeGenreSelected(
-      selectedTapIndex: selectedTapIndex ?? this.selectedTapIndex,
-      carouselIndex: carouselIndex ?? this.carouselIndex,
-      selectedGenre: selectedGenre ?? this.selectedGenre,
-    );
+    selectedTapIndex: selectedTapIndex ?? this.selectedTapIndex,
+    carouselIndex: carouselIndex ?? this.carouselIndex,
+    selectedGenre: selectedGenre ?? this.selectedGenre,
+  );
 }
 
 class HomeFailed extends HomeStates {
@@ -149,9 +149,28 @@ class HomeFailed extends HomeStates {
     String? selectedGenre,
     String? message,
   }) => HomeFailed(
-      selectedTapIndex: selectedTapIndex ?? this.selectedTapIndex,
-      carouselIndex: carouselIndex ?? this.carouselIndex,
-      selectedGenre: selectedGenre ?? this.selectedGenre,
-      message: message ?? this.message,
-    );
+    selectedTapIndex: selectedTapIndex ?? this.selectedTapIndex,
+    carouselIndex: carouselIndex ?? this.carouselIndex,
+    selectedGenre: selectedGenre ?? this.selectedGenre,
+    message: message ?? this.message,
+  );
+}
+
+class HomeProfileTabUpdated extends HomeStates {
+  const HomeProfileTabUpdated({
+    super.selectedTapIndex,
+    super.carouselIndex,
+    super.selectedGenre,
+  });
+
+  @override
+  HomeProfileTabUpdated copyWith({
+    int? selectedTapIndex,
+    int? carouselIndex,
+    String? selectedGenre,
+  }) => HomeProfileTabUpdated(
+    selectedTapIndex: selectedTapIndex ?? this.selectedTapIndex,
+    carouselIndex: carouselIndex ?? this.carouselIndex,
+    selectedGenre: selectedGenre ?? this.selectedGenre,
+  );
 }

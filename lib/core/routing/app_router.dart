@@ -13,33 +13,11 @@ class AppRouter extends RootStackRouter {
 
   @override
   List<AutoRoute> get routes => [
-    AutoRoute(
-      page: SplashRoute.page,
-      path: '/splash',
-      initial: true,
-    ),
-    AutoRoute(
-      page: SignInRoute.page,
-      path: '/signIn',
-    ),
-    AutoRoute(
-      page: SignUpRoute.page,
-      path: '/signUp',
-    ),
-    AutoRoute(
-      page: ForgotPasswordRoute.page,
-      path: '/forgotPassword',
-    ),
-    AutoRoute(
-      page: HomeRoute.page,
-      path: '/home',
-      guards: [AuthGuard()],
-    ),
-    AutoRoute(
-      page: ProfileRoute.page,
-      path: '/profile',
-      guards: [AuthGuard()],
-    ),
+    AutoRoute(page: SplashRoute.page, path: '/splash', initial: true),
+    AutoRoute(page: SignInRoute.page, path: '/signIn'),
+    AutoRoute(page: SignUpRoute.page, path: '/signUp'),
+    AutoRoute(page: ForgotPasswordRoute.page, path: '/forgotPassword'),
+    AutoRoute(page: HomeRoute.page, path: '/home', guards: [AuthGuard()]),
     AutoRoute(
       page: UpdateProfileRoute.page,
       path: '/update-profile',
@@ -50,17 +28,12 @@ class AppRouter extends RootStackRouter {
 
 class AuthGuard extends AutoRouteGuard {
   @override
-  void onNavigation(
-      NavigationResolver resolver,
-      StackRouter router,
-      ) {
+  void onNavigation(NavigationResolver resolver, StackRouter router) {
     if (getIt.get<FirebaseAuthService>().isAuthenticated) {
       resolver.next();
       return;
     }
 
-    unawaited(router.replace(
-      const SignInRoute(),
-    ));
+    unawaited(router.replace(const SignInRoute()));
   }
 }

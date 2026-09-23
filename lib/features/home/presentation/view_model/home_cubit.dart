@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:movies/core/firebase_service/firebase_auth_service.dart';
 import 'package:movies/core/network/api_result.dart';
 import 'package:movies/features/home/data/model/movies_param.dart';
 import 'package:movies/features/home/domain/entity/movie_entity.dart';
@@ -12,11 +13,13 @@ part 'home_states.dart';
 
 @Injectable()
 class HomeCubit extends Cubit<HomeStates> {
-  HomeCubit(this._getMoviesUseCase) : super(const HomeInit()) {
+  HomeCubit(this._getMoviesUseCase, this._firebaseAuthService)
+    : super(const HomeInit()) {
     unawaited(init());
   }
 
   final GetMoviesUseCase _getMoviesUseCase;
+  final FirebaseAuthService _firebaseAuthService;
 
   static HomeCubit of(BuildContext context) => context.read<HomeCubit>();
 
@@ -41,6 +44,7 @@ class HomeCubit extends Cubit<HomeStates> {
   // ---------------------------------------------------------------------------
 
   int selectedTapIndex = 0;
+  int selectedProfileTabIndex = 0;
 
   int currentCarouselIndex = 0;
 
@@ -128,10 +132,7 @@ class HomeCubit extends Cubit<HomeStates> {
     if (query.isEmpty) {
       searchResults.clear();
 
-      _params = const GetMoviesParams(
-        page: 1,
-        limit: 20,
-      );
+      _params = const GetMoviesParams(page: 1, limit: 20);
 
       _emit(
         HomeLoaded(
@@ -144,51 +145,45 @@ class HomeCubit extends Cubit<HomeStates> {
       return;
     }
 
-    _searchDebounce = Timer(
-      const Duration(milliseconds: 1500),
-          () async {
-        _params = _params.copyWith(
-          page: 1,
-          queryTerm: query,
-        );
+    _searchDebounce = Timer(const Duration(milliseconds: 1500), () async {
+      _params = _params.copyWith(page: 1, queryTerm: query);
 
-        _emit(
-          HomeLoading(
-            selectedTapIndex: selectedTapIndex,
-            carouselIndex: currentCarouselIndex,
-            selectedGenre: selectedGenre,
-          ),
-        );
+      _emit(
+        HomeLoading(
+          selectedTapIndex: selectedTapIndex,
+          carouselIndex: currentCarouselIndex,
+          selectedGenre: selectedGenre,
+        ),
+      );
 
-        final result = await _getMoviesUseCase.call(_params);
+      final result = await _getMoviesUseCase.call(_params);
 
-        switch (result) {
-          case ApiSuccess<List<MovieEntity>>():
-            searchResults = result.data;
+      switch (result) {
+        case ApiSuccess<List<MovieEntity>>():
+          searchResults = result.data;
 
-            _emit(
-              HomeLoaded(
-                selectedTapIndex: selectedTapIndex,
-                carouselIndex: currentCarouselIndex,
-                selectedGenre: selectedGenre,
-              ),
-            );
+          _emit(
+            HomeLoaded(
+              selectedTapIndex: selectedTapIndex,
+              carouselIndex: currentCarouselIndex,
+              selectedGenre: selectedGenre,
+            ),
+          );
 
-          case ApiError<List<MovieEntity>>():
-            searchResults = [];
+        case ApiError<List<MovieEntity>>():
+          searchResults = [];
 
-            _emit(
-              HomeFailed(
-                message: result.message,
-                selectedTapIndex: selectedTapIndex,
-                carouselIndex: currentCarouselIndex,
-                selectedGenre: selectedGenre,
-              ),
-            );
-        }
-      },
-    );
-  }  // ---------------------------------------------------------------------------
+          _emit(
+            HomeFailed(
+              message: result.message,
+              selectedTapIndex: selectedTapIndex,
+              carouselIndex: currentCarouselIndex,
+              selectedGenre: selectedGenre,
+            ),
+          );
+      }
+    });
+  } // ---------------------------------------------------------------------------
   // Genre
   // ---------------------------------------------------------------------------
 
@@ -251,15 +246,10 @@ class HomeCubit extends Cubit<HomeStates> {
     searchController.clear();
     searchResults.clear();
 
-    _params = const GetMoviesParams(
-      page: 1,
-      limit: 20,
-    );
+    _params = const GetMoviesParams(page: 1, limit: 20);
 
     selectedGenre = null;
     filteredMovies.clear();
-
-
   }
 
   // ---------------------------------------------------------------------------
@@ -292,6 +282,32 @@ class HomeCubit extends Cubit<HomeStates> {
       ),
     );
   }
+
+  void changeProfileTab(int index) {
+    selectedProfileTabIndex = index;
+    _emit(
+      HomeProfileTabUpdated(
+        selectedTapIndex: selectedTapIndex,
+        carouselIndex: currentCarouselIndex,
+        selectedGenre: selectedGenre,
+      ),
+    );
+  }
+
+  Stream<List<MovieEntity>> watchlistStream() =>
+      _firebaseAuthService.watchlistStream();
+
+  Stream<List<MovieEntity>> historyStream() =>
+      _firebaseAuthService.historyStream();
+
+  Future<void> addToWatchlist(MovieEntity movie) =>
+      _firebaseAuthService.addToWatchlist(movie);
+
+  Future<void> removeFromWatchlist(String movieId) =>
+      _firebaseAuthService.removeFromWatchlist(movieId);
+
+  Future<void> addToHistory(MovieEntity movie) =>
+      _firebaseAuthService.addToHistory(movie);
 
   // ---------------------------------------------------------------------------
   // Carousel
