@@ -30,15 +30,15 @@ class AppPrimaryButton extends StatelessWidget {
           ? constraints.maxWidth
           : context.w(358),
       height: height ?? context.h(50),
-      backgroundColor: colors.primary,
-      foregroundColor: colors.background,
+      backgroundColor: appColors.primary,
+      foregroundColor: appColors.background,
       prefix: prefix,
       suffix: suffix,
       child:
           child ??
           AppText(
             text: title ?? '',
-            color: colors.background,
+            color: appColors.background,
             fontSize: context.sp(20),
           ),
     ),
@@ -71,15 +71,15 @@ class AppDangerButton extends StatelessWidget {
           ? constraints.maxWidth
           : context.w(358),
       height: height ?? context.h(50),
-      backgroundColor: colors.secondary,
-      foregroundColor: colors.primaryText,
+      backgroundColor: appColors.secondary,
+      foregroundColor: appColors.primaryText,
       prefix: prefix,
       suffix: suffix,
       child:
           child ??
           AppText(
             text: title ?? '',
-            color: colors.primaryText,
+            color: appColors.primaryText,
             fontSize: context.sp(20),
           ),
     ),

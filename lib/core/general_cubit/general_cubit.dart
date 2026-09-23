@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GeneralState {
@@ -23,13 +24,12 @@ class GeneralState {
   );
 }
 
+@singleton
 class GeneralCubit extends Cubit<GeneralState> {
-  GeneralCubit._() : super(const GeneralState()) {
-    unawaited(init());
-  }
+  GeneralCubit() : super(const GeneralState());
 
   static GeneralCubit of(BuildContext context) => context.read<GeneralCubit>();
-  static final GeneralCubit instance = GeneralCubit._();
+
   static const String _themeModeKey = 'theme_mode';
   static const String _languageKey = 'language';
 
@@ -57,12 +57,22 @@ class GeneralCubit extends Cubit<GeneralState> {
     emit(state.copyWith(themeMode: themeMode, locale: locale));
   }
 
+  Future<void> changeLanguage(String code) async {
+    final locale = Locale(code);
+
+    emit(state.copyWith(locale: locale));
+
+    await _prefs.setString(_languageKey, code);
+  }
+
   Future<void> changeTheme(ThemeMode mode) async {
-    await _prefs.setString(_themeModeKey, switch (mode) {
+    final theme = switch (mode) {
       ThemeMode.light => 'light',
       ThemeMode.dark => 'dark',
       ThemeMode.system => 'system',
-    });
+    };
+
+    await _prefs.setString(_themeModeKey, theme);
 
     emit(state.copyWith(themeMode: mode));
   }
@@ -73,14 +83,6 @@ class GeneralCubit extends Cubit<GeneralState> {
         : ThemeMode.dark;
 
     await changeTheme(newTheme);
-  }
-
-  Future<void> changeLanguage(String code) async {
-    final locale = Locale(code);
-
-    await _prefs.setString(_languageKey, code);
-
-    emit(state.copyWith(locale: locale));
   }
 
   bool get isDark => state.isDark;

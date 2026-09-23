@@ -32,7 +32,7 @@ class MoviePosterCard extends StatelessWidget {
           child: Container(
             padding: context.edgeInsets(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
-              color: colors.background.withValues(alpha: .8),
+              color: appColors.background.withValues(alpha: .8),
               borderRadius: BorderRadius.circular(context.r(8)),
             ),
             child: Row(
@@ -45,7 +45,7 @@ class MoviePosterCard extends StatelessWidget {
                 SizedBox(width: context.w(4)),
                 Icon(
                   Icons.star,
-                  color: colors.primary,
+                  color: appColors.primary,
                   size: context.sp(14),
                 ),
               ],

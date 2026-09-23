@@ -54,11 +54,11 @@ class _PickAvatarSheetContent extends StatelessWidget {
           child: DecoratedBox(
             decoration: BoxDecoration(
               color: isSelected
-                  ? colors.primary.withValues(alpha: .6)
-                  : colors.fill,
+                  ? appColors.primary.withValues(alpha: .6)
+                  : appColors.fill,
               borderRadius: BorderRadius.circular(context.r(20)),
               border: Border.all(
-                color: colors.primary,
+                color: appColors.primary,
                 width: context.w(2),
               ),
             ),

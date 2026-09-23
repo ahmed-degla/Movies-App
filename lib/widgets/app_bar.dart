@@ -51,14 +51,18 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
     title:
         titleWidget ??
         (title != null
-            ? AppText(text: title!, fontSize: context.sp(14), fontWeight: .w700)
+            ? AppText(
+                text: title!,
+                fontSize: context.sp(14),
+                fontWeight: FontWeight.w700,
+              )
             : null),
 
     leading:
         leading ??
         (context.router.canPop()
             ? InkWell(
-                overlayColor: .all(Colors.transparent),
+                overlayColor: WidgetStateProperty.all(Colors.transparent),
                 onTap: () => context.router.maybePop(),
                 child: Padding(
                   padding: EdgeInsetsDirectional.only(start: context.w(8)),
@@ -75,7 +79,6 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
     backgroundColor: backgroundColor ?? Colors.transparent,
     foregroundColor: foregroundColor,
     scrolledUnderElevation: 0,
-
     bottom: bottom,
   );
 }

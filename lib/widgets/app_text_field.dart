@@ -252,7 +252,8 @@ class _AppTextFieldState extends State<AppTextField> {
     final hintStyle = TextStyle(
       inherit: widget.hintStyle?.inherit ?? true,
       color:
-          widget.hintStyle?.color ?? appColors.primaryText.withValues(alpha: .5),
+          widget.hintStyle?.color ??
+          appColors.primaryText.withValues(alpha: .5),
       backgroundColor: widget.hintStyle?.backgroundColor,
       fontSize: widget.hintStyle?.fontSize ?? context.sp(14),
       fontWeight: widget.hintStyle?.fontWeight ?? FontWeight.w400,
@@ -338,7 +339,9 @@ class _AppTextFieldState extends State<AppTextField> {
         filled: true,
         fillColor:
             widget.fillColor ??
-            (widget.enabled ? appColors.fill : appColors.fill.withValues(alpha: .2)),
+            (widget.enabled
+                ? appColors.fill
+                : appColors.fill.withValues(alpha: .2)),
 
         contentPadding:
             widget.contentPadding ??
@@ -362,9 +365,10 @@ class _AppTextFieldState extends State<AppTextField> {
       children: [
         AppText(
           text: widget.labelText!,
-          color: widget.labelColor ?? appColors.primaryText.withValues(alpha: .8),
+          color:
+              widget.labelColor ?? appColors.primaryText.withValues(alpha: .8),
           fontSize: widget.labelFontSize,
-          fontWeight: widget.labelFontWeight ?? .w500,
+          fontWeight: widget.labelFontWeight ?? FontWeight.w500,
           height: widget.labelHeight,
           letterSpacing: widget.labelLetterSpacing,
           textAlign: widget.labelTextAlign,

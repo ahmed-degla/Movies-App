@@ -71,11 +71,63 @@ class $AssetsImagesGen {
 class $AssetsImagesPngGen {
   const $AssetsImagesPngGen();
 
+  /// File path: assets/images/png/Avatar1.png
+  AssetGenImage get avatar1 =>
+      const AssetGenImage('assets/images/png/Avatar1.png');
+
+  /// File path: assets/images/png/Avatar2.png
+  AssetGenImage get avatar2 =>
+      const AssetGenImage('assets/images/png/Avatar2.png');
+
+  /// File path: assets/images/png/Avatar3.png
+  AssetGenImage get avatar3 =>
+      const AssetGenImage('assets/images/png/Avatar3.png');
+
+  /// File path: assets/images/png/Avatar4.png
+  AssetGenImage get avatar4 =>
+      const AssetGenImage('assets/images/png/Avatar4.png');
+
+  /// File path: assets/images/png/Avatar5.png
+  AssetGenImage get avatar5 =>
+      const AssetGenImage('assets/images/png/Avatar5.png');
+
+  /// File path: assets/images/png/Avatar6.png
+  AssetGenImage get avatar6 =>
+      const AssetGenImage('assets/images/png/Avatar6.png');
+
+  /// File path: assets/images/png/Avatar7.png
+  AssetGenImage get avatar7 =>
+      const AssetGenImage('assets/images/png/Avatar7.png');
+
+  /// File path: assets/images/png/Avatar8.png
+  AssetGenImage get avatar8 =>
+      const AssetGenImage('assets/images/png/Avatar8.png');
+
+  /// File path: assets/images/png/Avatar9.png
+  AssetGenImage get avatar9 =>
+      const AssetGenImage('assets/images/png/Avatar9.png');
+
+  /// File path: assets/images/png/avaliable_now.png
+  AssetGenImage get avaliableNow =>
+      const AssetGenImage('assets/images/png/avaliable_now.png');
+
   /// File path: assets/images/png/empty.png
   AssetGenImage get empty => const AssetGenImage('assets/images/png/empty.png');
 
+  /// File path: assets/images/png/forgot_password.png
+  AssetGenImage get forgotPassword =>
+      const AssetGenImage('assets/images/png/forgot_password.png');
+
   /// File path: assets/images/png/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/png/logo.png');
+
+  /// File path: assets/images/png/movie_bg.png
+  AssetGenImage get movieBg =>
+      const AssetGenImage('assets/images/png/movie_bg.png');
+
+  /// File path: assets/images/png/movie_cover.png
+  AssetGenImage get movieCover =>
+      const AssetGenImage('assets/images/png/movie_cover.png');
 
   /// File path: assets/images/png/profile1.png
   AssetGenImage get profile1 =>
@@ -121,10 +173,27 @@ class $AssetsImagesPngGen {
   AssetGenImage get routeLogo =>
       const AssetGenImage('assets/images/png/route_logo.png');
 
+  /// File path: assets/images/png/watch_now.png
+  AssetGenImage get watchNow =>
+      const AssetGenImage('assets/images/png/watch_now.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
+    avatar1,
+    avatar2,
+    avatar3,
+    avatar4,
+    avatar5,
+    avatar6,
+    avatar7,
+    avatar8,
+    avatar9,
+    avaliableNow,
     empty,
+    forgotPassword,
     logo,
+    movieBg,
+    movieCover,
     profile1,
     profile10,
     profile2,
@@ -136,20 +205,60 @@ class $AssetsImagesPngGen {
     profile8,
     profile9,
     routeLogo,
+    watchNow,
   ];
 }
 
 class $AssetsImagesSvgGen {
   const $AssetsImagesSvgGen();
 
+  /// File path: assets/images/svg/ar_flag.svg
+  SvgGenImage get arFlag => const SvgGenImage('assets/images/svg/ar_flag.svg');
+
+  /// File path: assets/images/svg/arrow.svg
+  SvgGenImage get arrow => const SvgGenImage('assets/images/svg/arrow.svg');
+
+  /// File path: assets/images/svg/back_arrow.svg
+  SvgGenImage get backArrow =>
+      const SvgGenImage('assets/images/svg/back_arrow.svg');
+
+  /// File path: assets/images/svg/email.svg
+  SvgGenImage get email => const SvgGenImage('assets/images/svg/email.svg');
+
+  /// File path: assets/images/svg/en_flag.svg
+  SvgGenImage get enFlag => const SvgGenImage('assets/images/svg/en_flag.svg');
+
   /// File path: assets/images/svg/exit.svg
   SvgGenImage get exit => const SvgGenImage('assets/images/svg/exit.svg');
+
+  /// File path: assets/images/svg/explore.svg
+  SvgGenImage get explore => const SvgGenImage('assets/images/svg/explore.svg');
 
   /// File path: assets/images/svg/history.svg
   SvgGenImage get history => const SvgGenImage('assets/images/svg/history.svg');
 
+  /// File path: assets/images/svg/home.svg
+  SvgGenImage get home => const SvgGenImage('assets/images/svg/home.svg');
+
+  /// File path: assets/images/svg/icon _google.svg
+  SvgGenImage get iconGoogle =>
+      const SvgGenImage('assets/images/svg/icon _google.svg');
+
+  /// File path: assets/images/svg/lock.svg
+  SvgGenImage get lock => const SvgGenImage('assets/images/svg/lock.svg');
+
+  /// File path: assets/images/svg/name_icon.svg
+  SvgGenImage get nameIcon =>
+      const SvgGenImage('assets/images/svg/name_icon.svg');
+
   /// File path: assets/images/svg/phone.svg
   SvgGenImage get phone => const SvgGenImage('assets/images/svg/phone.svg');
+
+  /// File path: assets/images/svg/profile.svg
+  SvgGenImage get profile => const SvgGenImage('assets/images/svg/profile.svg');
+
+  /// File path: assets/images/svg/search.svg
+  SvgGenImage get search => const SvgGenImage('assets/images/svg/search.svg');
 
   /// File path: assets/images/svg/user.svg
   SvgGenImage get user => const SvgGenImage('assets/images/svg/user.svg');
@@ -159,7 +268,25 @@ class $AssetsImagesSvgGen {
       const SvgGenImage('assets/images/svg/watchList.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [exit, history, phone, user, watchList];
+  List<SvgGenImage> get values => [
+    arFlag,
+    arrow,
+    backArrow,
+    email,
+    enFlag,
+    exit,
+    explore,
+    history,
+    home,
+    iconGoogle,
+    lock,
+    nameIcon,
+    phone,
+    profile,
+    search,
+    user,
+    watchList,
+  ];
 }
 
 abstract final class Assets {

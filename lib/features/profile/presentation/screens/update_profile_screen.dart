@@ -55,11 +55,10 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    backgroundColor: colors.background,
     appBar: AppAppBar(
       titleWidget: AppText(
         text: StringsManager.pickAvatar,
-        color: colors.primary,
+        color: appColors.primary,
         fontSize: context.sp(16),
       ),
     ),
