@@ -129,6 +129,30 @@ class $AssetsImagesPngGen {
   AssetGenImage get movieCover =>
       const AssetGenImage('assets/images/png/movie_cover.png');
 
+  /// File path: assets/images/png/onboarding_1.png
+  AssetGenImage get onboarding1 =>
+      const AssetGenImage('assets/images/png/onboarding_1.png');
+
+  /// File path: assets/images/png/onboarding_2.png
+  AssetGenImage get onboarding2 =>
+      const AssetGenImage('assets/images/png/onboarding_2.png');
+
+  /// File path: assets/images/png/onboarding_3.png
+  AssetGenImage get onboarding3 =>
+      const AssetGenImage('assets/images/png/onboarding_3.png');
+
+  /// File path: assets/images/png/onboarding_4.png
+  AssetGenImage get onboarding4 =>
+      const AssetGenImage('assets/images/png/onboarding_4.png');
+
+  /// File path: assets/images/png/onboarding_5.png
+  AssetGenImage get onboarding5 =>
+      const AssetGenImage('assets/images/png/onboarding_5.png');
+
+  /// File path: assets/images/png/onboarding_6.png
+  AssetGenImage get onboarding6 =>
+      const AssetGenImage('assets/images/png/onboarding_6.png');
+
   /// File path: assets/images/png/profile1.png
   AssetGenImage get profile1 =>
       const AssetGenImage('assets/images/png/profile1.png');
@@ -194,6 +218,12 @@ class $AssetsImagesPngGen {
     logo,
     movieBg,
     movieCover,
+    onboarding1,
+    onboarding2,
+    onboarding3,
+    onboarding4,
+    onboarding5,
+    onboarding6,
     profile1,
     profile10,
     profile2,
