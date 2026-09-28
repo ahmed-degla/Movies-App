@@ -27,6 +27,11 @@ class AppRouter extends RootStackRouter {
       path: '/update-profile',
       guards: [AuthGuard()],
     ),
+    AutoRoute(
+      page: MovieDetailsRoute.page,
+      path: '/movie-details',
+      guards: [AuthGuard()],
+    ),
   ];
 }
 

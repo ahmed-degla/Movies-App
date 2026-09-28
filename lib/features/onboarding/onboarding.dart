@@ -134,7 +134,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           await prefs.setBool('onboarding_completed', true);
 
                           if (!mounted) return;
-                          context.router.replace(const SignInRoute());
+                          await context.router.replace(const SignInRoute());
                         } else {
                           unawaited(_controller.nextPage(
                             duration: const Duration(milliseconds: 300),

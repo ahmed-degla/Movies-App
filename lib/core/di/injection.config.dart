@@ -68,6 +68,26 @@ import 'package:movies/features/home/domain/use_cases/get_movies_use_case.dart'
     as _i604;
 import 'package:movies/features/home/presentation/view_model/home_cubit.dart'
     as _i217;
+import 'package:movies/features/movie_details/data/api_service/movie_details_api_service.dart'
+    as _i980;
+import 'package:movies/features/movie_details/data/datasource/movie_details_datasource.dart'
+    as _i144;
+import 'package:movies/features/movie_details/data/datasource/movie_details_local_datasource.dart'
+    as _i191;
+import 'package:movies/features/movie_details/data/datasource_impl/movie_details_datasource_impl.dart'
+    as _i229;
+import 'package:movies/features/movie_details/data/datasource_impl/movie_details_local_datasource_impl.dart'
+    as _i508;
+import 'package:movies/features/movie_details/data/repo_impl/movie_details_repo_impl.dart'
+    as _i35;
+import 'package:movies/features/movie_details/domain/repo/movie_details_repo.dart'
+    as _i676;
+import 'package:movies/features/movie_details/domain/use_cases/get_movie_details_use_case.dart'
+    as _i651;
+import 'package:movies/features/movie_details/domain/use_cases/toggle_bookmark_use_case.dart'
+    as _i864;
+import 'package:movies/features/movie_details/presentation/view_model/movie_details_cubit.dart'
+    as _i246;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -82,15 +102,25 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i361.Dio>(() => dioModule.dio);
     gh.factory<_i622.SignInDataSource>(() => _i870.SignInDataSourceImpl());
     gh.lazySingleton<_i451.ApiService>(() => _i451.ApiService(gh<_i361.Dio>()));
+    gh.lazySingleton<_i980.MovieDetailsApiService>(
+      () => _i980.MovieDetailsApiService(gh<_i361.Dio>()),
+    );
     gh.factory<_i947.SignInRepo>(
       () => _i628.SignInRepoImpl(gh<_i622.SignInDataSource>()),
     );
     gh.factory<_i681.MovieDataSource>(
       () => _i222.MovieDataSourceImpl(gh<_i451.ApiService>()),
     );
+    gh.factory<_i191.MovieDetailsLocalDataSource>(
+      () => _i508.MovieDetailsLocalDataSourceImpl(),
+    );
     gh.factory<_i271.SignUpDataSource>(() => _i186.SignUpDataSourceImpl());
     gh.factory<_i413.ForgotPasswordDataSource>(
       () => _i799.ForgotPasswordDataSourceImpl(),
+    );
+    gh.factory<_i144.MovieDetailsDataSource>(
+      () =>
+          _i229.MovieDetailsDataSourceImpl(gh<_i980.MovieDetailsApiService>()),
     );
     gh.factory<_i287.MoviesRepo>(
       () => _i495.MoviesRepoImpl(gh<_i681.MovieDataSource>()),
@@ -119,6 +149,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i32.ForgotPasswordCubit>(
       () => _i32.ForgotPasswordCubit(gh<_i514.ForgotPasswordUseCase>()),
     );
+    gh.factory<_i676.MovieDetailsRepo>(
+      () => _i35.MovieDetailsRepoImpl(
+        gh<_i144.MovieDetailsDataSource>(),
+        gh<_i191.MovieDetailsLocalDataSource>(),
+      ),
+    );
     gh.singleton<_i783.SignUpWithEmailUseCase>(
       () => _i783.SignUpWithEmailUseCase(gh<_i692.SignUpRepo>()),
     );
@@ -127,6 +163,18 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i604.GetMoviesUseCase>(
       () => _i604.GetMoviesUseCase(gh<_i287.MoviesRepo>()),
+    );
+    gh.singleton<_i651.GetMovieDetailsUseCase>(
+      () => _i651.GetMovieDetailsUseCase(gh<_i676.MovieDetailsRepo>()),
+    );
+    gh.singleton<_i864.ToggleBookmarkUseCase>(
+      () => _i864.ToggleBookmarkUseCase(gh<_i676.MovieDetailsRepo>()),
+    );
+    gh.factory<_i246.MovieDetailsCubit>(
+      () => _i246.MovieDetailsCubit(
+        gh<_i651.GetMovieDetailsUseCase>(),
+        gh<_i864.ToggleBookmarkUseCase>(),
+      ),
     );
     gh.factory<_i217.HomeCubit>(
       () => _i217.HomeCubit(

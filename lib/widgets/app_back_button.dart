@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../core/theme/theme_extension.dart';
-import '../core/utils/app_utils.dart';
+import 'package:movies/core/theme/theme_extension.dart';
+import 'package:movies/core/utils/app_utils.dart';
 
 class AppBackButton extends StatelessWidget {
   const AppBackButton({

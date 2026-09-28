@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:movies/generated/assets/assets.gen.dart';
 
 class ProfileAvatar extends StatelessWidget {
   const ProfileAvatar({
-    required this.imagePath,
+    required this.image,
     super.key,
     this.size,
     this.onTap,
   });
 
-  final String imagePath;
+  final AssetGenImage image;
   final double? size;
   final VoidCallback? onTap;
 
@@ -18,8 +19,7 @@ class ProfileAvatar extends StatelessWidget {
     final avatarSize = size ?? context.w(118);
 
     final avatar = ClipOval(
-      child: Image.asset(
-        imagePath,
+      child: image.image(
         width: avatarSize,
         height: avatarSize,
         fit: BoxFit.cover,

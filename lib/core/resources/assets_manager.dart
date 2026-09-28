@@ -15,4 +15,5 @@ abstract final class AssetsManager {
   static const String watchList= 'assets/images/svg/watchList.svg';
   static const String user= 'assets/images/svg/user.svg';
   static const String phone= 'assets/images/svg/phone.svg';
+  static const String rate = 'assets/images/svg/rate.svg';
 }

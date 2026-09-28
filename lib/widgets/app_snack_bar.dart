@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 
-import '../core/routing/app_router.dart';
+import 'package:movies/core/routing/app_router.dart';
 
 enum AppSnackBarType { success, error, info, warning }
 

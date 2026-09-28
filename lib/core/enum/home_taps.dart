@@ -1,4 +1,3 @@
-
 import 'package:movies/generated/assets/assets.gen.dart';
 
 enum HomeTaps {
@@ -9,19 +8,16 @@ enum HomeTaps {
 }
 
 extension HomeTapsExtension on HomeTaps {
-
-  String get icon {
+  SvgGenImage get icon {
     switch (this) {
       case HomeTaps.home:
-        return Assets.images.svg.home.path;
+        return Assets.images.svg.home;
       case HomeTaps.search:
-        return Assets.images.svg.search.path;
+        return Assets.images.svg.search;
       case HomeTaps.browse:
-        return Assets.images.svg.explore.path;
-
+        return Assets.images.svg.explore;
       case HomeTaps.profile:
-        return Assets.images.svg.profile.path;
+        return Assets.images.svg.profile;
     }
   }
-
 }

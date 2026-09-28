@@ -156,15 +156,23 @@ class AppButton extends StatelessWidget {
 
         padding: padding,
 
-        minimumSize: minimumSize,
+        minimumSize: minimumSize ??
+            (width == double.infinity
+                ? Size(0, height ?? context.h(50))
+                : null),
 
-        maximumSize: maximumSize,
+        maximumSize: maximumSize ??
+            (width == double.infinity
+                ? Size(double.infinity, height ?? context.h(50))
+                : null),
 
-        fixedSize: fixedSize ??
-            Size(
-              width ?? context.w(358),
-              height ?? context.h(50),
-            ),
+        fixedSize: width == double.infinity
+            ? fixedSize
+            : fixedSize ??
+                Size(
+                  width ?? context.w(358),
+                  height ?? context.h(50),
+                ),
 
         alignment: alignment,
 

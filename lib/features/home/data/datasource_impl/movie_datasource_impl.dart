@@ -23,7 +23,7 @@ class MovieDataSourceImpl implements MovieDataSource {
         genre: params.genre,
         sortBy: params.sortBy,
         orderBy: params.orderBy,
-      );
+      ) as Map<String, dynamic>;
 
       final data = response['data'] as Map<String, dynamic>?;
 

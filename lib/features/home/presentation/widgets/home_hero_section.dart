@@ -1,7 +1,11 @@
+import 'dart:async';
+
+import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:movies/core/routing/app_router.gr.dart';
 import 'package:movies/core/theme/theme_extension.dart';
 import 'package:movies/features/home/presentation/view_model/home_cubit.dart';
 import 'package:movies/generated/assets/assets.gen.dart';
@@ -60,6 +64,14 @@ class HomeHeroSection extends StatelessWidget {
                   itemBuilder: (context, index, _) => MovieCard(
                     imageUrl: cubit.movies[index].largeCoverImage,
                     rating: cubit.movies[index].rating,
+                    onTap: () {
+                      final id = int.tryParse(cubit.movies[index].id) ?? 0;
+                      if (id > 0) {
+                        unawaited(
+                          context.router.push(MovieDetailsRoute(movieId: id)),
+                        );
+                      }
+                    },
                   ),
                 ),
                 SizedBox(height: context.h(12)),
