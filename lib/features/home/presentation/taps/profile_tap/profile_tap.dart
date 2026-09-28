@@ -3,16 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:movies/core/resources/app_buttons.dart';
+import 'package:movies/core/di/injection.dart';
+import 'package:movies/core/firebase_service/firebase_auth_service.dart';
 import 'package:movies/core/resources/assets_manager.dart';
 import 'package:movies/core/resources/strings_manager.dart';
 import 'package:movies/core/routing/app_router.gr.dart';
+import 'package:movies/core/theme/theme_extension.dart';
 import 'package:movies/features/home/presentation/view_model/home_cubit.dart';
 import 'package:movies/features/profile/presentation/widgets/history_view.dart';
 import 'package:movies/features/profile/presentation/widgets/profile_avatar.dart';
 import 'package:movies/features/profile/presentation/widgets/profile_stat_item.dart';
 import 'package:movies/features/profile/presentation/widgets/profile_tab_item.dart';
 import 'package:movies/features/profile/presentation/widgets/watch_list_view.dart';
+import 'package:movies/widgets/app_button.dart';
 import 'package:movies/widgets/app_text.dart';
 
 class ProfileTap extends StatelessWidget {
@@ -51,7 +54,12 @@ class ProfileTap extends StatelessWidget {
                                       ),
                                       SizedBox(height: context.h(12)),
                                       AppText(
-                                        text: 'John Safwat',
+                                        text:
+                                            getIt
+                                                .get<FirebaseAuthService>()
+                                                .currentUser
+                                                ?.displayName ??
+                                            '',
                                         fontSize: context.sp(20),
                                         fontWeight: .w700,
                                       ),
@@ -100,17 +108,21 @@ class ProfileTap extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     flex: 2,
-                                    child: AppPrimaryButton(
+                                    child: AppButton(
                                       onTap: () => context.router.push(
                                         const UpdateProfileRoute(),
                                       ),
-                                      title: StringsManager.editProfile,
+                                      child: AppText(
+                                        text: StringsManager.editProfile,
+                                        fontSize: context.sp(16),
+                                      ),
                                     ),
                                   ),
                                   SizedBox(width: context.w(12)),
                                   Expanded(
-                                    child: AppDangerButton(
+                                    child: AppButton(
                                       onTap: () {},
+                                      backgroundColor: appColors.secondary,
                                       child: SvgPicture.asset(
                                         AssetsManager.exit,
                                         height: context.h(18),

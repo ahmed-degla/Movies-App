@@ -16,6 +16,22 @@
   "verifyEmail": "Verify Email",
   "avatar": "Avatar",
 "action":"Action",
-"seeMore":"See More"
-
+"seeMore":"See More",
+"onboardingTitle1": "Find Your Next Favorite Movie Here",
+"onboardingDescription1": "Get access to a huge library of movies to suit all tastes. You will surely like it.",
+"onboardingTitle2": "Discover Movies",
+"onboardingDescription2": "Explore a vast collection of movies in all genres. Find your next favorite film with ease.",
+"onboardingTitle3": "Explore All Genres",
+"onboardingDescription3": "Discover movies from every genre, in all available qualities. Find something new and exciting to watch every day.",
+"onboardingTitle4": "Create Watchlists",
+"onboardingDescription4": "Save movies to your watchlist to keep track of what you want to watch. Enjoy films in qualities and genres.",
+"onboardingTitle5": "Rate, Review, and Learn",
+"onboardingDescription5": "Share your thoughts on the movies you've watched. Dive deep into film details and help others discover great movies with your reviews.",
+"onboardingTitle6": "Start Watching Now",
+"onboardingDescription6": "",
+"onboardingNext": "Next",
+"onboardingBack": "Back",
+"onboardingExplore": "Explore Now",
+"onboardingFinish": "Finish",
+"onboardingError": "Couldn't save your onboarding progress. Please try again."
 }

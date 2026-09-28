@@ -9,7 +9,16 @@ class SignInInit extends SignInStates {
 }
 
 class SignInLoading extends SignInStates {
-  const SignInLoading();
+  const SignInLoading({
+    required this.type,
+  });
+
+  final SignInLoadingType type;
+}
+
+enum SignInLoadingType {
+  email,
+  google,
 }
 
 class SignInSuccess extends SignInStates {
@@ -17,7 +26,9 @@ class SignInSuccess extends SignInStates {
 }
 
 class SignInError extends SignInStates {
-  const SignInError({required this.message});
+  const SignInError({
+    required this.message,
+  });
 
   final String message;
 }

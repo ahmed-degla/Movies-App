@@ -205,6 +205,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'See More'**
   String get seeMore;
+
+  /// No description provided for @onboardingTitle1.
+  ///
+  /// In en, this message translates to:
+  /// **'Find Your Next Favorite Movie Here'**
+  String get onboardingTitle1;
+
+  /// No description provided for @onboardingDescription1.
+  ///
+  /// In en, this message translates to:
+  /// **'Get access to a huge library of movies to suit all tastes. You will surely like it.'**
+  String get onboardingDescription1;
+
+  /// No description provided for @onboardingTitle2.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover Movies'**
+  String get onboardingTitle2;
+
+  /// No description provided for @onboardingDescription2.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore a vast collection of movies in all genres. Find your next favorite film with ease.'**
+  String get onboardingDescription2;
+
+  /// No description provided for @onboardingTitle3.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore All Genres'**
+  String get onboardingTitle3;
+
+  /// No description provided for @onboardingDescription3.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover movies from every genre, in all available qualities. Find something new and exciting to watch every day.'**
+  String get onboardingDescription3;
+
+  /// No description provided for @onboardingTitle4.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Watchlists'**
+  String get onboardingTitle4;
+
+  /// No description provided for @onboardingDescription4.
+  ///
+  /// In en, this message translates to:
+  /// **'Save movies to your watchlist to keep track of what you want to watch. Enjoy films in qualities and genres.'**
+  String get onboardingDescription4;
+
+  /// No description provided for @onboardingTitle5.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate, Review, and Learn'**
+  String get onboardingTitle5;
+
+  /// No description provided for @onboardingDescription5.
+  ///
+  /// In en, this message translates to:
+  /// **'Share your thoughts on the movies you\'ve watched. Dive deep into film details and help others discover great movies with your reviews.'**
+  String get onboardingDescription5;
+
+  /// No description provided for @onboardingTitle6.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Watching Now'**
+  String get onboardingTitle6;
+
+  /// No description provided for @onboardingDescription6.
+  ///
+  /// In en, this message translates to:
+  /// **''**
+  String get onboardingDescription6;
+
+  /// No description provided for @onboardingNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get onboardingNext;
+
+  /// No description provided for @onboardingBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get onboardingBack;
+
+  /// No description provided for @onboardingExplore.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore Now'**
+  String get onboardingExplore;
+
+  /// No description provided for @onboardingFinish.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish'**
+  String get onboardingFinish;
+
+  /// No description provided for @onboardingError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t save your onboarding progress. Please try again.'**
+  String get onboardingError;
 }
 
 class _AppLocalizationsDelegate

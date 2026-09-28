@@ -3,19 +3,23 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:movies/core/di/injection.dart';
+import 'package:movies/core/enum/profile_avatar.dart';
 import 'package:movies/core/helpers/app_validator.dart';
 import 'package:movies/core/routing/app_router.gr.dart';
 import 'package:movies/core/theme/theme_extension.dart';
 import 'package:movies/core/utils/app_utils.dart';
 import 'package:movies/features/auth/sign_up/presentation/view_model/sign_up_cubit.dart';
-import 'package:movies/features/auth/widgets/custom_button.dart';
-import 'package:movies/features/auth/widgets/custom_field.dart';
 import 'package:movies/features/auth/widgets/custom_switch.dart';
 import 'package:movies/generated/assets/assets.gen.dart';
+import 'package:movies/widgets/app_back_button.dart';
+import 'package:movies/widgets/app_bar.dart';
+import 'package:movies/widgets/app_button.dart';
 import 'package:movies/widgets/app_text.dart';
+import 'package:movies/widgets/app_text_field.dart';
 
 @RoutePage()
 class SignUpScreen extends StatelessWidget {
@@ -29,8 +33,9 @@ class SignUpScreen extends StatelessWidget {
         if (state is SignUpSuccess) {
           unawaited(context.router.replaceAll([const HomeRoute()]));
         } else if (state is SignUpError) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(state.message)));
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message)));
         }
       },
       builder: (context, state) {
@@ -38,37 +43,30 @@ class SignUpScreen extends StatelessWidget {
         final isLoading = state is SignUpLoading;
 
         return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            leading: InkWell(
-              onTap: () => context.router.maybePop(),
-              child: Padding(
-                padding: REdgeInsets.all(16),
+          appBar: AppAppBar(
+            title: tr.register,
+            titleColor: appColors.primary,
+
+            leading: AppBackButton(
+              child: UnconstrainedBox(
                 child: Assets.images.svg.backArrow.svg(
-                  width: 24.w,
-                  height: 24.h,
+                  width: 20.w,
+                  height: 20.h,
                 ),
               ),
             ),
-            title: AppText(
-              text: tr.register,
-              color: appColors.primary,
-              fontSize: 16.sp,
-            ),
-            centerTitle: true,
           ),
           body: SafeArea(
             child: Padding(
-              padding: REdgeInsets.symmetric(horizontal: 19),
+              padding: REdgeInsets.symmetric(horizontal: 16),
               child: SingleChildScrollView(
                 child: Form(
                   key: cubit.formKey,
                   child: Column(
                     children: [
-                      CarouselSlider(
+                      CarouselSlider.builder(
                         options: CarouselOptions(
-                          height: 161.h,
+                          height: 160.h,
                           enlargeCenterPage: true,
                           enlargeFactor: 0.5,
                           viewportFraction: 0.3,
@@ -76,96 +74,102 @@ class SignUpScreen extends StatelessWidget {
                             cubit.selectAvatar(index);
                           },
                         ),
-                        items: cubit.avatars
-                            .map(
-                              (avatar) =>
-                                  avatar.image(width: 161.w, height: 161.h),
-                            )
-                            .toList(),
+
+                        itemCount: Avatar.values.length,
+                        itemBuilder:
+                            (BuildContext context, int index, int realIndex) =>
+                                Avatar.values[index].avatar.image(
+                                  width: 160.w,
+                                  height: 160.h,
+                                ),
                       ),
-                      AppText(
-                        text: tr.avatar,
-                        color: appColors.primaryText,
-                        fontSize: 16.sp,
-                      ),
+                      AppText(text: tr.avatar, fontSize: 16.sp),
                       SizedBox(height: 12.h),
-                      CustomField(
+                      AppTextField(
                         controller: cubit.nameController,
                         hintText: tr.name,
-                        prefix: Assets.images.svg.nameIcon.svg(
-                          width: 37.w,
-                          height: 36.h,
+                        prefixIcon: UnconstrainedBox(
+                          child: Assets.images.svg.nameIcon.svg(
+                            width: 26.w,
+                            height: 26.h,
+                          ),
                         ),
                         validator: (value) => AppValidators.name(value),
                       ),
                       SizedBox(height: 24.h),
-                      CustomField(
+                      AppTextField(
                         controller: cubit.emailController,
                         hintText: tr.email,
-                        prefix: Assets.images.svg.email.svg(
-                          width: 31.w,
-                          height: 25.h,
+                        prefixIcon: UnconstrainedBox(
+                          child: Assets.images.svg.email.svg(
+                            width: 26.w,
+                            height: 26.h,
+                          ),
                         ),
                         keyboardType: TextInputType.emailAddress,
                         validator: (value) => AppValidators.email(value),
                       ),
                       SizedBox(height: 24.h),
-                      CustomField(
+                      AppTextField(
                         controller: cubit.passwordController,
                         hintText: tr.password,
-                        prefix: Assets.images.svg.lock.svg(
-                          width: 26.w,
-                          height: 30.h,
+                        prefixIcon: UnconstrainedBox(
+                          child: Assets.images.svg.lock.svg(
+                            width: 26.w,
+                            height: 26.h,
+                          ),
                         ),
-                        isPassword: true,
+                        obscureText: true,
                         validator: (value) => AppValidators.password(value),
                       ),
                       SizedBox(height: 24.h),
-                      CustomField(
+                      AppTextField(
                         controller: cubit.confirmPasswordController,
                         hintText: tr.confirmPassword,
-                        prefix: Assets.images.svg.lock.svg(
-                          width: 26.w,
-                          height: 30.h,
+                        prefixIcon: UnconstrainedBox(
+                          child: Assets.images.svg.lock.svg(
+                            width: 26.w,
+                            height: 26.h,
+                          ),
                         ),
-                        isPassword: true,
+                        obscureText: true,
                         validator: (value) => AppValidators.confirmPassword(
                           value,
                           cubit.passwordController.text,
                         ),
                       ),
                       SizedBox(height: 24.h),
-                      CustomField(
+                      AppTextField(
                         controller: cubit.phoneController,
                         hintText: tr.phoneNumber,
-                        prefix: Assets.images.svg.phone.svg(
-                          width: 25.w,
-                          height: 25.h,
+                        prefixIcon: UnconstrainedBox(
+                          child: Assets.images.svg.phone.svg(
+                            width: 26.w,
+                            height: 26.h,
+                          ),
                         ),
                         keyboardType: TextInputType.phone,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          LengthLimitingTextInputFormatter(11),
+                        ],
                         validator: (value) => AppValidators.phone(value),
                       ),
                       SizedBox(height: 24.h),
                       if (isLoading)
                         const Center(child: CircularProgressIndicator())
                       else
-                        CustomButton(
-                          title: tr.createAccount,
+                        AppButton(
                           onTap: () async {
-                            if (cubit.formKey.currentState!.validate()) {
-                              await cubit.signUpWithEmail(
-                                email: cubit.emailController.text,
-                                password: cubit.passwordController.text,
-                                name: cubit.nameController.text,
-                                phone: cubit.phoneController.text,
-                                avatar: cubit
-                                    .avatars[cubit.selectedAvatarIndex]
-                                    .path,
-                              );
-                            }
+                            await cubit.signUpWithEmail();
                           },
+                          child: AppText(
+                            text: tr.createAccount,
+                            color: appColors.background,
+                            fontSize: context.sp(20),
+                          ),
                         ),
-                      SizedBox(height: 17.h),
+                      SizedBox(height: 16.h),
                       Row(
                         spacing: 4.w,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -175,19 +179,17 @@ class SignUpScreen extends StatelessWidget {
                             color: appColors.primaryText,
                             fontSize: 14.sp,
                           ),
-                          InkWell(
+                          AppText(
                             onTap: () => context.router.maybePop(),
-                            child: AppText(
-                              text: tr.login,
-                              color: appColors.primary,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w900,
-                            ),
+                            text: tr.login,
+                            color: appColors.primary,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w900,
                           ),
                         ],
                       ),
                       SizedBox(height: 18.h),
-                      CustomSwitch(),
+                      const CustomSwitch(),
                       SizedBox(height: 20.h),
                     ],
                   ),

@@ -68,6 +68,14 @@ import 'package:movies/features/home/domain/use_cases/get_movies_use_case.dart'
     as _i604;
 import 'package:movies/features/home/presentation/view_model/home_cubit.dart'
     as _i217;
+import 'package:movies/features/onboarding/data/repository/onboarding_repository_impl.dart'
+    as _i378;
+import 'package:movies/features/onboarding/domain/repository/onboarding_repository.dart'
+    as _i842;
+import 'package:movies/features/onboarding/domain/use_cases/mark_onboarding_completed_use_case.dart'
+    as _i612;
+import 'package:movies/features/onboarding/presentation/view_model/onboarding_cubit.dart'
+    as _i672;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -81,7 +89,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i187.GeneralCubit>(() => _i187.GeneralCubit());
     gh.singleton<_i361.Dio>(() => dioModule.dio);
     gh.factory<_i622.SignInDataSource>(() => _i870.SignInDataSourceImpl());
+    gh.factory<_i842.OnboardingRepository>(
+      () => _i378.OnboardingRepositoryImpl(),
+    );
     gh.lazySingleton<_i451.ApiService>(() => _i451.ApiService(gh<_i361.Dio>()));
+    gh.factory<_i612.MarkOnboardingCompletedUseCase>(
+      () => _i612.MarkOnboardingCompletedUseCase(
+        gh<_i842.OnboardingRepository>(),
+      ),
+    );
     gh.factory<_i947.SignInRepo>(
       () => _i628.SignInRepoImpl(gh<_i622.SignInDataSource>()),
     );
@@ -91,6 +107,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i271.SignUpDataSource>(() => _i186.SignUpDataSourceImpl());
     gh.factory<_i413.ForgotPasswordDataSource>(
       () => _i799.ForgotPasswordDataSourceImpl(),
+    );
+    gh.factory<_i672.OnboardingCubit>(
+      () => _i672.OnboardingCubit(gh<_i612.MarkOnboardingCompletedUseCase>()),
     );
     gh.factory<_i287.MoviesRepo>(
       () => _i495.MoviesRepoImpl(gh<_i681.MovieDataSource>()),

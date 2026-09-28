@@ -6,13 +6,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:movies/core/di/injection.dart';
 import 'package:movies/core/helpers/app_validator.dart';
+import 'package:movies/core/theme/theme_extension.dart';
 import 'package:movies/core/utils/app_utils.dart';
 import 'package:movies/features/auth/forgot_password/presentation/view_model/forgot_password_cubit.dart';
-import 'package:movies/features/auth/widgets/custom_button.dart';
-import 'package:movies/features/auth/widgets/custom_field.dart';
 import 'package:movies/generated/assets/assets.gen.dart';
+import 'package:movies/widgets/app_back_button.dart';
 import 'package:movies/widgets/app_bar.dart';
+import 'package:movies/widgets/app_button.dart';
 import 'package:movies/widgets/app_snack_bar.dart';
+import 'package:movies/widgets/app_text.dart';
+import 'package:movies/widgets/app_text_field.dart';
 
 @RoutePage()
 class ForgotPasswordScreen extends StatelessWidget {
@@ -39,42 +42,58 @@ class ForgotPasswordScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppAppBar(
             title: tr.forgotPassword,
+            titleColor: appColors.primary,
+
+            leading: AppBackButton(
+              child: UnconstrainedBox(
+                child: Assets.images.svg.backArrow.svg(
+                  width: 20.w,
+                  height: 20.h,
+                ),
+              ),
+            ),
           ),
+
           body: Padding(
             padding: REdgeInsets.symmetric(horizontal: 16.w),
             child: SingleChildScrollView(
               child: Form(
                 key: cubit.formKey,
                 child: Column(
+                  crossAxisAlignment: .stretch,
                   spacing: 24.h,
                   children: [
                     Assets.images.png.forgotPassword.image(
-                      height: 430.h,
-                      fit: BoxFit.fitHeight,
+                      fit: BoxFit.cover,
                     ),
-                    CustomField(
+                    AppTextField(
                       controller: cubit.emailController,
-                      prefix: Assets.images.svg.email.svg(
-                        width: 31.w,
-                        height: 25.h,
+                      prefixIcon: UnconstrainedBox(
+                        child: Assets.images.svg.email.svg(
+                          width: 26.w,
+                          height: 26.h,
+                        ),
                       ),
                       hintText: tr.email,
                       keyboardType: TextInputType.emailAddress,
                       validator: (value) => AppValidators.email(value),
                     ),
-                    if (isLoading)
-                      const Center(child: CircularProgressIndicator())
-                    else
-                      CustomButton(
-                        title: tr.verifyEmail,
-                        onTap: () async {
-                          if (cubit.formKey.currentState!.validate()) {
-                            await cubit.sendPasswordResetEmail(
-                              email: cubit.emailController.text,
-                            );
-                          }
-                        },
+
+                    AppButton(
+                      onTap: () async {
+                        if (cubit.formKey.currentState!.validate()) {
+                          await cubit.sendPasswordResetEmail(
+                            email: cubit.emailController.text,
+                          );
+                        }
+                      },
+                      loading: isLoading,
+                      child: AppText(
+                        text: tr.verifyEmail,
+                        fontSize: context.sp(20),
+                        color: appColors.background,
                       ),
+                    ),
                   ],
                 ),
               ),

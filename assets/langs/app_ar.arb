@@ -16,5 +16,22 @@
   "verifyEmail": "تحقق من البريد الإلكتروني",
   "avatar": "الصورة الشخصية",
 "action":"الاكشن",
-"seeMore":"المزيد"
+"seeMore":"المزيد",
+"onboardingTitle1": "اعثر على فيلمك المفضل القادم هنا",
+"onboardingDescription1": "استمتع بمكتبة ضخمة من الأفلام تناسب جميع الأذواق. ستعجبك بالتأكيد.",
+"onboardingTitle2": "اكتشف الأفلام",
+"onboardingDescription2": "استكشف مجموعة واسعة من الأفلام بمختلف الأنواع، واعثر بسهولة على فيلمك المفضل القادم.",
+"onboardingTitle3": "استكشف جميع الأنواع",
+"onboardingDescription3": "اكتشف أفلاماً من كل الأنواع وبجودات مختلفة. اعثر كل يوم على شيء جديد وممتع.",
+"onboardingTitle4": "أنشئ قوائم المشاهدة",
+"onboardingDescription4": "احفظ الأفلام في قائمتك لتتابع ما تريد مشاهدته، واستمتع بالأفلام بجودات وأنواع مختلفة.",
+"onboardingTitle5": "قيّم وراجع واكتشف",
+"onboardingDescription5": "شارك آراءك حول الأفلام التي شاهدتها، واكتشف تفاصيلها وساعد الآخرين على العثور على أفلام رائعة من خلال مراجعاتك.",
+"onboardingTitle6": "ابدأ المشاهدة الآن",
+"onboardingDescription6": "",
+"onboardingNext": "التالي",
+"onboardingBack": "رجوع",
+"onboardingExplore": "استكشف الآن",
+"onboardingFinish": "إنهاء",
+"onboardingError": "تعذر حفظ تقدمك. يرجى المحاولة مرة أخرى."
 }

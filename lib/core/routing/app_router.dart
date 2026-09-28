@@ -21,6 +21,7 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: SignInRoute.page, path: '/signIn'),
     AutoRoute(page: SignUpRoute.page, path: '/signUp'),
     AutoRoute(page: ForgotPasswordRoute.page, path: '/forgotPassword'),
+
     AutoRoute(page: HomeRoute.page, path: '/home', guards: [AuthGuard()]),
     AutoRoute(
       page: UpdateProfileRoute.page,

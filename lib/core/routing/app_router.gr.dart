@@ -18,7 +18,8 @@ import 'package:movies/features/auth/sign_in/presentation/sign_in_screen.dart'
 import 'package:movies/features/auth/sign_up/presentation/sign_up_screen.dart'
     as _i5;
 import 'package:movies/features/home/presentation/home_screen.dart' as _i2;
-import 'package:movies/features/onboarding/onboarding.dart' as _i3;
+import 'package:movies/features/onboarding/presentation/onboarding_screen.dart'
+    as _i3;
 import 'package:movies/features/profile/presentation/screens/update_profile_screen.dart'
     as _i7;
 import 'package:movies/features/splash/presentation/splash_screen.dart' as _i6;

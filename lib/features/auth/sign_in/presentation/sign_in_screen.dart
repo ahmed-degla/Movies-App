@@ -29,81 +29,90 @@ class SignInScreen extends StatelessWidget {
         if (state is SignInSuccess) {
           unawaited(context.router.replaceAll([const HomeRoute()]));
         } else if (state is SignInError) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(state.message)));
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message)));
         }
       },
       builder: (context, state) {
         context.watch<GeneralCubit>();
+
         final cubit = SignInCubit.of(context);
 
         return Scaffold(
           body: SafeArea(
             child: Padding(
-              padding: REdgeInsets.symmetric(horizontal: 19),
+              padding: context.edgeInsets(horizontal: 16),
               child: SingleChildScrollView(
                 child: Form(
                   key: cubit.formKey,
                   child: Column(
                     children: [
-                      SizedBox(height: 67.h),
-                      Assets.images.png.logo.image(width: 121.w, height: 118.h),
-                      SizedBox(height: 69.h),
+                      SizedBox(height: 62.h),
+
+                      Assets.images.png.logo.image(width: 120.w, height: 118.h),
+
+                      SizedBox(height: 62.h),
+
                       AppTextField(
                         controller: cubit.emailController,
                         hintText: tr.email,
                         prefixIcon: UnconstrainedBox(
                           child: Assets.images.svg.email.svg(
-                            width: 31.w,
-                            height: 25.h,
+                            width: 26.w,
+                            height: 26.h,
                           ),
                         ),
                         keyboardType: TextInputType.emailAddress,
-                        validator: (value) => AppValidators.email(value),
+                        validator: AppValidators.email,
                       ),
 
                       SizedBox(height: 22.h),
+
                       AppTextField(
                         controller: cubit.passwordController,
                         hintText: tr.password,
                         prefixIcon: UnconstrainedBox(
                           child: Assets.images.svg.lock.svg(
                             width: 26.w,
-                            height: 30.h,
+                            height: 26.h,
                           ),
                         ),
                         obscureText: true,
-                        validator: (value) => AppValidators.password(value),
+                        validator: AppValidators.password,
                       ),
-                      SizedBox(height: 17.h),
-                      Row(
-                        children: [
-                          const Spacer(),
-                          InkWell(
-                            onTap: () async {
-                              await context.router.push(
-                                const ForgotPasswordRoute(),
-                              );
-                            },
-                            child: AppText(
-                              text: tr.forgotPassword,
-                              color: appColors.primary,
-                            ),
-                          ),
-                        ],
+
+                      SizedBox(height: 16.h),
+
+                      Align(
+                        alignment: AlignmentDirectional.centerEnd,
+                        child: AppText(
+                          onTap: () async {
+                            await context.router.push(
+                              const ForgotPasswordRoute(),
+                            );
+                          },
+                          text: tr.forgotPassword,
+                          color: appColors.primary,
+                        ),
                       ),
-                      SizedBox(height: 33.h),
+
+                      SizedBox(height: 30.h),
+
                       AppButton(
-                        onTap: () async {
-                          await cubit.signInWithEmail(
-                            email: cubit.emailController.text,
-                            password: cubit.passwordController.text,
-                          );
-                        },
-                        loading: cubit.isStateLoading,
-                        child: AppText(text: tr.login),
+                        onTap: cubit.isGoogleLoading
+                            ? null
+                            : cubit.signInWithEmail,
+                        loading: cubit.isEmailLoading,
+                        child: AppText(
+                          text: tr.login,
+                          fontSize: context.sp(20),
+                          color: appColors.background,
+                        ),
                       ),
-                      SizedBox(height: 22.h),
+
+                      SizedBox(height: 20.h),
+
                       Row(
                         spacing: 4.w,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -113,30 +122,30 @@ class SignInScreen extends StatelessWidget {
                             color: appColors.primaryText,
                             fontSize: 14.sp,
                           ),
-                          InkWell(
+                          AppText(
                             onTap: () async {
                               await context.router.push(const SignUpRoute());
                             },
-                            child: AppText(
-                              text: tr.createOne,
-                              color: appColors.primary,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w900,
-                            ),
+                            text: tr.createOne,
+                            color: appColors.primary,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w900,
                           ),
                         ],
                       ),
-                      SizedBox(height: 27.h),
+
+                      SizedBox(height: 26.h),
+
                       Row(
-                        spacing: 11.w,
+                        spacing: 12.w,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SizedBox(
-                            width: 91.w,
+                          Expanded(
                             child: Divider(
                               height: 1.h,
                               thickness: 1.h,
                               color: appColors.primary,
+                              indent: context.w(30),
                             ),
                           ),
                           AppText(
@@ -144,19 +153,24 @@ class SignInScreen extends StatelessWidget {
                             color: appColors.primary,
                             fontSize: 15.sp,
                           ),
-                          SizedBox(
-                            width: 91.w,
+                          Expanded(
                             child: Divider(
                               height: 1.h,
                               thickness: 1.h,
                               color: appColors.primary,
+                              endIndent: context.w(30),
                             ),
                           ),
                         ],
                       ),
+
                       SizedBox(height: 28.h),
+
                       AppButton(
-                        onTap: cubit.signInWithGoogle,
+                        onTap: cubit.isEmailLoading
+                            ? null
+                            : cubit.signInWithGoogle,
+                        loading: cubit.isGoogleLoading,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -167,16 +181,16 @@ class SignInScreen extends StatelessWidget {
                             SizedBox(width: 10.w),
                             AppText(
                               text: tr.loginWithGoogle,
-                              fontSize: 18.sp,
+                              fontSize: 16.sp,
                               color: appColors.background,
-                              fontWeight: FontWeight.w700,
                             ),
                           ],
                         ),
                       ),
-                      SizedBox(height: 33.6.h),
-                      CustomSwitch(),
+
                       SizedBox(height: 20.h),
+
+                      const CustomSwitch(),
                     ],
                   ),
                 ),

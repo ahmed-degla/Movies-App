@@ -20,6 +20,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.centerTitle,
     this.toolbarHeight,
     this.bottom,
+    this.titleColor,
   });
 
   final String? title;
@@ -30,6 +31,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   final Color? backgroundColor;
   final Color? foregroundColor;
+  final Color? titleColor;
 
   final bool bottomBorder;
   final Color? borderColor;
@@ -55,20 +57,14 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
                 text: title!,
                 fontSize: context.sp(14),
                 fontWeight: FontWeight.w700,
+                color: titleColor,
               )
             : null),
 
     leading:
         leading ??
         (context.router.canPop()
-            ? InkWell(
-                overlayColor: WidgetStateProperty.all(Colors.transparent),
-                onTap: () => context.router.maybePop(),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.only(start: context.w(8)),
-                  child: const AppBackButton(),
-                ),
-              )
+            ? const AppBackButton()
             : null),
 
     actions: actions,

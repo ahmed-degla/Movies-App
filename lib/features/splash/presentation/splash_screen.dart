@@ -20,7 +20,7 @@ class SplashScreen extends StatelessWidget {
     child: BlocListener<SplashCubit, SplashState>(
       listener: (context, state) {
         if (state.isReady) {
-          unawaited(context.router.replace(const HomeRoute()));
+          unawaited(context.router.replace(const OnboardingRoute()));
         }
       },
       child: Scaffold(

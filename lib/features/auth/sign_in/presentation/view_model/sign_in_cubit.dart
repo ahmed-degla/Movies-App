@@ -9,61 +9,80 @@ part 'sign_in_states.dart';
 
 @Injectable()
 class SignInCubit extends Cubit<SignInStates> {
-  SignInCubit(this._signInWithEmailUseCase, this._signInWithGoogleUseCase)
-    : super(const SignInInit());
+  SignInCubit(
+      this._signInWithEmailUseCase,
+      this._signInWithGoogleUseCase,
+      ) : super(const SignInInit());
 
   final SignInWithEmailUseCase _signInWithEmailUseCase;
   final SignInWithGoogleUseCase _signInWithGoogleUseCase;
+
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  bool isEnglish = true;
 
   static SignInCubit of(BuildContext context) =>
       BlocProvider.of<SignInCubit>(context);
 
-  bool get isStateLoading => state is SignInLoading;
+  bool get isEmailLoading =>
+      state is SignInLoading &&
+          (state as SignInLoading).type == SignInLoadingType.email;
 
-  void toggleLanguage(bool value) {
-    isEnglish = value;
-    emit(state);
-  }
+  bool get isGoogleLoading =>
+      state is SignInLoading &&
+          (state as SignInLoading).type == SignInLoadingType.google;
 
-  Future<void> signInWithEmail({
-    required String email,
-    required String password,
-  }) async {
-    _emit(const SignInLoading());
+  Future<void> signInWithEmail() async {
     if (!formKey.currentState!.validate()) return;
 
-    final result = await _signInWithEmailUseCase.call(
-      email: email,
-      password: password,
+    _emit(
+      const SignInLoading(
+        type: SignInLoadingType.email,
+      ),
     );
 
-    switch (result) {
-      case ApiSuccess():
-        _emit(const SignInSuccess());
-      case ApiError(:final message):
-        _emit(SignInError(message: message));
+    try {
+      final result = await _signInWithEmailUseCase.call(
+        email: emailController.text.trim(),
+        password: passwordController.text,
+      );
+
+      switch (result) {
+        case ApiSuccess():
+          _emit(const SignInSuccess());
+
+        case ApiError(:final message):
+          _emit(SignInError(message: message));
+      }
+    } catch (e) {
+      _emit(SignInError(message: e.toString()));
     }
   }
 
   Future<void> signInWithGoogle() async {
-    _emit(const SignInLoading());
+    _emit(
+      const SignInLoading(
+        type: SignInLoadingType.google,
+      ),
+    );
 
-    final result = await _signInWithGoogleUseCase.call();
+    try {
+      final result = await _signInWithGoogleUseCase.call();
 
-    switch (result) {
-      case ApiSuccess(:final data):
-        if (data != null) {
-          _emit(const SignInSuccess());
-        } else {
-          // User cancelled sign-in
-          _emit(const SignInInit());
-        }
-      case ApiError(:final message):
-        _emit(SignInError(message: message));
+      switch (result) {
+        case ApiSuccess(:final data):
+          if (data != null) {
+            _emit(const SignInSuccess());
+          } else {
+            _emit(const SignInInit());
+          }
+
+        case ApiError(:final message):
+          _emit(SignInError(message: message));
+      }
+    } catch (e) {
+      _emit(SignInError(message: e.toString()));
     }
   }
 

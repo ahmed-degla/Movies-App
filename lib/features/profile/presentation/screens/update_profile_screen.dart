@@ -3,7 +3,8 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
-import 'package:movies/core/resources/app_buttons.dart';
+import 'package:movies/core/di/injection.dart';
+import 'package:movies/core/firebase_service/firebase_auth_service.dart';
 import 'package:movies/core/resources/assets_manager.dart';
 import 'package:movies/core/resources/strings_manager.dart';
 import 'package:movies/core/theme/theme_extension.dart';
@@ -11,6 +12,7 @@ import 'package:movies/features/profile/presentation/widgets/pick_avatar_bottom_
 import 'package:movies/features/profile/presentation/widgets/profile_avatar.dart';
 import 'package:movies/features/profile/presentation/widgets/update_profile_field_icon.dart';
 import 'package:movies/widgets/app_bar.dart';
+import 'package:movies/widgets/app_button.dart';
 import 'package:movies/widgets/app_text.dart';
 import 'package:movies/widgets/app_text_field.dart';
 
@@ -128,14 +130,23 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                 ),
               ),
             ),
-            AppDangerButton(
-              onTap: () {},
-              title: StringsManager.deleteAccount,
+            AppButton(
+              onTap: () {
+                getIt.get<FirebaseAuthService>().deleteAccount();
+              },
+              backgroundColor: appColors.secondary,
+              child: AppText(
+                text: StringsManager.deleteAccount,
+                fontSize: context.sp(16),
+              ),
             ),
             SizedBox(height: context.h(16)),
-            AppPrimaryButton(
+            AppButton(
               onTap: () {},
-              title: StringsManager.updateData,
+              child: AppText(
+                text: StringsManager.updateData,
+                fontSize: context.sp(16),
+              ),
             ),
             SizedBox(height: context.h(24)),
           ],
