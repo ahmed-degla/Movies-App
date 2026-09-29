@@ -1,5 +1,5 @@
+import 'package:movies/core/utils/app_utils.dart';
 import 'package:movies/generated/assets/assets.gen.dart';
-import 'package:movies/generated/l10n/app_localizations.dart';
 
 class OnboardingPageContent {
   const OnboardingPageContent({
@@ -9,39 +9,39 @@ class OnboardingPageContent {
   });
 
   final AssetGenImage image;
-  final String Function(AppLocalizations localizations) title;
-  final String Function(AppLocalizations localizations) description;
+  final String  title;
+  final String  description;
 
   static final List<OnboardingPageContent> pages = List.unmodifiable([
     OnboardingPageContent(
       image: Assets.images.png.onboarding1,
-      title: (localizations) => localizations.onboardingTitle1,
-      description: (localizations) => localizations.onboardingDescription1,
+      title:  tr.onboardingTitle1,
+      description:  tr.onboardingDescription1,
     ),
     OnboardingPageContent(
       image: Assets.images.png.onboarding2,
-      title: (localizations) => localizations.onboardingTitle2,
-      description: (localizations) => localizations.onboardingDescription2,
+      title:  tr.onboardingTitle2,
+      description:  tr.onboardingDescription2,
     ),
     OnboardingPageContent(
       image: Assets.images.png.onboarding3,
-      title: (localizations) => localizations.onboardingTitle3,
-      description: (localizations) => localizations.onboardingDescription3,
+      title:  tr.onboardingTitle3,
+      description:  tr.onboardingDescription3,
     ),
     OnboardingPageContent(
       image: Assets.images.png.onboarding4,
-      title: (localizations) => localizations.onboardingTitle4,
-      description: (localizations) => localizations.onboardingDescription4,
+      title:  tr.onboardingTitle4,
+      description:  tr.onboardingDescription4,
     ),
     OnboardingPageContent(
       image: Assets.images.png.onboarding5,
-      title: (localizations) => localizations.onboardingTitle5,
-      description: (localizations) => localizations.onboardingDescription5,
+      title:  tr.onboardingTitle5,
+      description:  tr.onboardingDescription5,
     ),
     OnboardingPageContent(
       image: Assets.images.png.onboarding6,
-      title: (localizations) => localizations.onboardingTitle6,
-      description: (localizations) => localizations.onboardingDescription6,
+      title:  tr.onboardingTitle6,
+      description:  tr.onboardingDescription6,
     ),
   ]);
 

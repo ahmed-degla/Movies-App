@@ -61,15 +61,15 @@ class OnboardingNavigationPanel extends StatelessWidget {
                 key: ValueKey(state.currentPage),
                 children: [
                   AppText(
-                    text: page.title(localizations),
+                    text: page.title,
                     fontSize: context.sp(24),
                     fontWeight: FontWeight.bold,
                     textAlign: TextAlign.center,
                   ),
-                  if (page.description(localizations).isNotEmpty) ...[
+                  if (page.description.isNotEmpty) ...[
                     SizedBox(height: context.h(20)),
                     AppText(
-                      text: page.description(localizations),
+                      text: page.description,
                       fontSize: context.sp(20),
                       textAlign: TextAlign.center,
                       color: state.currentPage == 0
