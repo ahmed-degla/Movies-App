@@ -25,71 +25,70 @@ class UpdateProfileView extends StatelessWidget {
   const UpdateProfileView({super.key});
 
   @override
-  Widget build(BuildContext context) =>
-      BlocConsumer<UpdateProfileCubit, UpdateProfileState>(
-        listener: _handleState,
-        builder: (context, state) {
-          final cubit = context.read<UpdateProfileCubit>();
-          final isEnabled = !state.isBusy;
+  Widget build(
+    BuildContext context,
+  ) => BlocConsumer<UpdateProfileCubit, UpdateProfileState>(
+    listener: _handleState,
+    builder: (context, state) {
+      final cubit = context.read<UpdateProfileCubit>();
+      final isEnabled = !state.isBusy;
 
-          return Scaffold(
-            appBar: AppAppBar(
-              titleWidget: AppText(
-                text: tr.editProfile,
-                color: appColors.primary,
-                fontSize: context.sp(16),
-              ),
-              leading: AppBackButton(
-                child: UnconstrainedBox(
-                  child: Assets.images.svg.backArrow.svg(),
-                ),
-              ),
-            ),
-            body: SafeArea(
-              child: Padding(
-                padding: context.edgeInsets(horizontal: 16),
-                child: Form(
-                  key: cubit.formKey,
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: UpdateProfileEditor(
-                            nameController: cubit.nameController,
-                            phoneController: cubit.phoneController,
-                            selectedAvatar:
-                                state.selectedAvatar ??
-                                Avatar.profileImage1.avatar.path,
-                            onPickAvatar: isEnabled
-                                ? () => unawaited(_pickAvatar(cubit))
-                                : null,
-                            isEnabled: isEnabled,
-                            validateName: AppValidators.name,
-                            validatePhone: AppValidators.phone,
-                            onResetPassword: () =>
-                                unawaited(cubit.sendPasswordResetEmail()),
-                            isSendingPasswordReset: state.isSendingPasswordReset,
-                          ),
-                        ),
-                      ),
-                      UpdateProfileActions(
+      return Scaffold(
+        appBar: AppAppBar(
+          titleWidget: AppText(
+            text: tr.editProfile,
+            color: appColors.primary,
+            fontSize: context.sp(16),
+          ),
+          leading: AppBackButton(
+            child: UnconstrainedBox(child: Assets.images.svg.backArrow.svg()),
+          ),
+        ),
+        body: SafeArea(
+          child: Padding(
+            padding: context.edgeInsets(horizontal: 16),
+            child: Form(
+              key: cubit.formKey,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: UpdateProfileEditor(
+                        nameController: cubit.nameController,
+                        phoneController: cubit.phoneController,
+                        selectedAvatar:
+                            state.selectedAvatar ??
+                            Avatar.profileImage1.avatar.path,
+                        onPickAvatar: isEnabled
+                            ? () => unawaited(_pickAvatar(cubit))
+                            : null,
                         isEnabled: isEnabled,
-                        isDeleting: state.isDeleting,
-                        isSaving: state.isSaving,
-
-                        onDelete: () =>
-                            unawaited(_confirmAndDelete(context, cubit)),
-
-                        onSave: () => unawaited(cubit.saveProfile()),
+                        validateName: AppValidators.name,
+                        validatePhone: AppValidators.phone,
+                        onResetPassword: () =>
+                            unawaited(cubit.sendPasswordResetEmail()),
+                        isSendingPasswordReset: state.isSendingPasswordReset,
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                  UpdateProfileActions(
+                    isEnabled: isEnabled,
+                    isDeleting: state.isDeleting,
+                    isSaving: state.isSaving,
+
+                    onDelete: () =>
+                        unawaited(_confirmAndDelete(context, cubit)),
+
+                    onSave: () => unawaited(cubit.saveProfile()),
+                  ),
+                ],
               ),
             ),
-          );
-        },
+          ),
+        ),
       );
+    },
+  );
 
   void _handleState(BuildContext context, UpdateProfileState state) {
     switch (state.action) {
@@ -108,7 +107,7 @@ class UpdateProfileView extends StatelessWidget {
           type: AppSnackBarType.success,
         );
       case UpdateProfileAction.accountDeleted:
-        unawaited(context.router.replaceAll([const SignInRoute()]));
+        unawaited(_navigateToSignInAfterFrame(context));
       case UpdateProfileAction.failed:
         final message = state.errorMessage;
         if (message != null) {
@@ -132,7 +131,7 @@ class UpdateProfileView extends StatelessWidget {
     BuildContext context,
     UpdateProfileCubit cubit,
   ) async {
-    final confirmed = await showDialog<bool>(
+    final confirmed = await _showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(tr.deleteAccountConfirmTitle),
@@ -164,7 +163,7 @@ class UpdateProfileView extends StatelessWidget {
   Future<String?> _promptForPassword(BuildContext context) async {
     final passwordController = TextEditingController();
     try {
-      return await showDialog<String>(
+      return await _showDialog<String>(
         context: context,
         builder: (context) => AlertDialog(
           title: Text(tr.deleteAccountConfirmTitle),
@@ -189,5 +188,27 @@ class UpdateProfileView extends StatelessWidget {
     } finally {
       passwordController.dispose();
     }
+  }
+
+  Future<T?> _showDialog<T>({
+    required BuildContext context,
+    required WidgetBuilder builder,
+  }) async {
+    final navigator = Navigator.of(context, rootNavigator: true);
+    final route = DialogRoute<T>(
+      context: context,
+      builder: builder,
+      themes: InheritedTheme.capture(from: context, to: navigator.context),
+    );
+    final result = await navigator.push<T>(route);
+    await route.completed;
+    return result;
+  }
+
+  Future<void> _navigateToSignInAfterFrame(BuildContext context) async {
+    await WidgetsBinding.instance.endOfFrame;
+    if (!context.mounted) return;
+
+    await context.router.replaceAll([const SignInRoute()]);
   }
 }
