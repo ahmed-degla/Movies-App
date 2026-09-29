@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:movies/core/utils/app_utils.dart';
+import 'package:movies/core/utils/localized_error_message.dart';
 import 'package:movies/features/home/presentation/view_model/home_cubit.dart';
 import 'package:movies/features/home/presentation/widgets/home_hero_section.dart';
 import 'package:movies/features/home/presentation/widgets/movie_section.dart';
@@ -24,7 +25,11 @@ class HomeTap extends StatelessWidget {
             return const Center(child: AppProgressIndicator());
           }
           if (state is HomeFailed) {
-            return Center(child: AppText(text: state.message));
+            return Center(
+              child: AppText(
+                text: localizedErrorMessage(context, state.message),
+              ),
+            );
           }
           return SingleChildScrollView(
             child: Column(

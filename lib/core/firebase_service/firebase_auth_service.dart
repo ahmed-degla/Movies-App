@@ -142,6 +142,52 @@ class FirebaseAuthService {
     await Future.wait([_firebaseAuth.signOut(), _googleSignIn.signOut()]);
   }
 
+  Future<void> reauthenticateCurrentUser({String? password}) async {
+    final user = currentUser;
+    if (user == null) {
+      throw StateError('A signed-in user is required.');
+    }
+
+    final providers = user.providerData.map((provider) => provider.providerId);
+    if (providers.contains(EmailAuthProvider.PROVIDER_ID)) {
+      if (password == null || password.isEmpty) {
+        throw ArgumentError('A password is required to reauthenticate.');
+      }
+      final email = user.email;
+      if (email == null) {
+        throw FirebaseAuthException(
+          code: 'missing-email-for-reauthentication',
+          message: 'The signed-in account has no email address.',
+        );
+      }
+      await user.reauthenticateWithCredential(
+        EmailAuthProvider.credential(email: email, password: password),
+      );
+      return;
+    }
+
+    if (providers.contains(GoogleAuthProvider.PROVIDER_ID)) {
+      final googleUser = await _googleSignIn.authenticate();
+      final idToken = googleUser.authentication.idToken;
+      if (idToken == null) {
+        throw FirebaseAuthException(
+          code: 'google-sign-in-no-id-token',
+          message: 'Google Sign-In did not return an ID token.',
+        );
+      }
+      await user.reauthenticateWithCredential(
+        GoogleAuthProvider.credential(idToken: idToken),
+      );
+      return;
+    }
+
+    throw FirebaseAuthException(
+      code: 'unsupported-reauthentication-provider',
+      message:
+          'No supported sign-in provider is available for reauthentication.',
+    );
+  }
+
   // ==================== User Data ====================
 
   Future<UserModel?> getUserData(String uid) async {
@@ -160,16 +206,25 @@ class FirebaseAuthService {
     return getUserData(user.uid);
   }
 
+  Stream<UserModel?> currentUserDataStream() {
+    final user = currentUser;
+    if (user == null) {
+      throw StateError('A signed-in user is required.');
+    }
+
+    return _usersRef
+        .doc(user.uid)
+        .snapshots()
+        .map((snapshot) => snapshot.data());
+  }
+
   CollectionReference<Map<String, dynamic>> _userMoviesRef(String collection) {
     final user = currentUser;
     if (user == null) {
       throw StateError('A signed-in user is required.');
     }
 
-    return _firestore
-        .collection(_usersCollection)
-        .doc(user.uid)
-        .collection(collection);
+    return _usersRef.doc(user.uid).collection(collection);
   }
 
   Map<String, dynamic> _movieData(MovieEntity movie) => {
@@ -212,9 +267,9 @@ class FirebaseAuthService {
       _userMoviesRef(_watchlistCollection).doc(movieId).delete();
 
   Stream<List<MovieEntity>> watchlistStream() =>
-      _userMoviesRef(_watchlistCollection)
-          .snapshots()
-          .map((snapshot) => snapshot.docs.map(_movieFromSnapshot).toList());
+      _userMoviesRef(_watchlistCollection).snapshots().map(
+        (snapshot) => snapshot.docs.map(_movieFromSnapshot).toList(),
+      );
 
   Future<void> addToHistory(MovieEntity movie) async {
     await _userMoviesRef(_historyCollection).doc(movie.id).set({
@@ -224,13 +279,38 @@ class FirebaseAuthService {
   }
 
   Stream<List<MovieEntity>> historyStream() =>
-      _userMoviesRef(_historyCollection)
-          .snapshots()
-          .map((snapshot) => snapshot.docs.map(_movieFromSnapshot).toList());
+      _userMoviesRef(_historyCollection).snapshots().map(
+        (snapshot) => snapshot.docs.map(_movieFromSnapshot).toList(),
+      );
 
   Future<void> updateUserData(UserModel user) => _usersRef
       .doc(user.uid)
       .set(user.copyWith(updatedAt: Timestamp.now()), SetOptions(merge: true));
+
+  Future<void> updateProfile({
+    required String name,
+    required String phone,
+    required String avatar,
+  }) async {
+    final user = currentUser;
+    if (user == null) {
+      throw StateError('A signed-in user is required.');
+    }
+
+    final trimmedName = name.trim();
+    final trimmedPhone = phone.trim();
+
+    await user.updateDisplayName(trimmedName);
+    await _firestore.collection(_usersCollection).doc(user.uid).set({
+      'uid': user.uid,
+      'email': user.email ?? '',
+      'name': trimmedName,
+      'phone': trimmedPhone,
+      'image': avatar,
+      'avatar': avatar,
+      'updatedAt': Timestamp.now(),
+    }, SetOptions(merge: true));
+  }
 
   Future<void> deleteAccount() async {
     final user = currentUser;
@@ -239,12 +319,31 @@ class FirebaseAuthService {
       return;
     }
 
+    await _deleteUserCollection(user.uid, _watchlistCollection);
+    await _deleteUserCollection(user.uid, _historyCollection);
     await _usersRef.doc(user.uid).delete();
     await user.delete();
     await _googleSignIn.signOut();
   }
 
   // ==================== Private Helpers ====================
+
+  Future<void> _deleteUserCollection(String uid, String collection) async {
+    final userCollection = _usersRef.doc(uid).collection(collection);
+
+    while (true) {
+      final snapshot = await userCollection.limit(450).get();
+      if (snapshot.docs.isEmpty) {
+        return;
+      }
+
+      final batch = _firestore.batch();
+      for (final document in snapshot.docs) {
+        batch.delete(document.reference);
+      }
+      await batch.commit();
+    }
+  }
 
   Future<void> _saveOrUpdateGoogleUser(User user) async {
     final userRef = _usersRef.doc(user.uid);

@@ -11,7 +11,6 @@ class MovieSection extends StatelessWidget {
   const MovieSection({
     required this.title,
     required this.movies,
-
     super.key,
     this.onSeeMore,
   });
@@ -55,11 +54,7 @@ class MovieSection extends StatelessWidget {
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: movies.length,
-            itemBuilder: (context, index) => MovieCard(
-              imageUrl: movies[index].largeCoverImage,
-              rating: movies[index].rating,
-              onTap: () {},
-            ),
+            itemBuilder: (context, index) => MovieCard(movie: movies[index]),
             separatorBuilder: (_, _) => SizedBox(width: context.w(12)),
           ),
         ),

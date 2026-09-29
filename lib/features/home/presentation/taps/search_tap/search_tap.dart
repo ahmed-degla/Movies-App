@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:movies/core/theme/theme_extension.dart';
+import 'package:movies/core/utils/app_utils.dart';
 import 'package:movies/features/home/presentation/view_model/home_cubit.dart';
 import 'package:movies/generated/assets/assets.gen.dart';
 import 'package:movies/widgets/app/movie_card.dart';
@@ -27,7 +28,7 @@ class SearchTap extends StatelessWidget {
                 builder: (context, value, child) => AppTextField(
                   controller: cubit.searchController,
                   onChanged: cubit.onSearchChanged,
-                  hintText: 'Search',
+                  hintText: tr.search,
                   suffixIcon: value.text.isNotEmpty
                       ? InkWell(
                           onTap: cubit.resetFilters,
@@ -68,11 +69,7 @@ class SearchTap extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final movie = cubit.searchResults[index];
 
-                        return MovieCard(
-                          imageUrl: movie.largeCoverImage,
-                          rating: movie.rating,
-                          onTap: () {},
-                        );
+                        return MovieCard(movie: movie);
                       },
                     ),
                   );

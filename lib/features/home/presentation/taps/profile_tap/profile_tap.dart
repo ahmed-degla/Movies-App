@@ -2,21 +2,16 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movies/core/di/injection.dart';
 import 'package:movies/core/firebase_service/firebase_auth_service.dart';
-import 'package:movies/core/resources/assets_manager.dart';
-import 'package:movies/core/resources/strings_manager.dart';
 import 'package:movies/core/routing/app_router.gr.dart';
-import 'package:movies/core/theme/theme_extension.dart';
+import 'package:movies/core/utils/localized_error_message.dart';
 import 'package:movies/features/home/presentation/view_model/home_cubit.dart';
+import 'package:movies/features/home/presentation/widgets/profile_overview.dart';
+import 'package:movies/features/home/presentation/widgets/profile_tabs.dart';
 import 'package:movies/features/profile/presentation/widgets/history_view.dart';
-import 'package:movies/features/profile/presentation/widgets/profile_avatar.dart';
-import 'package:movies/features/profile/presentation/widgets/profile_stat_item.dart';
-import 'package:movies/features/profile/presentation/widgets/profile_tab_item.dart';
 import 'package:movies/features/profile/presentation/widgets/watch_list_view.dart';
-import 'package:movies/widgets/app_button.dart';
-import 'package:movies/widgets/app_text.dart';
+import 'package:movies/widgets/app_snack_bar.dart';
 
 class ProfileTap extends StatelessWidget {
   const ProfileTap({super.key});
@@ -26,7 +21,6 @@ class ProfileTap extends StatelessWidget {
     builder: (context, state) {
       final cubit = HomeCubit.of(context);
       final isHistory = cubit.selectedProfileTabIndex == 1;
-
       return SafeArea(
         child: Column(
           children: [
@@ -42,118 +36,39 @@ class ProfileTap extends StatelessWidget {
                     curve: Curves.easeOutCubic,
                     child: isHistory
                         ? const SizedBox.shrink()
-                        : Column(
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Column(
-                                    children: [
-                                      const ProfileAvatar(
-                                        imagePath: AssetsManager.profile1,
-                                      ),
-                                      SizedBox(height: context.h(12)),
-                                      AppText(
-                                        text:
-                                            getIt
-                                                .get<FirebaseAuthService>()
-                                                .currentUser
-                                                ?.displayName ??
-                                            '',
-                                        fontSize: context.sp(20),
-                                        fontWeight: .w700,
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(width: context.w(16)),
-                                  Expanded(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                        top: context.h(16),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            child: StreamBuilder(
-                                              stream: cubit.watchlistStream(),
-                                              builder: (context, snapshot) =>
-                                                  ProfileStatItem(
-                                                    value:
-                                                        '${snapshot.data?.length ?? 0}',
-                                                    label:
-                                                        StringsManager.wishList,
-                                                  ),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: StreamBuilder(
-                                              stream: cubit.historyStream(),
-                                              builder: (context, snapshot) =>
-                                                  ProfileStatItem(
-                                                    value:
-                                                        '${snapshot.data?.length ?? 0}',
-                                                    label:
-                                                        StringsManager.history,
-                                                  ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                        : ProfileOverview(
+                            watchlistStream: cubit.watchlistStream(),
+                            historyStream: cubit.historyStream(),
+                            onEditProfile: () =>
+                                context.router.push(const UpdateProfileRoute()),
+                            onSignOut: () async {
+                              try {
+                                await getIt
+                                    .get<FirebaseAuthService>()
+                                    .signOut();
+                                if (context.mounted) {
+                                  await context.router.replaceAll([
+                                    const SignInRoute(),
+                                  ]);
+                                }
+                              } on Object catch (error) {
+                                if (context.mounted) {
+                                  AppSnackBar.show(
+                                    message: localizedErrorMessage(
+                                      context,
+                                      error.toString(),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: context.h(20)),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    flex: 2,
-                                    child: AppButton(
-                                      onTap: () => context.router.push(
-                                        const UpdateProfileRoute(),
-                                      ),
-                                      child: AppText(
-                                        text: StringsManager.editProfile,
-                                        fontSize: context.sp(16),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(width: context.w(12)),
-                                  Expanded(
-                                    child: AppButton(
-                                      onTap: () {},
-                                      backgroundColor: appColors.secondary,
-                                      child: SvgPicture.asset(
-                                        AssetsManager.exit,
-                                        height: context.h(18),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: context.h(20)),
-                            ],
+                                    type: AppSnackBarType.error,
+                                  );
+                                }
+                              }
+                            },
                           ),
                   ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ProfileTabItem(
-                          label: StringsManager.watchList,
-                          iconPath: AssetsManager.watchList,
-                          isSelected: !isHistory,
-                          onTap: () => cubit.changeProfileTab(0),
-                        ),
-                      ),
-                      Expanded(
-                        child: ProfileTabItem(
-                          label: StringsManager.history,
-                          iconPath: AssetsManager.history,
-                          isSelected: isHistory,
-                          onTap: () => cubit.changeProfileTab(1),
-                        ),
-                      ),
-                    ],
+                  ProfileTabs(
+                    isHistorySelected: isHistory,
+                    onWatchlistSelected: () => cubit.changeProfileTab(0),
+                    onHistorySelected: () => cubit.changeProfileTab(1),
                   ),
                 ],
               ),

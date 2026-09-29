@@ -15,7 +15,7 @@ class ForgotPasswordDataSourceImpl implements ForgotPasswordDataSource {
       );
       return const ApiSuccess(data: null);
     } on FirebaseAuthException catch (e) {
-      return ApiError(message: e.message ?? 'Password reset failed');
+      return ApiError(message: 'firebase_auth:${e.code}');
     } on Object catch (e) {
       return ApiError(message: e.toString());
     }

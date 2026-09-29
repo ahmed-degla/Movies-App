@@ -4,6 +4,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:movies/core/di/injection.dart';
+import 'package:movies/core/firebase_service/firebase_auth_service.dart';
 import 'package:movies/core/routing/app_router.gr.dart';
 import 'package:movies/core/theme/theme_extension.dart';
 import 'package:movies/features/splash/presentation/view_model/splash_cubit.dart';
@@ -19,7 +21,10 @@ class SplashScreen extends StatelessWidget {
     create: (_) => SplashCubit(),
     child: BlocListener<SplashCubit, SplashState>(
       listener: (context, state) {
-        if (state.isReady) {
+        if(!state.isReady) return;
+        if (getIt<FirebaseAuthService>().currentUser != null) {
+          unawaited(context.router.replace(const HomeRoute()));
+        }else{
           unawaited(context.router.replace(const OnboardingRoute()));
         }
       },

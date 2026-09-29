@@ -8,6 +8,7 @@ import 'package:movies/core/di/injection.dart';
 import 'package:movies/core/helpers/app_validator.dart';
 import 'package:movies/core/theme/theme_extension.dart';
 import 'package:movies/core/utils/app_utils.dart';
+import 'package:movies/core/utils/localized_error_message.dart';
 import 'package:movies/features/auth/forgot_password/presentation/view_model/forgot_password_cubit.dart';
 import 'package:movies/generated/assets/assets.gen.dart';
 import 'package:movies/widgets/app_back_button.dart';
@@ -27,12 +28,13 @@ class ForgotPasswordScreen extends StatelessWidget {
     child: BlocConsumer<ForgotPasswordCubit, ForgotPasswordStates>(
       listener: (context, state) {
         if (state is ForgotPasswordSuccess) {
-          AppSnackBar.show(
-            message: 'Password reset link sent! Please check your email.',
-          );
+          AppSnackBar.show(message: tr.passwordResetEmailSent);
           unawaited(context.router.maybePop());
         } else if (state is ForgotPasswordError) {
-          AppSnackBar.show(message: state.message, type: AppSnackBarType.error);
+          AppSnackBar.show(
+            message: localizedErrorMessage(context, state.message),
+            type: AppSnackBarType.error,
+          );
         }
       },
       builder: (context, state) {
@@ -63,9 +65,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   crossAxisAlignment: .stretch,
                   spacing: 24.h,
                   children: [
-                    Assets.images.png.forgotPassword.image(
-                      fit: BoxFit.cover,
-                    ),
+                    Assets.images.png.forgotPassword.image(fit: BoxFit.cover),
                     AppTextField(
                       controller: cubit.emailController,
                       prefixIcon: UnconstrainedBox(
@@ -76,7 +76,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                       ),
                       hintText: tr.email,
                       keyboardType: TextInputType.emailAddress,
-                      validator: (value) => AppValidators.email(value),
+                      validator: (value) => AppValidators.email(value, tr),
                     ),
 
                     AppButton(

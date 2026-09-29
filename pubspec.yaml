@@ -37,6 +37,7 @@ dependencies:
   firebase_auth: ^6.7.0
   cloud_firestore: ^6.10.0
   google_sign_in: ^7.2.0
+  json_annotation: ^4.12.0
 
 dev_dependencies:
   flutter_test:
@@ -46,6 +47,7 @@ dev_dependencies:
   auto_route_generator: ^10.6.0
   injectable_generator: ^3.0.0
   retrofit_generator: ^10.2.9
+  json_serializable: ^6.11.1
   build_runner: ^2.15.1
   flutter_gen_runner: ^5.15.0
 
@@ -99,6 +101,4 @@ flutter:
 
         - asset: assets/fonts/Roboto-Black.ttf
           weight: 900
-
-
 

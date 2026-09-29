@@ -1,0 +1,76 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'movie_details_model.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+MovieDetailsModel _$MovieDetailsModelFromJson(Map<String, dynamic> json) =>
+    MovieDetailsModel(
+      id: (json['id'] as num).toInt(),
+      url: json['url'] as String,
+      imdbCode: _stringFromJson(json['imdb_code']),
+      title: json['title'] as String,
+      titleEnglish: json['title_english'] as String,
+      titleLong: json['title_long'] as String,
+      slug: json['slug'] as String,
+      year: (json['year'] as num).toInt(),
+      rating: json['rating'] as num,
+      runtime: (json['runtime'] as num).toInt(),
+      genres: (json['genres'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      likeCount: (json['like_count'] as num).toInt(),
+      descriptionIntro: json['description_intro'] as String,
+      descriptionFull: json['description_full'] as String,
+      ytTrailerCode: json['yt_trailer_code'] as String,
+      language: json['language'] as String,
+      mpaRating: json['mpa_rating'] as String,
+      backgroundImage: json['background_image'] as String,
+      backgroundImageOriginal: json['background_image_original'] as String,
+      smallCoverImage: json['small_cover_image'] as String,
+      mediumCoverImage: json['medium_cover_image'] as String,
+      largeCoverImage: json['large_cover_image'] as String,
+      screenshots: (_readScreenshots(json, 'screenshots') as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      cast:
+          (json['cast'] as List<dynamic>?)
+              ?.map((e) => CastModel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      torrents:
+          (json['torrents'] as List<dynamic>?)
+              ?.map((e) => TorrentModel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$MovieDetailsModelToJson(MovieDetailsModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'url': instance.url,
+      'imdb_code': instance.imdbCode,
+      'title': instance.title,
+      'title_english': instance.titleEnglish,
+      'title_long': instance.titleLong,
+      'slug': instance.slug,
+      'year': instance.year,
+      'rating': instance.rating,
+      'runtime': instance.runtime,
+      'genres': instance.genres,
+      'like_count': instance.likeCount,
+      'description_intro': instance.descriptionIntro,
+      'description_full': instance.descriptionFull,
+      'yt_trailer_code': instance.ytTrailerCode,
+      'language': instance.language,
+      'mpa_rating': instance.mpaRating,
+      'background_image': instance.backgroundImage,
+      'background_image_original': instance.backgroundImageOriginal,
+      'small_cover_image': instance.smallCoverImage,
+      'medium_cover_image': instance.mediumCoverImage,
+      'large_cover_image': instance.largeCoverImage,
+      'cast': instance.cast.map((e) => e.toJson()).toList(),
+      'torrents': instance.torrents.map((e) => e.toJson()).toList(),
+    };

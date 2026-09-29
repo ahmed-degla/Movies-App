@@ -1,25 +1,27 @@
 import 'package:movies/generated/assets/assets.gen.dart';
 
 enum Avatar {
-  avatar1,
-  avatar2,
-  avatar3,
-  avatar4,
-  avatar5,
-  avatar6,
-  avatar7,
-  avatar8,
-  avatar9;
+  profileImage1,
+  profileImage2,
+  profileImage3,
+  profileImage4,
+  profileImage5,
+  profileImage6,
+  profileImage7,
+  profileImage8,
+  profileImage9,
+  profileImage10;
 
   AssetGenImage get avatar => switch (this) {
-    Avatar.avatar1 => Assets.images.png.avatar1,
-    Avatar.avatar2 => Assets.images.png.avatar2,
-    Avatar.avatar3 => Assets.images.png.avatar3,
-    Avatar.avatar4 => Assets.images.png.avatar4,
-    Avatar.avatar5 => Assets.images.png.avatar5,
-    Avatar.avatar6 => Assets.images.png.avatar6,
-    Avatar.avatar7 => Assets.images.png.avatar7,
-    Avatar.avatar8 => Assets.images.png.avatar8,
-    Avatar.avatar9 => Assets.images.png.avatar9,
+    Avatar.profileImage1 => Assets.images.png.profileImage1,
+    Avatar.profileImage2 => Assets.images.png.profileImage2,
+    Avatar.profileImage3 => Assets.images.png.profileImage3,
+    Avatar.profileImage4 => Assets.images.png.profileImage4,
+    Avatar.profileImage5 => Assets.images.png.profileImage5,
+    Avatar.profileImage6 => Assets.images.png.profileImage6,
+    Avatar.profileImage7 => Assets.images.png.profileImage7,
+    Avatar.profileImage8 => Assets.images.png.profileImage8,
+    Avatar.profileImage9 => Assets.images.png.profileImage9,
+    Avatar.profileImage10 => Assets.images.png.profileImage10,
   };
 }

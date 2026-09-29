@@ -25,7 +25,7 @@ class SignUpDataSourceImpl implements SignUpDataSource {
       );
       return ApiSuccess(data: credential);
     } on FirebaseAuthException catch (e) {
-      return ApiError(message: e.message ?? 'Registration failed');
+      return ApiError(message: 'firebase_auth:${e.code}');
     } on Object catch (e) {
       return ApiError(message: e.toString());
     }

@@ -57,10 +57,10 @@ class HomeHeroSection extends StatelessWidget {
                     },
                   ),
                   itemCount: cubit.movies.length,
-                  itemBuilder: (context, index, _) => MovieCard(
-                    imageUrl: cubit.movies[index].largeCoverImage,
-                    rating: cubit.movies[index].rating,
-                  ),
+                  itemBuilder: (context, index, _) {
+                    final movie = cubit.movies[index];
+                    return MovieCard(movie: movie);
+                  },
                 ),
                 SizedBox(height: context.h(12)),
                 Assets.images.png.watchNow.image(

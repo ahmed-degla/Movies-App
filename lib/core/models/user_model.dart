@@ -1,5 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'user_model.g.dart';
+
+@JsonSerializable(includeIfNull: false)
 class UserModel {
   const UserModel({
     required this.uid,
@@ -12,38 +16,25 @@ class UserModel {
     this.updatedAt,
   });
 
-  /// Factory constructor to create a [UserModel] from a Firestore map.
-  factory UserModel.fromFirestore(Map<String, dynamic> json) => UserModel(
-        uid: json['uid'] as String? ?? '',
-        email: json['email'] as String? ?? '',
-        name: json['name'] as String? ?? '',
-        phone: json['phone'] as String?,
-        image: json['image'] as String?,
-        avatar: json['avatar'] as String?,
-        createdAt: json['createdAt'] as Timestamp?,
-        updatedAt: json['updatedAt'] as Timestamp?,
-      );
+  factory UserModel.fromFirestore(Map<String, dynamic> json) =>
+      _$UserModelFromJson(json);
 
   final String uid;
   final String email;
   final String name;
+
+  @JsonKey(readValue: _readPhone)
   final String? phone;
   final String? image;
   final String? avatar;
+
+  @FirestoreTimestampConverter()
   final Timestamp? createdAt;
+
+  @FirestoreTimestampConverter()
   final Timestamp? updatedAt;
 
-  /// Converts the [UserModel] instance to a map for Firestore.
-  Map<String, dynamic> toFirestore() => {
-        'uid': uid,
-        'email': email,
-        'name': name,
-        if (phone != null) 'phone': phone,
-        if (image != null) 'image': image,
-        if (avatar != null) 'avatar': avatar,
-        if (createdAt != null) 'createdAt': createdAt,
-        if (updatedAt != null) 'updatedAt': updatedAt,
-      };
+  Map<String, dynamic> toFirestore() => _$UserModelToJson(this);
 
   /// Returns a copy of [UserModel] with updated fields.
   UserModel copyWith({
@@ -55,15 +46,37 @@ class UserModel {
     String? avatar,
     Timestamp? createdAt,
     Timestamp? updatedAt,
-  }) =>
-      UserModel(
-        uid: uid ?? this.uid,
-        email: email ?? this.email,
-        name: name ?? this.name,
-        phone: phone ?? this.phone,
-        image: image ?? this.image,
-        avatar: avatar ?? this.avatar,
-        createdAt: createdAt ?? this.createdAt,
-        updatedAt: updatedAt ?? this.updatedAt,
-      );
+  }) {
+    final copy = UserModel(
+      uid: uid ?? this.uid,
+      email: email ?? this.email,
+      name: name ?? this.name,
+      phone: phone ?? this.phone,
+      image: image ?? this.image,
+      avatar: avatar ?? this.avatar,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+    return copy;
+  }
+}
+
+Object? _readPhone(Map json, String key) =>
+    json['phone'] ?? json['phoneNumber'];
+
+class FirestoreTimestampConverter
+    implements JsonConverter<Timestamp?, Object?> {
+  const FirestoreTimestampConverter();
+
+  @override
+  Timestamp? fromJson(Object? json) {
+    if (json == null) return null;
+    if (json is Timestamp) return json;
+    if (json is DateTime) return Timestamp.fromDate(json);
+    if (json is String) return Timestamp.fromDate(DateTime.parse(json));
+    throw FormatException('Invalid Firestore timestamp: $json');
+  }
+
+  @override
+  Object? toJson(Timestamp? object) => object;
 }

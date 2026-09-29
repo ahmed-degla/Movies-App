@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 
-
 import 'package:movies/core/theme/theme_extension.dart';
+import 'package:movies/widgets/app_progress_indicator.dart';
 
 class AppButton extends StatelessWidget {
   const AppButton({
@@ -121,17 +121,10 @@ class AppButton extends StatelessWidget {
     final radius = borderRadius ?? context.sp(16);
 
     final effectiveBorder = _outlined
-        ? border ??
-        BorderSide(
-          color: primaryColor,
-          width: context.w(1.5),
-        )
+        ? border ?? BorderSide(color: primaryColor, width: context.w(1.5))
         : border;
 
-    final useGradient =
-        enableGradient &&
-            backgroundColor == null &&
-            !_outlined;
+    final useGradient = enableGradient && backgroundColor == null && !_outlined;
 
     final button = ElevatedButton(
       onPressed: loading ? null : onTap,
@@ -160,11 +153,8 @@ class AppButton extends StatelessWidget {
 
         maximumSize: maximumSize,
 
-        fixedSize: fixedSize ??
-            Size(
-              width ?? context.w(358),
-              height ?? context.h(50),
-            ),
+        fixedSize:
+            fixedSize ?? Size(width ?? context.w(358), height ?? context.h(50)),
 
         alignment: alignment,
 
@@ -180,17 +170,12 @@ class AppButton extends StatelessWidget {
         ),
       ),
 
-      child: _buildChild(
-        context,
-        textColor,
-      ),
+      child: _buildChild(context, textColor),
     );
-
 
     if (!useGradient) {
       return button;
     }
-
 
     return Container(
       width: width ?? context.w(358),
@@ -207,19 +192,13 @@ class AppButton extends StatelessWidget {
     );
   }
 
-  Widget _buildChild(
-      BuildContext context,
-      Color color,
-      ) {
+  Widget _buildChild(BuildContext context, Color color) {
     if (loading) {
       return loadingWidget ??
-          SizedBox(
-            width: context.w(22),
-            height: context.w(22),
-            child: CircularProgressIndicator(
-              strokeWidth: context.w(2.5),
-              color: color,
-            ),
+          AppProgressIndicator(
+            size: context.w(22),
+            strokeWidth: context.w(2.5),
+            color: color,
           );
     }
 
@@ -231,15 +210,9 @@ class AppButton extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        if (prefix != null) ...[
-          prefix!,
-          SizedBox(width: context.w(8)),
-        ],
+        if (prefix != null) ...[prefix!, SizedBox(width: context.w(8))],
         Flexible(child: child),
-        if (suffix != null) ...[
-          SizedBox(width: context.w(8)),
-          suffix!,
-        ],
+        if (suffix != null) ...[SizedBox(width: context.w(8)), suffix!],
       ],
     );
   }

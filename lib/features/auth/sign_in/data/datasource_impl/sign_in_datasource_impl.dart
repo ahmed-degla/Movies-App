@@ -19,7 +19,7 @@ class SignInDataSourceImpl implements SignInDataSource {
       );
       return ApiSuccess(data: credential);
     } on FirebaseAuthException catch (e) {
-      return ApiError(message: e.message ?? 'Authentication failed');
+      return ApiError(message: 'firebase_auth:${e.code}');
     } on Object catch (e) {
       return ApiError(message: e.toString());
     }
@@ -28,10 +28,12 @@ class SignInDataSourceImpl implements SignInDataSource {
   @override
   FutureApiResult<UserCredential?> signInWithGoogle() async {
     try {
-      final credential = await getIt.get<FirebaseAuthService>().signInWithGoogle();
+      final credential = await getIt
+          .get<FirebaseAuthService>()
+          .signInWithGoogle();
       return ApiSuccess(data: credential);
     } on FirebaseAuthException catch (e) {
-      return ApiError(message: e.message ?? 'Google Sign-In failed');
+      return ApiError(message: 'firebase_auth:${e.code}');
     } on Object catch (e) {
       return ApiError(message: e.toString());
     }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
@@ -26,7 +28,7 @@ class ExploreTap extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 padding: EdgeInsets.symmetric(horizontal: context.w(16)),
                 itemCount: cubit.genres.length,
-                separatorBuilder: (_, __) => SizedBox(width: context.w(8)),
+                separatorBuilder: (_, _) => SizedBox(width: context.w(8)),
                 itemBuilder: (context, index) {
                   final genre = cubit.genres[index];
                   final isSelected = cubit.selectedGenre == genre;
@@ -52,7 +54,7 @@ class ExploreTap extends StatelessWidget {
                     ),
                     selected: isSelected,
                     onSelected: (_) {
-                      cubit.onGenreSelected(genre);
+                      unawaited(cubit.onGenreSelected(genre));
                     },
                   );
                 },
@@ -64,8 +66,7 @@ class ExploreTap extends StatelessWidget {
             Builder(
               builder: (context) {
                 if (state is HomeLoading) {
-
-                  return  const Expanded(
+                  return const Expanded(
                     child: Center(child: AppProgressIndicator()),
                   );
                 }
@@ -92,11 +93,7 @@ class ExploreTap extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final movie = cubit.filteredMovies[index];
 
-                      return MovieCard(
-                        imageUrl: movie.largeCoverImage,
-                        rating: movie.rating,
-                        onTap: () {},
-                      );
+                      return MovieCard(movie: movie);
                     },
                   ),
                 );

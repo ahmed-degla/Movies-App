@@ -71,42 +71,6 @@ class $AssetsImagesGen {
 class $AssetsImagesPngGen {
   const $AssetsImagesPngGen();
 
-  /// File path: assets/images/png/Avatar1.png
-  AssetGenImage get avatar1 =>
-      const AssetGenImage('assets/images/png/Avatar1.png');
-
-  /// File path: assets/images/png/Avatar2.png
-  AssetGenImage get avatar2 =>
-      const AssetGenImage('assets/images/png/Avatar2.png');
-
-  /// File path: assets/images/png/Avatar3.png
-  AssetGenImage get avatar3 =>
-      const AssetGenImage('assets/images/png/Avatar3.png');
-
-  /// File path: assets/images/png/Avatar4.png
-  AssetGenImage get avatar4 =>
-      const AssetGenImage('assets/images/png/Avatar4.png');
-
-  /// File path: assets/images/png/Avatar5.png
-  AssetGenImage get avatar5 =>
-      const AssetGenImage('assets/images/png/Avatar5.png');
-
-  /// File path: assets/images/png/Avatar6.png
-  AssetGenImage get avatar6 =>
-      const AssetGenImage('assets/images/png/Avatar6.png');
-
-  /// File path: assets/images/png/Avatar7.png
-  AssetGenImage get avatar7 =>
-      const AssetGenImage('assets/images/png/Avatar7.png');
-
-  /// File path: assets/images/png/Avatar8.png
-  AssetGenImage get avatar8 =>
-      const AssetGenImage('assets/images/png/Avatar8.png');
-
-  /// File path: assets/images/png/Avatar9.png
-  AssetGenImage get avatar9 =>
-      const AssetGenImage('assets/images/png/Avatar9.png');
-
   /// File path: assets/images/png/avaliable_now.png
   AssetGenImage get avaliableNow =>
       const AssetGenImage('assets/images/png/avaliable_now.png');
@@ -153,45 +117,45 @@ class $AssetsImagesPngGen {
   AssetGenImage get onboarding6 =>
       const AssetGenImage('assets/images/png/onboarding_6.png');
 
-  /// File path: assets/images/png/profile1.png
-  AssetGenImage get profile1 =>
-      const AssetGenImage('assets/images/png/profile1.png');
+  /// File path: assets/images/png/profile_image_1.png
+  AssetGenImage get profileImage1 =>
+      const AssetGenImage('assets/images/png/profile_image_1.png');
 
-  /// File path: assets/images/png/profile10.png
-  AssetGenImage get profile10 =>
-      const AssetGenImage('assets/images/png/profile10.png');
+  /// File path: assets/images/png/profile_image_10.png
+  AssetGenImage get profileImage10 =>
+      const AssetGenImage('assets/images/png/profile_image_10.png');
 
-  /// File path: assets/images/png/profile2.png
-  AssetGenImage get profile2 =>
-      const AssetGenImage('assets/images/png/profile2.png');
+  /// File path: assets/images/png/profile_image_2.png
+  AssetGenImage get profileImage2 =>
+      const AssetGenImage('assets/images/png/profile_image_2.png');
 
-  /// File path: assets/images/png/profile3.png
-  AssetGenImage get profile3 =>
-      const AssetGenImage('assets/images/png/profile3.png');
+  /// File path: assets/images/png/profile_image_3.png
+  AssetGenImage get profileImage3 =>
+      const AssetGenImage('assets/images/png/profile_image_3.png');
 
-  /// File path: assets/images/png/profile4.png
-  AssetGenImage get profile4 =>
-      const AssetGenImage('assets/images/png/profile4.png');
+  /// File path: assets/images/png/profile_image_4.png
+  AssetGenImage get profileImage4 =>
+      const AssetGenImage('assets/images/png/profile_image_4.png');
 
-  /// File path: assets/images/png/profile5.png
-  AssetGenImage get profile5 =>
-      const AssetGenImage('assets/images/png/profile5.png');
+  /// File path: assets/images/png/profile_image_5.png
+  AssetGenImage get profileImage5 =>
+      const AssetGenImage('assets/images/png/profile_image_5.png');
 
-  /// File path: assets/images/png/profile6.png
-  AssetGenImage get profile6 =>
-      const AssetGenImage('assets/images/png/profile6.png');
+  /// File path: assets/images/png/profile_image_6.png
+  AssetGenImage get profileImage6 =>
+      const AssetGenImage('assets/images/png/profile_image_6.png');
 
-  /// File path: assets/images/png/profile7.png
-  AssetGenImage get profile7 =>
-      const AssetGenImage('assets/images/png/profile7.png');
+  /// File path: assets/images/png/profile_image_7.png
+  AssetGenImage get profileImage7 =>
+      const AssetGenImage('assets/images/png/profile_image_7.png');
 
-  /// File path: assets/images/png/profile8.png
-  AssetGenImage get profile8 =>
-      const AssetGenImage('assets/images/png/profile8.png');
+  /// File path: assets/images/png/profile_image_8.png
+  AssetGenImage get profileImage8 =>
+      const AssetGenImage('assets/images/png/profile_image_8.png');
 
-  /// File path: assets/images/png/profile9.png
-  AssetGenImage get profile9 =>
-      const AssetGenImage('assets/images/png/profile9.png');
+  /// File path: assets/images/png/profile_image_9.png
+  AssetGenImage get profileImage9 =>
+      const AssetGenImage('assets/images/png/profile_image_9.png');
 
   /// File path: assets/images/png/route_logo.png
   AssetGenImage get routeLogo =>
@@ -203,15 +167,6 @@ class $AssetsImagesPngGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
-    avatar1,
-    avatar2,
-    avatar3,
-    avatar4,
-    avatar5,
-    avatar6,
-    avatar7,
-    avatar8,
-    avatar9,
     avaliableNow,
     empty,
     forgotPassword,
@@ -224,16 +179,16 @@ class $AssetsImagesPngGen {
     onboarding4,
     onboarding5,
     onboarding6,
-    profile1,
-    profile10,
-    profile2,
-    profile3,
-    profile4,
-    profile5,
-    profile6,
-    profile7,
-    profile8,
-    profile9,
+    profileImage1,
+    profileImage10,
+    profileImage2,
+    profileImage3,
+    profileImage4,
+    profileImage5,
+    profileImage6,
+    profileImage7,
+    profileImage8,
+    profileImage9,
     routeLogo,
     watchNow,
   ];
