@@ -1,3 +1,4 @@
+import 'package:movies/features/movie_details/data/model/json_parsers.dart';
 import 'package:movies/features/movie_details/domain/entity/similar_movie_entity.dart';
 
 class SimilarMovieModel extends SimilarMovieEntity {
@@ -8,16 +9,20 @@ class SimilarMovieModel extends SimilarMovieEntity {
     required super.rating,
   });
 
-  factory SimilarMovieModel.fromJson(Map<String, dynamic> json) =>
-      SimilarMovieModel(
-        id: (json['id'] as num?)?.toInt() ?? 0,
-        title: json['title']?.toString() ?? '',
-        posterImage: json['medium_cover_image']?.toString() ??
-            json['large_cover_image']?.toString() ??
-            json['small_cover_image']?.toString() ??
-            '',
-        rating: json['rating'] as num? ?? 0,
-      );
+  factory SimilarMovieModel.fromJson(Map<String, dynamic> json) {
+    final mediumCover = parseJsonString(json['medium_cover_image']);
+    final largeCover = parseJsonString(json['large_cover_image']);
+    final smallCover = parseJsonString(json['small_cover_image']);
+
+    return SimilarMovieModel(
+      id: parseJsonInt(json['id']),
+      title: parseJsonString(json['title']),
+      posterImage: mediumCover.isNotEmpty
+          ? mediumCover
+          : (largeCover.isNotEmpty ? largeCover : smallCover),
+      rating: parseJsonNum(json['rating']),
+    );
+  }
 
   Map<String, dynamic> toJson() => {
     'id': id,

@@ -1,43 +1,43 @@
 import 'package:injectable/injectable.dart';
+import 'package:movies/core/firebase_service/firebase_auth_service.dart';
+import 'package:movies/features/home/domain/entity/movie_entity.dart';
 import 'package:movies/features/movie_details/data/datasource/movie_details_local_datasource.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 @Injectable(as: MovieDetailsLocalDataSource)
 class MovieDetailsLocalDataSourceImpl implements MovieDetailsLocalDataSource {
-  static const String _bookmarksKey = 'bookmarked_movie_ids';
+  MovieDetailsLocalDataSourceImpl(this._firebaseAuthService);
+
+  final FirebaseAuthService _firebaseAuthService;
 
   @override
-  Future<bool> isBookmarked(int movieId) async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      final bookmarks = prefs.getStringList(_bookmarksKey) ?? const [];
-      return bookmarks.contains(movieId.toString());
-    } on Exception catch (_) {
+  Future<bool> isBookmarked(String movieId) async {
+    if (_firebaseAuthService.currentUser == null) {
       return false;
     }
+    final watchlist = await _firebaseAuthService.watchlistStream().first;
+    return watchlist.any((movie) => movie.id == movieId);
   }
 
   @override
-  Future<bool> toggleBookmark(int movieId) async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      final bookmarks =
-          (prefs.getStringList(_bookmarksKey) ?? const []).toList();
-      final idStr = movieId.toString();
-
-      final bool isNowBookmarked;
-      if (bookmarks.contains(idStr)) {
-        bookmarks.remove(idStr);
-        isNowBookmarked = false;
-      } else {
-        bookmarks.add(idStr);
-        isNowBookmarked = true;
-      }
-
-      await prefs.setStringList(_bookmarksKey, bookmarks);
-      return isNowBookmarked;
-    } on Exception catch (_) {
+  Future<bool> toggleBookmark(MovieEntity movie) async {
+    if (_firebaseAuthService.currentUser == null) {
+      throw Exception('A signed-in user is required.');
+    }
+    final currentlyBookmarked = await isBookmarked(movie.id);
+    if (currentlyBookmarked) {
+      await _firebaseAuthService.removeFromWatchlist(movie.id);
       return false;
     }
+
+    await _firebaseAuthService.addToWatchlist(movie);
+    return true;
+  }
+
+  @override
+  Future<void> addToHistory(MovieEntity movie) async {
+    if (_firebaseAuthService.currentUser == null) {
+      return;
+    }
+    await _firebaseAuthService.addToHistory(movie);
   }
 }

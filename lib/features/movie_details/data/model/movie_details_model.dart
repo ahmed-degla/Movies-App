@@ -1,4 +1,5 @@
 import 'package:movies/features/movie_details/data/model/cast_member_model.dart';
+import 'package:movies/features/movie_details/data/model/json_parsers.dart';
 import 'package:movies/features/movie_details/data/model/similar_movie_model.dart';
 import 'package:movies/features/movie_details/domain/entity/movie_details_entity.dart';
 
@@ -26,15 +27,13 @@ class MovieDetailsModel extends MovieDetailsEntity {
     List<SimilarMovieModel> similarMovies = const [],
     bool isBookmarked = false,
   }) {
-    final rawSummary = json['summary']?.toString();
-    final rawDescFull = json['description_full']?.toString();
-    final rawDescIntro = json['description_intro']?.toString();
+    final rawSummary = parseJsonString(json['summary']);
+    final rawDescFull = parseJsonString(json['description_full']);
+    final rawDescIntro = parseJsonString(json['description_intro']);
 
-    final summary = (rawSummary != null && rawSummary.isNotEmpty)
+    final summary = rawSummary.isNotEmpty
         ? rawSummary
-        : ((rawDescFull != null && rawDescFull.isNotEmpty)
-            ? rawDescFull
-            : (rawDescIntro ?? ''));
+        : (rawDescFull.isNotEmpty ? rawDescFull : rawDescIntro);
 
     final screenshots = <String>[];
     for (final key in [
@@ -45,42 +44,43 @@ class MovieDetailsModel extends MovieDetailsEntity {
       'medium_screenshot_image2',
       'medium_screenshot_image3',
     ]) {
-      final url = json[key]?.toString();
-      if (url != null && url.isNotEmpty && !screenshots.contains(url)) {
+      final url = parseJsonString(json[key]);
+      if (url.isNotEmpty && !screenshots.contains(url)) {
         screenshots.add(url);
       }
     }
 
-    final castJson = json['cast'] as List<dynamic>? ?? const [];
-    final cast = castJson
+    final cast = asJsonList(json['cast'])
+        .map(asJsonMap)
         .whereType<Map<String, dynamic>>()
         .map(CastMemberModel.fromJson)
         .toList();
 
-    final genresJson = json['genres'] as List<dynamic>? ?? const [];
-    final genres = genresJson.map((e) => e.toString()).toList();
+    final genres = asJsonList(json['genres']).map(parseJsonString).toList();
 
     return MovieDetailsModel(
-      id: (json['id'] as num?)?.toInt() ?? 0,
-      title: json['title']?.toString() ?? '',
-      releaseYear: (json['year'] as num?)?.toInt() ?? 0,
-      backdropImage: json['background_image_original']?.toString() ??
-          json['background_image']?.toString() ??
-          '',
-      posterImage: json['large_cover_image']?.toString() ??
-          json['medium_cover_image']?.toString() ??
-          json['small_cover_image']?.toString() ??
-          '',
-      rating: json['rating'] as num? ?? 0,
-      runtime: (json['runtime'] as num?)?.toInt() ?? 0,
-      likesCount: (json['like_count'] as num?)?.toInt() ?? 0,
+      id: parseJsonInt(json['id']),
+      title: parseJsonString(json['title']),
+      releaseYear: parseJsonInt(json['year']),
+      backdropImage:
+          parseJsonString(json['background_image_original']).isNotEmpty
+          ? parseJsonString(json['background_image_original'])
+          : parseJsonString(json['background_image']),
+      posterImage: parseJsonString(json['large_cover_image']).isNotEmpty
+          ? parseJsonString(json['large_cover_image'])
+          : (parseJsonString(json['medium_cover_image']).isNotEmpty
+                ? parseJsonString(json['medium_cover_image'])
+                : parseJsonString(json['small_cover_image'])),
+      rating: parseJsonNum(json['rating']),
+      runtime: parseJsonInt(json['runtime']),
+      likesCount: parseJsonInt(json['like_count']),
       summary: summary,
       screenshots: screenshots,
       genres: genres,
       cast: cast,
       similarMovies: similarMovies,
       isBookmarked: isBookmarked,
-      trailerCode: json['yt_trailer_code']?.toString() ?? '',
+      trailerCode: parseJsonString(json['yt_trailer_code']),
     );
   }
 

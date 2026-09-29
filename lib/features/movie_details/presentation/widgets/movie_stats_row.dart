@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:movies/core/utils/app_utils.dart';
 import 'package:movies/features/movie_details/domain/entity/movie_details_entity.dart';
 import 'package:movies/features/movie_details/presentation/widgets/stat_chip.dart';
 import 'package:movies/generated/assets/assets.gen.dart';
@@ -11,7 +12,9 @@ class MovieStatsRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final runtimeValue = movie.runtime > 0 ? '${movie.runtime}' : 'N/A';
+    final runtimeValue = movie.runtime > 0
+        ? '${movie.runtime}'
+        : tr.movieDetailsNotAvailable;
     final ratingValue = movie.rating > 0
         ? movie.rating.toStringAsFixed(1)
         : '0.0';
@@ -35,10 +38,7 @@ class MovieStatsRow extends StatelessWidget {
           ),
           SizedBox(width: context.w(10)),
           Expanded(
-            child: StatChip(
-              icon: Assets.images.svg.rate,
-              value: ratingValue,
-            ),
+            child: StatChip(icon: Assets.images.svg.rate, value: ratingValue),
           ),
         ],
       ),

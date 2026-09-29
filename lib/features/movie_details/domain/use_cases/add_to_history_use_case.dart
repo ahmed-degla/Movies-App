@@ -4,11 +4,11 @@ import 'package:movies/features/movie_details/domain/entity/movie_details_entity
 import 'package:movies/features/movie_details/domain/repo/movie_details_repo.dart';
 
 @singleton
-class ToggleBookmarkUseCase {
-  ToggleBookmarkUseCase(this._movieDetailsRepo);
+class AddToHistoryUseCase {
+  AddToHistoryUseCase(this._movieDetailsRepo);
 
   final MovieDetailsRepo _movieDetailsRepo;
 
-  FutureApiResult<bool> call(MovieDetailsEntity movie) =>
-      _movieDetailsRepo.toggleBookmark(movie);
+  FutureApiResult<void> call(MovieDetailsEntity movie) =>
+      _movieDetailsRepo.addToHistory(movie);
 }

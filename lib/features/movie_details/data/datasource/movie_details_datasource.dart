@@ -4,5 +4,5 @@ import 'package:movies/features/movie_details/data/model/similar_movie_model.dar
 
 abstract interface class MovieDetailsDataSource {
   FutureApiResult<MovieDetailsModel> getMovieDetails(int movieId);
-  Future<List<SimilarMovieModel>> getMovieSuggestions(int movieId);
+  FutureApiResult<List<SimilarMovieModel>> getMovieSuggestions(int movieId);
 }

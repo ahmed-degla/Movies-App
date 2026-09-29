@@ -1,7 +1,9 @@
 import 'package:injectable/injectable.dart';
 import 'package:movies/core/network/api_result.dart';
+import 'package:movies/core/utils/app_utils.dart';
 import 'package:movies/features/movie_details/data/api_service/movie_details_api_service.dart';
 import 'package:movies/features/movie_details/data/datasource/movie_details_datasource.dart';
+import 'package:movies/features/movie_details/data/model/json_parsers.dart';
 import 'package:movies/features/movie_details/data/model/movie_details_model.dart';
 import 'package:movies/features/movie_details/data/model/similar_movie_model.dart';
 
@@ -14,38 +16,40 @@ class MovieDetailsDataSourceImpl implements MovieDetailsDataSource {
   @override
   FutureApiResult<MovieDetailsModel> getMovieDetails(int movieId) async {
     try {
-      final response = await _apiService.getMovieDetails(
-        movieId: movieId,
-      ) as Map<String, dynamic>?;
+      final response = await _apiService.getMovieDetails(movieId: movieId);
+      final movieJson = asJsonMap(asJsonMap(response)?['data'])?['movie'];
+      final movieMap = asJsonMap(movieJson);
 
-      final data = response?['data'] as Map<String, dynamic>?;
-      final movieJson = data?['movie'] as Map<String, dynamic>?;
-
-      if (movieJson == null) {
-        return const ApiError(message: 'Movie details not found');
+      if (movieMap == null) {
+        return ApiError(message: tr.movieDetailsLoadFailed);
       }
 
-      final movie = MovieDetailsModel.fromJson(movieJson);
-      return ApiSuccess(data: movie);
+      return ApiSuccess(data: MovieDetailsModel.fromJson(movieMap));
     } on Exception catch (e) {
       return ApiError(message: e.toString());
     }
   }
 
   @override
-  Future<List<SimilarMovieModel>> getMovieSuggestions(int movieId) async {
+  FutureApiResult<List<SimilarMovieModel>> getMovieSuggestions(
+    int movieId,
+  ) async {
     try {
-      final response = await _apiService.getMovieSuggestions(movieId: movieId)
-          as Map<String, dynamic>?;
-      final data = response?['data'] as Map<String, dynamic>?;
-      final moviesJson = data?['movies'] as List<dynamic>? ?? const [];
+      final response = await _apiService.getMovieSuggestions(movieId: movieId);
+      final data = asJsonMap(asJsonMap(response)?['data']);
+      if (data == null) {
+        return ApiError(message: tr.movieDetailsSuggestionsFailed);
+      }
 
-      return moviesJson
+      final movies = asJsonList(data['movies'])
+          .map(asJsonMap)
           .whereType<Map<String, dynamic>>()
           .map(SimilarMovieModel.fromJson)
           .toList();
-    } on Exception catch (_) {
-      return const [];
+
+      return ApiSuccess(data: movies);
+    } on Exception catch (e) {
+      return ApiError(message: e.toString());
     }
   }
 }

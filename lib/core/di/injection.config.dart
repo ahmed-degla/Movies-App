@@ -82,6 +82,8 @@ import 'package:movies/features/movie_details/data/repo_impl/movie_details_repo_
     as _i35;
 import 'package:movies/features/movie_details/domain/repo/movie_details_repo.dart'
     as _i676;
+import 'package:movies/features/movie_details/domain/use_cases/add_to_history_use_case.dart'
+    as _i885;
 import 'package:movies/features/movie_details/domain/use_cases/get_movie_details_use_case.dart'
     as _i651;
 import 'package:movies/features/movie_details/domain/use_cases/toggle_bookmark_use_case.dart'
@@ -111,9 +113,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i681.MovieDataSource>(
       () => _i222.MovieDataSourceImpl(gh<_i451.ApiService>()),
     );
-    gh.factory<_i191.MovieDetailsLocalDataSource>(
-      () => _i508.MovieDetailsLocalDataSourceImpl(),
-    );
     gh.factory<_i271.SignUpDataSource>(() => _i186.SignUpDataSourceImpl());
     gh.factory<_i413.ForgotPasswordDataSource>(
       () => _i799.ForgotPasswordDataSourceImpl(),
@@ -121,6 +120,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i144.MovieDetailsDataSource>(
       () =>
           _i229.MovieDetailsDataSourceImpl(gh<_i980.MovieDetailsApiService>()),
+    );
+    gh.factory<_i191.MovieDetailsLocalDataSource>(
+      () => _i508.MovieDetailsLocalDataSourceImpl(
+        gh<_i348.FirebaseAuthService>(),
+      ),
     );
     gh.factory<_i287.MoviesRepo>(
       () => _i495.MoviesRepoImpl(gh<_i681.MovieDataSource>()),
@@ -164,22 +168,26 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i604.GetMoviesUseCase>(
       () => _i604.GetMoviesUseCase(gh<_i287.MoviesRepo>()),
     );
+    gh.singleton<_i885.AddToHistoryUseCase>(
+      () => _i885.AddToHistoryUseCase(gh<_i676.MovieDetailsRepo>()),
+    );
     gh.singleton<_i651.GetMovieDetailsUseCase>(
       () => _i651.GetMovieDetailsUseCase(gh<_i676.MovieDetailsRepo>()),
     );
     gh.singleton<_i864.ToggleBookmarkUseCase>(
       () => _i864.ToggleBookmarkUseCase(gh<_i676.MovieDetailsRepo>()),
     );
-    gh.factory<_i246.MovieDetailsCubit>(
-      () => _i246.MovieDetailsCubit(
-        gh<_i651.GetMovieDetailsUseCase>(),
-        gh<_i864.ToggleBookmarkUseCase>(),
-      ),
-    );
     gh.factory<_i217.HomeCubit>(
       () => _i217.HomeCubit(
         gh<_i604.GetMoviesUseCase>(),
         gh<_i348.FirebaseAuthService>(),
+      ),
+    );
+    gh.factory<_i246.MovieDetailsCubit>(
+      () => _i246.MovieDetailsCubit(
+        gh<_i651.GetMovieDetailsUseCase>(),
+        gh<_i864.ToggleBookmarkUseCase>(),
+        gh<_i885.AddToHistoryUseCase>(),
       ),
     );
     return this;

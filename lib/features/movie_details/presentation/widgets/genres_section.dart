@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:movies/core/utils/app_utils.dart';
 import 'package:movies/features/movie_details/presentation/widgets/genre_chip.dart';
 import 'package:movies/widgets/app_text.dart';
 
@@ -20,7 +21,7 @@ class GenresSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppText(
-            text: 'Genres',
+            text: tr.movieDetailsGenres,
             fontSize: context.sp(18),
             fontWeight: FontWeight.bold,
           ),

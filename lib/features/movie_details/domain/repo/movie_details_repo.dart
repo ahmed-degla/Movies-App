@@ -3,5 +3,6 @@ import 'package:movies/features/movie_details/domain/entity/movie_details_entity
 
 abstract interface class MovieDetailsRepo {
   FutureApiResult<MovieDetailsEntity> getMovieDetails(int movieId);
-  FutureApiResult<bool> toggleBookmark(int movieId);
+  FutureApiResult<bool> toggleBookmark(MovieDetailsEntity movie);
+  FutureApiResult<void> addToHistory(MovieDetailsEntity movie);
 }

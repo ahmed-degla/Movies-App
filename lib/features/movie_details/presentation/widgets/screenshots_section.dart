@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:movies/core/utils/app_utils.dart';
 import 'package:movies/widgets/app_network_image.dart';
 import 'package:movies/widgets/app_text.dart';
 
@@ -20,7 +21,7 @@ class ScreenshotsSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppText(
-            text: 'Screen Shots',
+            text: tr.movieDetailsScreenShots,
             fontSize: context.sp(18),
             fontWeight: FontWeight.bold,
           ),
@@ -35,9 +36,7 @@ class ScreenshotsSection extends StatelessWidget {
               child: SizedBox(
                 width: double.infinity,
                 height: context.h(170),
-                child: AppNetWorkImage(
-                  imageUrl: screenshots[index],
-                ),
+                child: AppNetWorkImage(imageUrl: screenshots[index]),
               ),
             ),
           ),

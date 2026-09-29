@@ -1,3 +1,4 @@
+import 'package:movies/features/movie_details/data/model/json_parsers.dart';
 import 'package:movies/features/movie_details/domain/entity/cast_member_entity.dart';
 
 class CastMemberModel extends CastMemberEntity {
@@ -9,9 +10,9 @@ class CastMemberModel extends CastMemberEntity {
 
   factory CastMemberModel.fromJson(Map<String, dynamic> json) =>
       CastMemberModel(
-        name: json['name']?.toString() ?? '',
-        characterName: json['character_name']?.toString() ?? '',
-        avatarImage: json['url_small_image']?.toString() ?? '',
+        name: parseJsonString(json['name']),
+        characterName: parseJsonString(json['character_name']),
+        avatarImage: parseJsonString(json['url_small_image']),
       );
 
   Map<String, dynamic> toJson() => {

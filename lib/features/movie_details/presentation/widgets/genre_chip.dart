@@ -10,19 +10,19 @@ class GenreChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: context.w(16),
-          vertical: context.h(8),
-        ),
-        decoration: BoxDecoration(
-          color: appColors.fill,
-          borderRadius: BorderRadius.circular(context.r(12)),
-          border: Border.all(color: Colors.white24),
-        ),
-        child: AppText(
-          text: genre,
-          fontSize: context.sp(14),
-          fontWeight: FontWeight.w500,
-        ),
-      );
+    padding: EdgeInsets.symmetric(
+      horizontal: context.w(16),
+      vertical: context.h(8),
+    ),
+    decoration: BoxDecoration(
+      color: appColors.fill,
+      borderRadius: BorderRadius.circular(context.r(12)),
+      border: Border.all(color: appColors.primaryText.withValues(alpha: 0.24)),
+    ),
+    child: AppText(
+      text: genre,
+      fontSize: context.sp(14),
+      fontWeight: FontWeight.w500,
+    ),
+  );
 }

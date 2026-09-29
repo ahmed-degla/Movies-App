@@ -30,11 +30,10 @@ class MovieDetailsLoaded extends MovieDetailsStates {
   MovieDetailsLoaded copyWith({
     MovieDetailsEntity? movie,
     bool? isBookmarking,
-  }) =>
-      MovieDetailsLoaded(
-        movie: movie ?? this.movie,
-        isBookmarking: isBookmarking ?? this.isBookmarking,
-      );
+  }) => MovieDetailsLoaded(
+    movie: movie ?? this.movie,
+    isBookmarking: isBookmarking ?? this.isBookmarking,
+  );
 }
 
 class MovieDetailsError extends MovieDetailsStates {

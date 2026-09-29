@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:movies/core/theme/theme_extension.dart';
+import 'package:movies/core/utils/app_utils.dart';
 import 'package:movies/widgets/app_text.dart';
 
 class SummarySection extends StatelessWidget {
@@ -19,7 +21,7 @@ class SummarySection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppText(
-            text: 'Summary',
+            text: tr.movieDetailsSummary,
             fontSize: context.sp(18),
             fontWeight: FontWeight.bold,
           ),
@@ -27,7 +29,7 @@ class SummarySection extends StatelessWidget {
           AppText(
             text: summary,
             fontSize: context.sp(14),
-            color: Colors.white70,
+            color: appColors.primaryText.withValues(alpha: 0.7),
             height: 1.5,
           ),
         ],

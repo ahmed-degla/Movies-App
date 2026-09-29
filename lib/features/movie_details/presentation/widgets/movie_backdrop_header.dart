@@ -1,11 +1,13 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:movies/core/theme/theme_extension.dart';
 import 'package:movies/features/movie_details/domain/entity/movie_details_entity.dart';
+import 'package:movies/features/movie_details/presentation/utils/movie_trailer_launcher.dart';
 import 'package:movies/features/movie_details/presentation/view_model/movie_details_cubit.dart';
 import 'package:movies/widgets/app_network_image.dart';
-import 'package:movies/widgets/app_snack_bar.dart';
 import 'package:movies/widgets/app_text.dart';
 
 class MovieBackdropHeader extends StatelessWidget {
@@ -37,7 +39,7 @@ class MovieBackdropHeader extends StatelessWidget {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      Colors.black.withValues(alpha: 0.4),
+                      appColors.background.withValues(alpha: 0.4),
                       Colors.transparent,
                       appColors.background.withValues(alpha: 0.8),
                       appColors.background,
@@ -58,29 +60,38 @@ class MovieBackdropHeader extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         GestureDetector(
-                          onTap: () => context.router.maybePop(),
+                          onTap: () {
+                            unawaited(context.router.maybePop());
+                          },
                           child: Container(
                             width: context.w(44),
                             height: context.w(44),
                             decoration: BoxDecoration(
-                              color: Colors.black.withValues(alpha: 0.5),
+                              color: appColors.background.withValues(
+                                alpha: 0.5,
+                              ),
                               shape: BoxShape.circle,
                             ),
                             child: Icon(
                               Icons.arrow_back_ios_new_rounded,
-                              color: Colors.white,
+                              color: appColors.primaryText,
                               size: context.sp(20),
                             ),
                           ),
                         ),
                         GestureDetector(
-                          onTap: () =>
+                          onTap: () {
+                            unawaited(
                               MovieDetailsCubit.of(context).toggleBookmark(),
+                            );
+                          },
                           child: Container(
                             width: context.w(44),
                             height: context.w(44),
                             decoration: BoxDecoration(
-                              color: Colors.black.withValues(alpha: 0.5),
+                              color: appColors.background.withValues(
+                                alpha: 0.5,
+                              ),
                               shape: BoxShape.circle,
                             ),
                             child: Icon(
@@ -89,7 +100,7 @@ class MovieBackdropHeader extends StatelessWidget {
                                   : Icons.bookmark_outline_rounded,
                               color: movie.isBookmarked
                                   ? appColors.primary
-                                  : Colors.white,
+                                  : appColors.primaryText,
                               size: context.sp(24),
                             ),
                           ),
@@ -102,16 +113,14 @@ class MovieBackdropHeader extends StatelessWidget {
               Center(
                 child: GestureDetector(
                   onTap: () {
-                    AppSnackBar.show(
-                      message: 'Playing trailer for ${movie.title}...',
-                    );
+                    unawaited(openMovieTrailer(movie));
                   },
                   child: Container(
                     width: context.w(80),
                     height: context.w(80),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.white.withValues(alpha: 0.25),
+                      color: appColors.primaryText.withValues(alpha: 0.25),
                     ),
                     padding: EdgeInsets.all(context.w(8)),
                     child: DecoratedBox(
@@ -121,7 +130,7 @@ class MovieBackdropHeader extends StatelessWidget {
                       ),
                       child: Icon(
                         Icons.play_arrow_rounded,
-                        color: Colors.white,
+                        color: appColors.primaryText,
                         size: context.sp(42),
                       ),
                     ),
@@ -145,7 +154,7 @@ class MovieBackdropHeader extends StatelessWidget {
               AppText(
                 text: movie.releaseYear.toString(),
                 fontSize: context.sp(14),
-                color: Colors.white60,
+                color: appColors.primaryText.withValues(alpha: 0.6),
                 textAlign: TextAlign.center,
               ),
             ],

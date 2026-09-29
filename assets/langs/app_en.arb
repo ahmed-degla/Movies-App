@@ -15,7 +15,38 @@
   "register": "Register",
   "verifyEmail": "Verify Email",
   "avatar": "Avatar",
-"action":"Action",
-"seeMore":"See More"
-
+  "action": "Action",
+  "seeMore": "See More",
+  "movieDetailsWatch": "Watch",
+  "movieDetailsScreenShots": "Screen Shots",
+  "movieDetailsSimilar": "Similar",
+  "movieDetailsSummary": "Summary",
+  "movieDetailsCast": "Cast",
+  "movieDetailsGenres": "Genres",
+  "movieDetailsNotAvailable": "N/A",
+  "movieDetailsTryAgain": "Try Again",
+  "movieDetailsNameLabel": "Name : {name}",
+  "@movieDetailsNameLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "movieDetailsCharacterLabel": "Character : {character}",
+  "@movieDetailsCharacterLabel": {
+    "placeholders": {
+      "character": {
+        "type": "String"
+      }
+    }
+  },
+  "movieDetailsNoTrailer": "No trailer is available for this movie.",
+  "movieDetailsTrailerOpenFailed": "Couldn't open the trailer.",
+  "movieDetailsWatchAddedToHistory": "Added to your watch history.",
+  "movieDetailsWatchFailed": "Couldn't start watching this movie.",
+  "movieDetailsBookmarkFailed": "Couldn't update your watchlist.",
+  "movieDetailsNoInternet": "No internet connection",
+  "movieDetailsLoadFailed": "Couldn't load movie details.",
+  "movieDetailsSuggestionsFailed": "Couldn't load similar movies."
 }

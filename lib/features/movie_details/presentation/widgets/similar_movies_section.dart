@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:movies/core/routing/app_router.gr.dart';
+import 'package:movies/core/utils/app_utils.dart';
 import 'package:movies/features/movie_details/domain/entity/similar_movie_entity.dart';
 import 'package:movies/features/movie_details/presentation/widgets/similar_movie_card.dart';
 import 'package:movies/widgets/app_text.dart';
@@ -25,7 +26,7 @@ class SimilarMoviesSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppText(
-            text: 'Similar',
+            text: tr.movieDetailsSimilar,
             fontSize: context.sp(18),
             fontWeight: FontWeight.bold,
           ),
