@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:movies/core/theme/theme_extension.dart';
-import 'package:movies/core/utils/app_utils.dart';
+import 'package:movies/features/onboarding/presentation/onboarding_page_content.dart';
 import 'package:movies/features/onboarding/presentation/view_model/onboarding_cubit.dart';
+import 'package:movies/generated/l10n/app_localizations.dart';
 import 'package:movies/widgets/app_button.dart';
 import 'package:movies/widgets/app_text.dart';
 
 class OnboardingNavigationPanel extends StatelessWidget {
   const OnboardingNavigationPanel({
     required this.state,
+    required this.page,
+    required this.localizations,
     required this.onNext,
     required this.onBack,
     required this.onFinish,
@@ -16,28 +19,14 @@ class OnboardingNavigationPanel extends StatelessWidget {
   });
 
   final OnboardingState state;
+  final OnboardingPageContent page;
+  final AppLocalizations localizations;
   final VoidCallback onNext;
   final VoidCallback onBack;
   final VoidCallback onFinish;
 
   @override
   Widget build(BuildContext context) {
-    final titles = [
-      tr.onboardingTitle1,
-      tr.onboardingTitle2,
-      tr.onboardingTitle3,
-      tr.onboardingTitle4,
-      tr.onboardingTitle5,
-      tr.onboardingTitle6,
-    ];
-    final descriptions = [
-      tr.onboardingDescription1,
-      tr.onboardingDescription2,
-      tr.onboardingDescription3,
-      tr.onboardingDescription4,
-      tr.onboardingDescription5,
-      tr.onboardingDescription6,
-    ];
     final isLastPage = state.currentPage == OnboardingCubit.pageCount - 1;
 
     return Container(
@@ -72,15 +61,15 @@ class OnboardingNavigationPanel extends StatelessWidget {
                 key: ValueKey(state.currentPage),
                 children: [
                   AppText(
-                    text: titles[state.currentPage],
+                    text: page.title(localizations),
                     fontSize: context.sp(24),
                     fontWeight: FontWeight.bold,
                     textAlign: TextAlign.center,
                   ),
-                  if (descriptions[state.currentPage].isNotEmpty) ...[
+                  if (page.description(localizations).isNotEmpty) ...[
                     SizedBox(height: context.h(20)),
                     AppText(
-                      text: descriptions[state.currentPage],
+                      text: page.description(localizations),
                       fontSize: context.sp(20),
                       textAlign: TextAlign.center,
                       color: state.currentPage == 0
@@ -101,10 +90,10 @@ class OnboardingNavigationPanel extends StatelessWidget {
               loading: state.isCompleting,
               child: AppText(
                 text: isLastPage
-                    ? tr.onboardingFinish
+                    ? localizations.onboardingFinish
                     : state.currentPage == 0
-                    ? tr.onboardingExplore
-                    : tr.onboardingNext,
+                    ? localizations.onboardingExplore
+                    : localizations.onboardingNext,
                 fontSize: context.sp(20),
                 color: appColors.background,
                 fontWeight: FontWeight.w600,
@@ -115,7 +104,7 @@ class OnboardingNavigationPanel extends StatelessWidget {
               AppButton.outlined(
                 onTap: state.isCompleting ? null : onBack,
                 child: AppText(
-                  text: tr.onboardingBack,
+                  text: localizations.onboardingBack,
                   color: appColors.primary,
                   fontSize: context.sp(20),
                   fontWeight: FontWeight.w600,

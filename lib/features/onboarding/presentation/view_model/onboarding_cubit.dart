@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:movies/features/onboarding/domain/use_cases/mark_onboarding_completed_use_case.dart';
+import 'package:movies/features/onboarding/presentation/onboarding_page_content.dart';
 
 class OnboardingState {
   const OnboardingState({
@@ -36,16 +37,22 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     : pageController = PageController(),
       super(const OnboardingState());
 
-  static const int pageCount = 6;
+  static int get pageCount => OnboardingPageContent.pageCount;
 
   final MarkOnboardingCompletedUseCase _markOnboardingCompleted;
   final PageController pageController;
 
-  Future<void> goToPage(int page) => pageController.animateToPage(
-    page,
-    duration: const Duration(milliseconds: 380),
-    curve: Curves.easeInOutCubic,
-  );
+  Future<void> goToPage(int page) {
+    if (page < 0 || page >= pageCount || !pageController.hasClients) {
+      return Future<void>.value();
+    }
+
+    return pageController.animateToPage(
+      page,
+      duration: const Duration(milliseconds: 380),
+      curve: Curves.easeInOutCubic,
+    );
+  }
 
   void onPageChanged(int page) {
     if (page < 0 || page >= pageCount || page == state.currentPage) return;

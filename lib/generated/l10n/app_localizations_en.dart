@@ -101,7 +101,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboardingTitle6 => 'Start Watching Now';
 
   @override
-  String get onboardingDescription6 => '';
+  String get onboardingDescription6 =>
+      'Sign in or create an account to discover movies, build your watchlist, and start watching.';
 
   @override
   String get onboardingNext => 'Next';

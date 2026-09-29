@@ -275,7 +275,7 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingDescription6.
   ///
   /// In en, this message translates to:
-  /// **''**
+  /// **'Sign in or create an account to discover movies, build your watchlist, and start watching.'**
   String get onboardingDescription6;
 
   /// No description provided for @onboardingNext.

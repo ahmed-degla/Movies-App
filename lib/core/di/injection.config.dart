@@ -88,6 +88,8 @@ import 'package:movies/features/onboarding/data/repository/onboarding_repository
     as _i378;
 import 'package:movies/features/onboarding/domain/repository/onboarding_repository.dart'
     as _i842;
+import 'package:movies/features/onboarding/domain/use_cases/is_onboarding_completed_use_case.dart'
+    as _i1031;
 import 'package:movies/features/onboarding/domain/use_cases/mark_onboarding_completed_use_case.dart'
     as _i612;
 import 'package:movies/features/onboarding/presentation/view_model/onboarding_cubit.dart'
@@ -129,6 +131,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i451.ApiService>(() => _i451.ApiService(gh<_i361.Dio>()));
     gh.lazySingleton<_i980.MovieDetailsApiService>(
       () => _i980.MovieDetailsApiService(gh<_i361.Dio>()),
+    );
+    gh.factory<_i1031.IsOnboardingCompletedUseCase>(
+      () =>
+          _i1031.IsOnboardingCompletedUseCase(gh<_i842.OnboardingRepository>()),
     );
     gh.factory<_i612.MarkOnboardingCompletedUseCase>(
       () => _i612.MarkOnboardingCompletedUseCase(

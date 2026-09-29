@@ -101,7 +101,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get onboardingTitle6 => 'ابدأ المشاهدة الآن';
 
   @override
-  String get onboardingDescription6 => '';
+  String get onboardingDescription6 =>
+      'سجّل الدخول أو أنشئ حسابًا لاكتشاف الأفلام وإنشاء قائمة مشاهداتك والبدء في المشاهدة.';
 
   @override
   String get onboardingNext => 'التالي';
