@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -58,8 +57,66 @@ class AppLocalizationsAr extends AppLocalizations {
   String get avatar => 'الصورة الشخصية';
 
   @override
-  String get action => 'الاكشن';
+  String get action => 'أكشن';
 
   @override
   String get seeMore => 'المزيد';
+
+  @override
+  String get movieDetailsWatch => 'مشاهدة';
+
+  @override
+  String get movieDetailsScreenShots => 'لقطات الشاشة';
+
+  @override
+  String get movieDetailsSimilar => 'أفلام مشابهة';
+
+  @override
+  String get movieDetailsSummary => 'الملخص';
+
+  @override
+  String get movieDetailsCast => 'طاقم التمثيل';
+
+  @override
+  String get movieDetailsGenres => 'التصنيفات';
+
+  @override
+  String get movieDetailsNotAvailable => 'غير متاح';
+
+  @override
+  String get movieDetailsTryAgain => 'حاول مرة أخرى';
+
+  @override
+  String movieDetailsNameLabel(String name) {
+    return 'الاسم : $name';
+  }
+
+  @override
+  String movieDetailsCharacterLabel(String character) {
+    return 'الشخصية : $character';
+  }
+
+  @override
+  String get movieDetailsNoTrailer => 'لا يوجد إعلان تشويقي لهذا الفيلم.';
+
+  @override
+  String get movieDetailsTrailerOpenFailed => 'تعذر فتح الإعلان التشويقي.';
+
+  @override
+  String get movieDetailsWatchAddedToHistory => 'تمت الإضافة إلى سجل المشاهدة.';
+
+  @override
+  String get movieDetailsWatchFailed => 'تعذر بدء مشاهدة هذا الفيلم.';
+
+  @override
+  String get movieDetailsBookmarkFailed => 'تعذر تحديث قائمة المشاهدة.';
+
+  @override
+  String get movieDetailsNoInternet => 'لا يوجد اتصال بالإنترنت';
+
+  @override
+  String get movieDetailsLoadFailed => 'تعذر تحميل تفاصيل الفيلم.';
+
+  @override
+  String get movieDetailsSuggestionsFailed => 'تعذر تحميل الأفلام المشابهة.';
 }

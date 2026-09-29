@@ -1,5 +1,9 @@
+import 'dart:async';
+
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:movies/core/routing/app_router.gr.dart';
 import 'package:movies/core/theme/theme_extension.dart';
 import 'package:movies/core/utils/app_utils.dart';
 import 'package:movies/features/home/domain/entity/movie_entity.dart';
@@ -58,7 +62,12 @@ class MovieSection extends StatelessWidget {
             itemBuilder: (context, index) => MovieCard(
               imageUrl: movies[index].largeCoverImage,
               rating: movies[index].rating,
-              onTap: () {},
+              onTap: () {
+                final id = int.tryParse(movies[index].id) ?? 0;
+                if (id > 0) {
+                  unawaited(context.router.push(MovieDetailsRoute(movieId: id)));
+                }
+              },
             ),
             separatorBuilder: (_, _) => SizedBox(width: context.w(12)),
           ),

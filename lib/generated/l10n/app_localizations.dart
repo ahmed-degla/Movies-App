@@ -205,6 +205,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'See More'**
   String get seeMore;
+
+  /// No description provided for @movieDetailsWatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch'**
+  String get movieDetailsWatch;
+
+  /// No description provided for @movieDetailsScreenShots.
+  ///
+  /// In en, this message translates to:
+  /// **'Screen Shots'**
+  String get movieDetailsScreenShots;
+
+  /// No description provided for @movieDetailsSimilar.
+  ///
+  /// In en, this message translates to:
+  /// **'Similar'**
+  String get movieDetailsSimilar;
+
+  /// No description provided for @movieDetailsSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Summary'**
+  String get movieDetailsSummary;
+
+  /// No description provided for @movieDetailsCast.
+  ///
+  /// In en, this message translates to:
+  /// **'Cast'**
+  String get movieDetailsCast;
+
+  /// No description provided for @movieDetailsGenres.
+  ///
+  /// In en, this message translates to:
+  /// **'Genres'**
+  String get movieDetailsGenres;
+
+  /// No description provided for @movieDetailsNotAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'N/A'**
+  String get movieDetailsNotAvailable;
+
+  /// No description provided for @movieDetailsTryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Try Again'**
+  String get movieDetailsTryAgain;
+
+  /// No description provided for @movieDetailsNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Name : {name}'**
+  String movieDetailsNameLabel(String name);
+
+  /// No description provided for @movieDetailsCharacterLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Character : {character}'**
+  String movieDetailsCharacterLabel(String character);
+
+  /// No description provided for @movieDetailsNoTrailer.
+  ///
+  /// In en, this message translates to:
+  /// **'No trailer is available for this movie.'**
+  String get movieDetailsNoTrailer;
+
+  /// No description provided for @movieDetailsTrailerOpenFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t open the trailer.'**
+  String get movieDetailsTrailerOpenFailed;
+
+  /// No description provided for @movieDetailsWatchAddedToHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Added to your watch history.'**
+  String get movieDetailsWatchAddedToHistory;
+
+  /// No description provided for @movieDetailsWatchFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t start watching this movie.'**
+  String get movieDetailsWatchFailed;
+
+  /// No description provided for @movieDetailsBookmarkFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t update your watchlist.'**
+  String get movieDetailsBookmarkFailed;
+
+  /// No description provided for @movieDetailsNoInternet.
+  ///
+  /// In en, this message translates to:
+  /// **'No internet connection'**
+  String get movieDetailsNoInternet;
+
+  /// No description provided for @movieDetailsLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load movie details.'**
+  String get movieDetailsLoadFailed;
+
+  /// No description provided for @movieDetailsSuggestionsFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load similar movies.'**
+  String get movieDetailsSuggestionsFailed;
 }
 
 class _AppLocalizationsDelegate

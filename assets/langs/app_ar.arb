@@ -15,6 +15,38 @@
   "register": "تسجيل",
   "verifyEmail": "تحقق من البريد الإلكتروني",
   "avatar": "الصورة الشخصية",
-"action":"الاكشن",
-"seeMore":"المزيد"
+  "action": "أكشن",
+  "seeMore": "المزيد",
+  "movieDetailsWatch": "مشاهدة",
+  "movieDetailsScreenShots": "لقطات ",
+  "movieDetailsSimilar": "أفلام مشابهة",
+  "movieDetailsSummary": "الملخص",
+  "movieDetailsCast": "طاقم التمثيل",
+  "movieDetailsGenres": "التصنيفات",
+  "movieDetailsNotAvailable": "غير متاح",
+  "movieDetailsTryAgain": "حاول مرة أخرى",
+  "movieDetailsNameLabel": "الاسم : {name}",
+  "@movieDetailsNameLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "movieDetailsCharacterLabel": "الشخصية : {character}",
+  "@movieDetailsCharacterLabel": {
+    "placeholders": {
+      "character": {
+        "type": "String"
+      }
+    }
+  },
+  "movieDetailsNoTrailer": "لا يوجد إعلان تشويقي لهذا الفيلم.",
+  "movieDetailsTrailerOpenFailed": "تعذر فتح الإعلان التشويقي.",
+  "movieDetailsWatchAddedToHistory": "تمت الإضافة إلى سجل المشاهدة.",
+  "movieDetailsWatchFailed": "تعذر بدء مشاهدة هذا الفيلم.",
+  "movieDetailsBookmarkFailed": "تعذر تحديث قائمة المشاهدة.",
+  "movieDetailsNoInternet": "لا يوجد اتصال بالإنترنت",
+  "movieDetailsLoadFailed": "تعذر تحميل تفاصيل الفيلم.",
+  "movieDetailsSuggestionsFailed": "تعذر تحميل الأفلام المشابهة."
 }

@@ -28,8 +28,7 @@ class GetMoviesParams {
     String? genre,
     String? sortBy,
     String? orderBy,
-  }) {
-    return GetMoviesParams(
+  }) => GetMoviesParams(
       page: page ?? this.page,
       limit: limit ?? this.limit,
       quality: quality ?? this.quality,
@@ -39,5 +38,4 @@ class GetMoviesParams {
       sortBy: sortBy ?? this.sortBy,
       orderBy: orderBy ?? this.orderBy,
     );
-  }
 }

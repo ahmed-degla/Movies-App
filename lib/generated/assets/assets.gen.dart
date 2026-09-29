@@ -129,6 +129,10 @@ class $AssetsImagesPngGen {
   AssetGenImage get movieCover =>
       const AssetGenImage('assets/images/png/movie_cover.png');
 
+  /// File path: assets/images/png/movie_details_background.png
+  AssetGenImage get movieDetailsBackground =>
+      const AssetGenImage('assets/images/png/movie_details_background.png');
+
   /// File path: assets/images/png/onboarding_1.png
   AssetGenImage get onboarding1 =>
       const AssetGenImage('assets/images/png/onboarding_1.png');
@@ -152,6 +156,9 @@ class $AssetsImagesPngGen {
   /// File path: assets/images/png/onboarding_6.png
   AssetGenImage get onboarding6 =>
       const AssetGenImage('assets/images/png/onboarding_6.png');
+
+  /// File path: assets/images/png/play.png
+  AssetGenImage get play => const AssetGenImage('assets/images/png/play.png');
 
   /// File path: assets/images/png/profile1.png
   AssetGenImage get profile1 =>
@@ -218,12 +225,14 @@ class $AssetsImagesPngGen {
     logo,
     movieBg,
     movieCover,
+    movieDetailsBackground,
     onboarding1,
     onboarding2,
     onboarding3,
     onboarding4,
     onboarding5,
     onboarding6,
+    play,
     profile1,
     profile10,
     profile2,
@@ -264,6 +273,9 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/explore.svg
   SvgGenImage get explore => const SvgGenImage('assets/images/svg/explore.svg');
 
+  /// File path: assets/images/svg/heart.svg
+  SvgGenImage get heart => const SvgGenImage('assets/images/svg/heart.svg');
+
   /// File path: assets/images/svg/history.svg
   SvgGenImage get history => const SvgGenImage('assets/images/svg/history.svg');
 
@@ -287,6 +299,9 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/profile.svg
   SvgGenImage get profile => const SvgGenImage('assets/images/svg/profile.svg');
 
+  /// File path: assets/images/svg/rate.svg
+  SvgGenImage get rate => const SvgGenImage('assets/images/svg/rate.svg');
+
   /// File path: assets/images/svg/search.svg
   SvgGenImage get search => const SvgGenImage('assets/images/svg/search.svg');
 
@@ -297,6 +312,9 @@ class $AssetsImagesSvgGen {
   SvgGenImage get watchList =>
       const SvgGenImage('assets/images/svg/watchList.svg');
 
+  /// File path: assets/images/svg/watched.svg
+  SvgGenImage get watched => const SvgGenImage('assets/images/svg/watched.svg');
+
   /// List of all assets
   List<SvgGenImage> get values => [
     arFlag,
@@ -306,6 +324,7 @@ class $AssetsImagesSvgGen {
     enFlag,
     exit,
     explore,
+    heart,
     history,
     home,
     iconGoogle,
@@ -313,9 +332,11 @@ class $AssetsImagesSvgGen {
     nameIcon,
     phone,
     profile,
+    rate,
     search,
     user,
     watchList,
+    watched,
   ];
 }
 

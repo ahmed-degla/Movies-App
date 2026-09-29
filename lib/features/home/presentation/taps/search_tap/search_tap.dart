@@ -1,6 +1,10 @@
+import 'dart:async';
+
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:movies/core/routing/app_router.gr.dart';
 import 'package:movies/core/theme/theme_extension.dart';
 import 'package:movies/features/home/presentation/view_model/home_cubit.dart';
 import 'package:movies/generated/assets/assets.gen.dart';
@@ -71,7 +75,16 @@ class SearchTap extends StatelessWidget {
                         return MovieCard(
                           imageUrl: movie.largeCoverImage,
                           rating: movie.rating,
-                          onTap: () {},
+                          onTap: () {
+                            final id = int.tryParse(movie.id) ?? 0;
+                            if (id > 0) {
+                              unawaited(
+                                context.router.push(
+                                  MovieDetailsRoute(movieId: id),
+                                ),
+                              );
+                            }
+                          },
                         );
                       },
                     ),
