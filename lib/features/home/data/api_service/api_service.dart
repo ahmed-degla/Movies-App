@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:movies/features/home/data/model/movies_response_model.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'api_service.g.dart';
@@ -11,7 +12,7 @@ abstract class ApiService {
   factory ApiService(Dio dio) = _ApiService;
 
   @GET('list_movies.json')
-  Future<dynamic> getMovies({
+  Future<MoviesResponseModel> getMovies({
     @Query('page') int? page,
     @Query('limit') int? limit,
     @Query('quality') String? quality,
@@ -21,7 +22,6 @@ abstract class ApiService {
     @Query('sort_by') String? sortBy,
     @Query('order_by') String? orderBy,
   });
-
 }
 /*
   @GET('movie_details.json')

@@ -44,14 +44,12 @@ class MovieDetailsCubit extends Cubit<MovieDetailsState> {
       case ApiSuccess<MovieDetailsEntity>(:final data):
         _currentMovie = data;
 
-        // Auto add to history
         try {
           if (_firebaseAuthService.isAuthenticated) {
             unawaited(_firebaseAuthService.addToHistory(data.toMovieEntity()));
           }
         } on Object catch (_) {}
 
-        // Fetch suggestions in parallel or sequence
         var suggestions = <MovieEntity>[];
         final suggestionsResult =
             await _getMovieSuggestionsUseCase.call(movieId);
@@ -115,7 +113,6 @@ class MovieDetailsCubit extends Cubit<MovieDetailsState> {
         await _firebaseAuthService.addToWatchlist(movie.toMovieEntity());
       }
     } on Object catch (_) {
-      // Revert on error
       emit(currentState);
     }
   }

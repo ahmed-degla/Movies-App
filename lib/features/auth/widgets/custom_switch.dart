@@ -80,7 +80,10 @@ class CustomSwitch extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            child: SizedBox(width: 38.06.h, height: 38.06.h),
+                            child: SizedBox(
+                              width: context.w(38),
+                              height: context.h(38),
+                            ),
                           ),
                         ),
                         Row(
@@ -118,20 +121,12 @@ class _LanguageIcon extends StatelessWidget {
     scale: isSelected ? 0.82 : 1,
     duration: const Duration(milliseconds: 300),
     curve: Curves.easeOutBack,
-    child: AnimatedOpacity(
-      opacity: isSelected ? 0.35 : 1,
-      duration: const Duration(milliseconds: 250),
-      child: SizedBox(
-        width: 38.06.h,
-        height: 38.06.h,
-        child: Center(
-          child: ClipOval(
-            child: asset.svg(
-              width: 26.86.w,
-              height: 26.86.h,
-              fit: BoxFit.cover,
-            ),
-          ),
+    child: SizedBox(
+      width: 38.h,
+      height: 38.h,
+      child: Center(
+        child: ClipOval(
+          child: asset.svg(width: 26.w, height: 26.h, fit: BoxFit.cover),
         ),
       ),
     ),

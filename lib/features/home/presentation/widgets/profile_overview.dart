@@ -6,11 +6,11 @@ import 'package:movies/core/models/user_model.dart';
 import 'package:movies/core/theme/theme_extension.dart';
 import 'package:movies/core/utils/app_utils.dart';
 import 'package:movies/features/home/domain/entity/movie_entity.dart';
-import 'package:movies/features/profile/presentation/widgets/profile_avatar.dart';
-import 'package:movies/features/profile/presentation/widgets/profile_stat_item.dart';
+import 'package:movies/features/home/presentation/widgets/profile_stat_item.dart';
 import 'package:movies/generated/assets/assets.gen.dart';
 import 'package:movies/widgets/app_button.dart';
 import 'package:movies/widgets/app_text.dart';
+import 'package:movies/widgets/profile_avatar.dart';
 
 class ProfileOverview extends StatelessWidget {
   const ProfileOverview({
@@ -27,71 +27,79 @@ class ProfileOverview extends StatelessWidget {
   final VoidCallback onSignOut;
 
   @override
-  Widget build(BuildContext context) {
-    final strings = tr;
-    return Column(
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const ProfileIdentity(),
-            SizedBox(width: context.w(16)),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.only(top: context.h(16)),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: StreamBuilder<List<MovieEntity>>(
-                        stream: watchlistStream,
-                        builder: (context, snapshot) => ProfileStatItem(
-                          value: '${snapshot.data?.length ?? 0}',
-                          label: strings.wishList,
-                        ),
+  Widget build(BuildContext context) => Column(
+    children: [
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const ProfileIdentity(),
+          SizedBox(width: context.w(16)),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(top: context.h(16)),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: StreamBuilder<List<MovieEntity>>(
+                      stream: watchlistStream,
+                      builder: (context, snapshot) => ProfileStatItem(
+                        value: '${snapshot.data?.length ?? 0}',
+                        label: tr.wishList,
                       ),
                     ),
-                    Expanded(
-                      child: StreamBuilder<List<MovieEntity>>(
-                        stream: historyStream,
-                        builder: (context, snapshot) => ProfileStatItem(
-                          value: '${snapshot.data?.length ?? 0}',
-                          label: strings.history,
-                        ),
+                  ),
+                  Expanded(
+                    child: StreamBuilder<List<MovieEntity>>(
+                      stream: historyStream,
+                      builder: (context, snapshot) => ProfileStatItem(
+                        value: '${snapshot.data?.length ?? 0}',
+                        label: tr.history,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-        SizedBox(height: context.h(20)),
-        Row(
-          children: [
-            Expanded(
-              flex: 2,
-              child: AppButton(
-                onTap: onEditProfile,
-                child: AppText(
-                  text: strings.editProfile,
-                  fontSize: context.sp(16),
-                ),
+          ),
+        ],
+      ),
+      SizedBox(height: context.h(20)),
+      Row(
+        children: [
+          Expanded(
+            flex: 2,
+            child: AppButton(
+              onTap: onEditProfile,
+              child: AppText(
+                text: tr.editProfile,
+                fontSize: context.sp(20),
+                color: appColors.background,
               ),
             ),
-            SizedBox(width: context.w(12)),
-            Expanded(
-              child: AppButton(
-                onTap: onSignOut,
-                backgroundColor: appColors.secondary,
-                child: Assets.images.svg.exit.svg(height: context.h(18)),
+          ),
+          SizedBox(width: context.w(12)),
+          Expanded(
+            child: AppButton(
+              onTap: onSignOut,
+              backgroundColor: appColors.secondary,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                spacing: context.w(12),
+                children: [
+                  AppText(text: tr.exit, fontSize: context.sp(20)),
+                  Assets.images.svg.exit.svg(
+                    height: context.h(18),
+                    color: appColors.primaryText,
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-        SizedBox(height: context.h(20)),
-      ],
-    );
-  }
+          ),
+        ],
+      ),
+      SizedBox(height: context.h(20)),
+    ],
+  );
 }
 
 class ProfileIdentity extends StatefulWidget {

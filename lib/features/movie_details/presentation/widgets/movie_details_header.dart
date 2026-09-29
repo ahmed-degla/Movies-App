@@ -7,6 +7,7 @@ import 'package:movies/core/utils/app_utils.dart';
 import 'package:movies/features/movie_details/domain/entity/movie_details_entity.dart';
 import 'package:movies/features/movie_details/presentation/view_model/movie_details_cubit.dart';
 import 'package:movies/features/movie_details/presentation/widgets/torrent_bottom_sheet.dart';
+import 'package:movies/generated/assets/assets.gen.dart';
 import 'package:movies/widgets/app_back_button.dart';
 import 'package:movies/widgets/app_bottom_sheet.dart';
 import 'package:movies/widgets/app_button.dart';
@@ -38,16 +39,12 @@ class MovieDetailsHeader extends StatelessWidget {
 
     return Stack(
       children: [
-        // Backdrop poster with gradient overlays
         SizedBox(
           height: context.h(520),
           width: double.infinity,
-          child: AppNetWorkImage(
-            imageUrl: backdropUrl,
-          ),
+          child: AppNetWorkImage(imageUrl: backdropUrl),
         ),
 
-        // Gradient fade
         Positioned.fill(
           child: Container(
             decoration: BoxDecoration(
@@ -66,7 +63,6 @@ class MovieDetailsHeader extends StatelessWidget {
           ),
         ),
 
-        // Top Navigation Bar (Back & Bookmark)
         SafeArea(
           child: Padding(
             padding: context.edgeInsets(horizontal: 16, vertical: 8),
@@ -81,7 +77,7 @@ class MovieDetailsHeader extends StatelessWidget {
                   icon: Icon(
                     isWatchlist ? Icons.bookmark : Icons.bookmark_border,
                     color: isWatchlist ? appColors.primary : Colors.white,
-                    size: context.sp(28),
+                    size: context.sp(32),
                   ),
                 ),
               ],
@@ -89,7 +85,6 @@ class MovieDetailsHeader extends StatelessWidget {
           ),
         ),
 
-        // Content (Play Button, Title, Year, Watch Button, Stats Row)
         Positioned(
           left: 0,
           right: 0,
@@ -98,8 +93,8 @@ class MovieDetailsHeader extends StatelessWidget {
             padding: context.edgeInsets(horizontal: 20),
             child: Column(
               mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // Yellow Circular Play Button
                 GestureDetector(
                   onTap: () => _onWatchTap(context),
                   child: Container(
@@ -127,10 +122,9 @@ class MovieDetailsHeader extends StatelessWidget {
                 ),
                 SizedBox(height: context.h(24)),
 
-                // Title
                 AppText(
                   text: movie.title,
-                  fontSize: context.sp(20),
+                  fontSize: context.sp(24),
                   fontWeight: FontWeight.bold,
                   textAlign: TextAlign.center,
                   maxLines: 2,
@@ -138,16 +132,16 @@ class MovieDetailsHeader extends StatelessWidget {
                 ),
                 SizedBox(height: context.h(6)),
 
-                // Year
                 if (movie.year > 0)
                   AppText(
                     text: movie.year.toString(),
-                    fontSize: context.sp(14),
-                    color: Colors.grey.shade400,
+                    fontSize: context.sp(20),
+                    color: appColors.primaryText.withValues(alpha: 0.5),
+                    textAlign: TextAlign.center,
+                    fontWeight: FontWeight.bold,
                   ),
                 SizedBox(height: context.h(16)),
 
-                // Red "Watch" Button
                 AppButton(
                   onTap: () => _onWatchTap(context),
                   backgroundColor: appColors.secondary,
@@ -163,22 +157,41 @@ class MovieDetailsHeader extends StatelessWidget {
                 ),
                 SizedBox(height: context.h(16)),
 
-                // Stats row (Likes, Runtime, Rating)
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     _StatPill(
-                      icon: Icons.favorite,
+                      icon: Assets.images.svg.like.svg(
+                        width: context.w(24),
+                        height: context.w(24),
+                        colorFilter: ColorFilter.mode(
+                          appColors.primary,
+                          BlendMode.srcIn,
+                        ),
+                      ),
                       value: '${movie.likeCount}',
                     ),
                     SizedBox(width: context.w(12)),
                     _StatPill(
-                      icon: Icons.access_time_filled,
+                      icon: Assets.images.svg.time.svg(
+                        width: context.w(24),
+                        height: context.w(24),
+                        colorFilter: ColorFilter.mode(
+                          appColors.primary,
+                          BlendMode.srcIn,
+                        ),
+                      ),
                       value: '${movie.runtime}',
                     ),
                     SizedBox(width: context.w(12)),
                     _StatPill(
-                      icon: Icons.star,
+                      icon: Assets.images.svg.star.svg(
+                        width: context.w(24),
+                        height: context.w(24),
+                        colorFilter: ColorFilter.mode(
+                          appColors.primary,
+                          BlendMode.srcIn,
+                        ),
+                      ),
                       value: movie.rating.toStringAsFixed(1),
                     ),
                   ],
@@ -194,38 +207,38 @@ class MovieDetailsHeader extends StatelessWidget {
 }
 
 class _StatPill extends StatelessWidget {
-  const _StatPill({
-    required this.icon,
-    required this.value,
-  });
+  const _StatPill({required this.icon, required this.value});
 
-  final IconData icon;
+  final Widget icon;
   final String value;
 
   @override
-  Widget build(BuildContext context) => Container(
-        padding: context.edgeInsets(horizontal: 16, vertical: 8),
-        decoration: BoxDecoration(
-          color: appColors.fill,
-          borderRadius: BorderRadius.circular(context.r(16)),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              icon,
-              color: appColors.primary,
-              size: context.sp(18),
-            ),
-            SizedBox(width: context.w(8)),
-            AppText(
+  Widget build(BuildContext context) => Expanded(
+    child: Container(
+      padding: context.edgeInsets(horizontal: 8, vertical: 8),
+      decoration: BoxDecoration(
+        color: appColors.fill,
+        borderRadius: BorderRadius.circular(context.r(16)),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          icon,
+          SizedBox(width: context.w(6)),
+          Flexible(
+            child: AppText(
               text: value,
-              fontSize: context.sp(15),
+              fontSize: context.sp(16),
               fontWeight: FontWeight.w600,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
             ),
-          ],
-        ),
-      );
+          ),
+        ],
+      ),
+    ),
+  );
 }
 
 extension on MovieDetailsEntity {

@@ -23,9 +23,9 @@ import 'package:movies/features/movie_details/presentation/screens/movie_details
     as _i3;
 import 'package:movies/features/onboarding/presentation/onboarding_screen.dart'
     as _i4;
-import 'package:movies/features/profile/presentation/screens/update_profile_screen.dart'
-    as _i8;
 import 'package:movies/features/splash/presentation/splash_screen.dart' as _i7;
+import 'package:movies/features/update_profile/presentation/screens/update_profile_screen.dart'
+    as _i8;
 
 /// generated route for
 /// [_i1.ForgotPasswordScreen]

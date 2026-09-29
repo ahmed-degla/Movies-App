@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:movies/core/enum/profile_avatar.dart';
 import 'package:movies/generated/assets/assets.gen.dart';
 
 class ProfileAvatar extends StatelessWidget {
@@ -49,14 +50,5 @@ class ProfileAvatar extends StatelessWidget {
     return GestureDetector(onTap: onTap, child: avatar);
   }
 
-  static String resolveImagePath(String path) {
-    final legacyAvatar = RegExp(
-      r'^(?:assets/images/png/)?(?:Avatar|profile)(\d+)\.png$',
-    ).firstMatch(path);
-    final imageNumber = int.tryParse(legacyAvatar?.group(1) ?? '');
-    if (imageNumber != null && imageNumber >= 1 && imageNumber <= 10) {
-      return 'assets/images/png/profile_image_$imageNumber.png';
-    }
-    return path;
-  }
+  static String resolveImagePath(String path) => Avatar.resolveImagePath(path);
 }

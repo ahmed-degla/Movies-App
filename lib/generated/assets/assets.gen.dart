@@ -229,6 +229,9 @@ class $AssetsImagesSvgGen {
   SvgGenImage get iconGoogle =>
       const SvgGenImage('assets/images/svg/icon _google.svg');
 
+  /// File path: assets/images/svg/like.svg
+  SvgGenImage get like => const SvgGenImage('assets/images/svg/like.svg');
+
   /// File path: assets/images/svg/lock.svg
   SvgGenImage get lock => const SvgGenImage('assets/images/svg/lock.svg');
 
@@ -244,6 +247,12 @@ class $AssetsImagesSvgGen {
 
   /// File path: assets/images/svg/search.svg
   SvgGenImage get search => const SvgGenImage('assets/images/svg/search.svg');
+
+  /// File path: assets/images/svg/star.svg
+  SvgGenImage get star => const SvgGenImage('assets/images/svg/star.svg');
+
+  /// File path: assets/images/svg/time.svg
+  SvgGenImage get time => const SvgGenImage('assets/images/svg/time.svg');
 
   /// File path: assets/images/svg/user.svg
   SvgGenImage get user => const SvgGenImage('assets/images/svg/user.svg');
@@ -264,11 +273,14 @@ class $AssetsImagesSvgGen {
     history,
     home,
     iconGoogle,
+    like,
     lock,
     nameIcon,
     phone,
     profile,
     search,
+    star,
+    time,
     user,
     watchList,
   ];

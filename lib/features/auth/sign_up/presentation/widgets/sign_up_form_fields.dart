@@ -31,7 +31,7 @@ class SignUpFormFields extends StatelessWidget {
         prefixIcon: UnconstrainedBox(
           child: Assets.images.svg.nameIcon.svg(width: 26.w, height: 26.h),
         ),
-        validator: (value) => AppValidators.name(value, tr),
+        validator: (value) => AppValidators.name(value),
       ),
       SizedBox(height: 24.h),
       AppTextField(
@@ -41,7 +41,7 @@ class SignUpFormFields extends StatelessWidget {
           child: Assets.images.svg.email.svg(width: 26.w, height: 26.h),
         ),
         keyboardType: TextInputType.emailAddress,
-        validator: (value) => AppValidators.email(value, tr),
+        validator: (value) => AppValidators.email(value),
       ),
       SizedBox(height: 24.h),
       AppTextField(
@@ -51,7 +51,7 @@ class SignUpFormFields extends StatelessWidget {
           child: Assets.images.svg.lock.svg(width: 26.w, height: 26.h),
         ),
         obscureText: true,
-        validator: (value) => AppValidators.password(value, tr),
+        validator: (value) => AppValidators.password(value),
       ),
       SizedBox(height: 24.h),
       AppTextField(
@@ -62,7 +62,7 @@ class SignUpFormFields extends StatelessWidget {
         ),
         obscureText: true,
         validator: (value) =>
-            AppValidators.confirmPassword(value, passwordController.text, tr),
+            AppValidators.confirmPassword(value, passwordController.text),
       ),
       SizedBox(height: 24.h),
       AppTextField(
@@ -76,7 +76,7 @@ class SignUpFormFields extends StatelessWidget {
           FilteringTextInputFormatter.digitsOnly,
           LengthLimitingTextInputFormatter(11),
         ],
-        validator: (value) => AppValidators.phone(value, tr),
+        validator: (value) => AppValidators.phone(value),
       ),
     ],
   );

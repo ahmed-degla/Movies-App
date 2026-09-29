@@ -28,10 +28,7 @@ class ProfileTabItem extends StatelessWidget {
           iconPath,
           width: context.w(22),
           height: context.h(22),
-          colorFilter: ColorFilter.mode(
-            isSelected ? appColors.primary : appColors.primaryText,
-            BlendMode.srcIn,
-          ),
+          colorFilter: ColorFilter.mode(appColors.primary, BlendMode.srcIn),
         ),
         SizedBox(height: context.h(6)),
         AppText(

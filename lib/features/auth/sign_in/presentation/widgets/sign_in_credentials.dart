@@ -31,6 +31,7 @@ class SignInCredentials extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
       AppTextField(
         controller: emailController,

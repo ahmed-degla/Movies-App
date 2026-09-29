@@ -8,7 +8,6 @@ import 'package:movies/core/di/injection.dart';
 import 'package:movies/core/general_cubit/general_cubit.dart';
 import 'package:movies/core/helpers/app_validator.dart';
 import 'package:movies/core/routing/app_router.gr.dart';
-import 'package:movies/core/utils/app_utils.dart';
 import 'package:movies/core/utils/localized_error_message.dart';
 import 'package:movies/features/auth/sign_in/presentation/view_model/sign_in_cubit.dart';
 import 'package:movies/features/auth/sign_in/presentation/widgets/sign_in_alternatives.dart';
@@ -58,9 +57,9 @@ class SignInScreen extends StatelessWidget {
                         emailController: cubit.emailController,
                         passwordController: cubit.passwordController,
                         validateEmail: (value) =>
-                            AppValidators.email(value, tr),
+                            AppValidators.email(value),
                         validatePassword: (value) =>
-                            AppValidators.password(value, tr),
+                            AppValidators.password(value),
                         onForgotPassword: () async {
                           await context.router.push(
                             const ForgotPasswordRoute(),

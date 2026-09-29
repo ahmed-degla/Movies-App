@@ -1,17 +1,21 @@
-# movies
+# Movies App
 
-A new Flutter project.
+A Flutter movies app built with Firebase and the YTS movies API.
 
-## Getting Started
+## Project documentation
 
-This project is a starting point for a Flutter application.
+- [Feature map](docs/FEATURE_MAP.md)
+- [App technologies](docs/technologies/README.md)
+- [Retrofit and Dio](docs/technologies/retrofit.md)
+- [Injectable and GetIt](docs/technologies/injectable.md)
 
-A few resources to get you started if this is your first Flutter project:
+## Code generation
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+After changing annotated models, routes, API services, or dependency
+registrations, run:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```sh
+dart run build_runner build
+```
+
+Generated files should not be edited manually.

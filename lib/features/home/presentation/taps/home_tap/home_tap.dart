@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
-import 'package:movies/core/utils/app_utils.dart';
 import 'package:movies/core/utils/localized_error_message.dart';
 import 'package:movies/features/home/presentation/view_model/home_cubit.dart';
 import 'package:movies/features/home/presentation/widgets/home_hero_section.dart';
@@ -17,9 +16,11 @@ class HomeTap extends StatelessWidget {
     final cubit = HomeCubit.of(context);
     return SafeArea(
       top: false,
-      child: BlocConsumer<HomeCubit, HomeStates>(
-        buildWhen: (previous, current) => current is HomeLoaded,
-        listener: (context, state) {},
+      child: BlocBuilder<HomeCubit, HomeStates>(
+        buildWhen: (previous, current) =>
+            current is HomeLoaded ||
+            current is HomeLoading ||
+            current is HomeFailed,
         builder: (context, state) {
           if (state is HomeLoading) {
             return const Center(child: AppProgressIndicator());
@@ -33,26 +34,17 @@ class HomeTap extends StatelessWidget {
           }
           return SingleChildScrollView(
             child: Column(
-              children: <Widget>[
+              children: [
                 const HomeHeroSection(),
                 SizedBox(height: context.h(12)),
-                MovieSection(
-                  movies: cubit.getRandomMovies(),
-                  onSeeMore: () {},
-                  title: tr.action,
-                ),
-                SizedBox(height: context.h(12)),
-                MovieSection(
-                  movies: cubit.getRandomMovies(),
-                  onSeeMore: () {},
-                  title: tr.action,
-                ),
-                SizedBox(height: context.h(12)),
-                MovieSection(
-                  movies: cubit.getRandomMovies(),
-                  onSeeMore: () {},
-                  title: tr.action,
-                ),
+                for (final genre in cubit.genres) ...[
+                  MovieSection(
+                    movies: cubit.moviesForGenre(genre),
+                    onSeeMore: () => cubit.openExploreForGenre(genre),
+                    title: genre,
+                  ),
+                  SizedBox(height: context.h(12)),
+                ],
               ],
             ),
           );

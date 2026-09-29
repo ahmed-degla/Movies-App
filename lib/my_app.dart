@@ -12,49 +12,41 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocBuilder<GeneralCubit, GeneralState>(
-    builder: (context, state) {
-      return ScreenUtilPlusInit(
-        designSize: const Size(430, 932),
-        builder: (context, _) => MaterialApp.router(
-          routerConfig: AppRouter.instance.config(),
+    builder: (context, state) => ScreenUtilPlusInit(
+      designSize: const Size(430, 932),
+      builder: (context, _) => MaterialApp.router(
+        routerConfig: AppRouter.instance.config(),
 
-          title: 'Movies',
+        title: 'Movies',
 
-          theme: AppTheme.light,
-          darkTheme: AppTheme.dark,
-          themeMode: state.themeMode,
+        theme: AppTheme.light,
+        darkTheme: AppTheme.dark,
+        themeMode: state.themeMode,
 
-          // ⭐ This must change when Cubit emits a new locale.
-          locale: state.locale,
+        locale: state.locale,
 
-          supportedLocales: const [Locale('en'), Locale('ar')],
+        supportedLocales: const [Locale('en'), Locale('ar')],
 
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
 
-          debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: false,
 
-          scrollBehavior: const NoGlowScrollBehavior(),
+        scrollBehavior: const NoGlowScrollBehavior(),
 
-          builder: (context, child) {
-            return ColoredBox(
-              color: Theme.of(context).scaffoldBackgroundColor,
-              child: GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                onTap: () {
-                  FocusManager.instance.primaryFocus?.unfocus();
-                },
-                child: child ?? const SizedBox.shrink(),
-              ),
-            );
+        builder: (context, child) => GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            FocusManager.instance.primaryFocus?.unfocus();
           },
+          child: child ?? const SizedBox.shrink(),
         ),
-      );
-    },
+      ),
+    ),
   );
 }
 

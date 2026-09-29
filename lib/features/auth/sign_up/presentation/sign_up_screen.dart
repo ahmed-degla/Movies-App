@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:movies/core/di/injection.dart';
+import 'package:movies/core/general_cubit/general_cubit.dart';
 import 'package:movies/core/routing/app_router.gr.dart';
 import 'package:movies/core/theme/theme_extension.dart';
 import 'package:movies/core/utils/app_utils.dart';
@@ -42,6 +43,7 @@ class SignUpScreen extends StatelessWidget {
       builder: (context, state) {
         final cubit = SignUpCubit.of(context);
         final isLoading = state is SignUpLoading;
+        context.watch<GeneralCubit>();
 
         return Scaffold(
           appBar: AppAppBar(
@@ -64,6 +66,7 @@ class SignUpScreen extends StatelessWidget {
                 child: Form(
                   key: cubit.formKey,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       SignUpAvatarPicker(onAvatarSelected: cubit.selectAvatar),
                       SizedBox(height: 12.h),
@@ -109,7 +112,7 @@ class SignUpScreen extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 18.h),
-                      const CustomSwitch(),
+                      const UnconstrainedBox(child: CustomSwitch()),
                       SizedBox(height: 20.h),
                     ],
                   ),

@@ -20,7 +20,7 @@ class _ApiService implements ApiService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<dynamic> getMovies({
+  Future<MoviesResponseModel> getMovies({
     int? page,
     int? limit,
     String? quality,
@@ -44,7 +44,7 @@ class _ApiService implements ApiService {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<dynamic>(
+    final _options = _setStreamType<MoviesResponseModel>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -54,8 +54,14 @@ class _ApiService implements ApiService {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch(_options);
-    final _value = _result.data;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late MoviesResponseModel _value;
+    try {
+      _value = MoviesResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, response: _result);
+      rethrow;
+    }
     return _value;
   }
 

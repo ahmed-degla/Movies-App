@@ -173,7 +173,7 @@ class _TorrentItem extends StatelessWidget {
               Navigator.of(context).pop();
             },
             child: AppText(
-              text: tr.magnet,
+              text: tr.copy,
               fontSize: context.sp(12),
               fontWeight: FontWeight.bold,
               color: Colors.black,

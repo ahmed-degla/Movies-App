@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies/core/utils/app_utils.dart';
-import 'package:movies/features/profile/presentation/widgets/profile_tab_item.dart';
+import 'package:movies/features/home/presentation/widgets/profile_tab_item.dart';
 import 'package:movies/generated/assets/assets.gen.dart';
 
 class ProfileTabs extends StatelessWidget {

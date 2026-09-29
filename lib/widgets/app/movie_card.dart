@@ -6,6 +6,7 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:movies/core/routing/app_router.gr.dart';
 import 'package:movies/core/theme/theme_extension.dart';
 import 'package:movies/features/home/domain/entity/movie_entity.dart';
+import 'package:movies/generated/assets/assets.gen.dart';
 import 'package:movies/widgets/app_network_image.dart';
 import 'package:movies/widgets/app_text.dart';
 
@@ -39,6 +40,9 @@ class MovieCard extends StatelessWidget {
             child: AppNetWorkImage(
               imageUrl: imageUrl,
               borderRadius: BorderRadius.circular(context.r(20)),
+              errorWidget: Assets.images.png.movieCover.image(
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           PositionedDirectional(
@@ -58,10 +62,9 @@ class MovieCard extends StatelessWidget {
                     fontSize: context.sp(16),
                   ),
                   SizedBox(width: context.w(4)),
-                  Icon(
-                    Icons.star,
+                  Assets.images.svg.star.svg(
                     color: appColors.primary,
-                    size: context.sp(22),
+                    width: context.w(22),
                   ),
                 ],
               ),

@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:movies/core/models/user_model.dart';
 import 'package:movies/features/home/data/model/movie_model.dart';
 import 'package:movies/features/home/data/model/movies_param.dart';
+import 'package:movies/features/home/data/model/movies_response_model.dart';
 import 'package:movies/features/movie_details/data/model/cast_model.dart';
 import 'package:movies/features/movie_details/data/model/movie_details_model.dart';
 import 'package:movies/features/movie_details/data/model/movie_details_params.dart';
@@ -29,6 +30,78 @@ void main() {
       expect(movie.backgroundImage, 'https://example.test/background.jpg');
       expect(movie.description, 'Description');
       expect(movie.toEntity().id, '78812');
+    });
+
+    test('movies response maps complete API data and ignores @meta', () {
+      final response = MoviesResponseModel.fromJson({
+        'status': 'ok',
+        'status_message': 'Query was successful',
+        'data': {
+          'movie_count': 1,
+          'limit': 20,
+          'page_number': 1,
+          'movies': [
+            {
+              'id': 78812,
+              'url': 'https://example.test/movie',
+              'imdb_code': 'tt1234567',
+              'title': 'Movie',
+              'title_english': 'Movie',
+              'title_long': 'Movie (2026)',
+              'slug': 'movie-2026',
+              'year': 2026,
+              'rating': 7.5,
+              'runtime': 100,
+              'genres': ['Drama'],
+              'summary': 'Summary',
+              'description_full': 'Description',
+              'synopsis': 'Synopsis',
+              'yt_trailer_code': 'trailer',
+              'language': 'en',
+              'mpa_rating': 'PG',
+              'background_image': 'https://example.test/background.jpg',
+              'background_image_original':
+                  'https://example.test/background-original.jpg',
+              'small_cover_image': 'https://example.test/small.jpg',
+              'medium_cover_image': 'https://example.test/medium.jpg',
+              'large_cover_image': 'https://example.test/large.jpg',
+              'state': 'ok',
+              'torrents': [
+                {
+                  'url': 'https://example.test/torrent',
+                  'hash': 'hash',
+                  'quality': '720p',
+                  'type': 'bluray',
+                  'is_repack': '0',
+                  'video_codec': 'x264',
+                  'bit_depth': '8',
+                  'audio_channels': '2.0',
+                  'seeds': 10,
+                  'peers': 2,
+                  'size': '1 GB',
+                  'size_bytes': 1000000,
+                  'date_uploaded': '2026-09-29 12:00:00',
+                  'date_uploaded_unix': 1790683200,
+                },
+              ],
+              'date_uploaded': '2026-09-29 12:00:00',
+              'date_uploaded_unix': 1790683200,
+            },
+          ],
+        },
+        '@meta': {'api_version': 2, 'execution_time': 0.01},
+      });
+
+      final movie = response.data.movies.single;
+      expect(response.data.movieCount, 1);
+      expect(response.data.limit, 20);
+      expect(response.data.pageNumber, 1);
+      expect(movie.imdbCode, 'tt1234567');
+      expect(movie.description, 'Description');
+      expect(movie.torrents.single.isRepack, '0');
+      expect(movie.torrents.single.dateUploadedUnix, 1790683200);
+      expect(response.toJson().containsKey('@meta'), isFalse);
+      expect(response.toJson()['data'], isA<Map<String, dynamic>>());
     });
 
     test('nested movie details decode screenshots, cast, and torrents', () {

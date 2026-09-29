@@ -37,12 +37,15 @@ class MovieSection extends StatelessWidget {
             SizedBox(width: context.w(4)),
             InkWell(
               onTap: onSeeMore,
-              child: Assets.images.svg.arrow.svg(
-                width: context.w(12),
-                height: context.h(12),
-                colorFilter: ColorFilter.mode(
-                  appColors.primary,
-                  BlendMode.srcIn,
+              child: RotatedBox(
+                quarterTurns: AppUtils.isAr ? 0 : 2,
+                child: Assets.images.svg.backArrow.svg(
+                  width: context.w(12),
+                  height: context.h(12),
+                  colorFilter: ColorFilter.mode(
+                    appColors.primary,
+                    BlendMode.srcIn,
+                  ),
                 ),
               ),
             ),

@@ -24,4 +24,23 @@ enum Avatar {
     Avatar.profileImage9 => Assets.images.png.profileImage9,
     Avatar.profileImage10 => Assets.images.png.profileImage10,
   };
+
+  static String resolveImagePath(String path) {
+    final legacyAvatar = RegExp(
+      r'^(?:assets/images/png/)?(?:Avatar|profile)(\d+)\.png$',
+    ).firstMatch(path);
+    final imageNumber = int.tryParse(legacyAvatar?.group(1) ?? '');
+    if (imageNumber != null && imageNumber >= 1 && imageNumber <= 10) {
+      return values[imageNumber - 1].avatar.path;
+    }
+    return path;
+  }
+
+  static String? resolveKnownImagePath(String path) {
+    final normalizedPath = resolveImagePath(path);
+    for (final avatar in values) {
+      if (avatar.avatar.path == normalizedPath) return normalizedPath;
+    }
+    return null;
+  }
 }

@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:movies/core/routing/app_router.gr.dart';
 import 'package:movies/features/home/domain/entity/movie_entity.dart';
-import 'package:movies/features/profile/presentation/widgets/empty_movies_placeholder.dart';
-import 'package:movies/features/profile/presentation/widgets/movie_poster_card.dart';
+import 'package:movies/features/home/presentation/taps/profile_tap/widgets/empty_movies_placeholder.dart';
+import 'package:movies/features/home/presentation/taps/profile_tap/widgets/movie_poster_card.dart';
 
 class MoviePreview {
   const MoviePreview({

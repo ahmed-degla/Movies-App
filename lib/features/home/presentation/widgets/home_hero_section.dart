@@ -15,6 +15,7 @@ class HomeHeroSection extends StatelessWidget {
   Widget build(BuildContext _) => BlocBuilder<HomeCubit, HomeStates>(
     builder: (context, state) {
       final cubit = HomeCubit.of(context);
+      if (cubit.movies.isEmpty) return const SizedBox.shrink();
 
       return Stack(
         children: [
@@ -35,6 +36,7 @@ class HomeHeroSection extends StatelessWidget {
               height: context.h(664),
               color: appColors.background.withValues(alpha: .6),
               colorBlendMode: BlendMode.darken,
+              errorWidget: Assets.images.png.movieBg.image(fit: BoxFit.cover),
             ),
           ),
 
@@ -55,6 +57,7 @@ class HomeHeroSection extends StatelessWidget {
                     onPageChanged: (index, _) {
                       cubit.changeCarouselIndex(index);
                     },
+                    autoPlay: true
                   ),
                   itemCount: cubit.movies.length,
                   itemBuilder: (context, index, _) {

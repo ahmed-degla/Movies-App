@@ -1,19 +1,19 @@
-import 'package:movies/generated/l10n/app_localizations.dart';
+import 'package:movies/core/utils/app_utils.dart';
 
 class AppValidators {
   AppValidators._();
 
-  static String? required(String? value, AppLocalizations strings) {
+  static String? required(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return strings.requiredField;
+      return tr.requiredField;
     }
 
     return null;
   }
 
-  static String? email(String? value, AppLocalizations strings) {
+  static String? email(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return strings.emailRequired;
+      return tr.emailRequired;
     }
 
     final emailRegex = RegExp(
@@ -21,19 +21,19 @@ class AppValidators {
     );
 
     if (!emailRegex.hasMatch(value.trim())) {
-      return strings.validEmail;
+      return tr.validEmail;
     }
 
     return null;
   }
 
-  static String? password(String? value, AppLocalizations strings) {
+  static String? password(String? value) {
     if (value == null || value.isEmpty) {
-      return strings.passwordRequired;
+      return tr.passwordRequired;
     }
 
     if (value.length < 8) {
-      return strings.passwordMinLength;
+      return tr.passwordMinLength;
     }
 
     final passwordRegex = RegExp(
@@ -41,7 +41,7 @@ class AppValidators {
     );
 
     if (!passwordRegex.hasMatch(value)) {
-      return strings.passwordComplexity;
+      return tr.passwordComplexity;
     }
 
     return null;
@@ -50,42 +50,41 @@ class AppValidators {
   static String? confirmPassword(
     String? value,
     String? password,
-    AppLocalizations strings,
   ) {
     if (value == null || value.isEmpty) {
-      return strings.confirmPasswordRequired;
+      return tr.confirmPasswordRequired;
     }
 
     if (value != password) {
-      return strings.passwordMismatch;
+      return tr.passwordMismatch;
     }
 
     return null;
   }
 
-  static String? name(String? value, AppLocalizations strings) {
+  static String? name(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return strings.nameRequired;
+      return tr.nameRequired;
     }
 
     final nameRegex = RegExp(r'^[a-zA-Z\u0600-\u06FF\s]{2,}$');
 
     if (!nameRegex.hasMatch(value.trim())) {
-      return strings.validName;
+      return tr.validName;
     }
 
     return null;
   }
 
-  static String? phone(String? value, AppLocalizations strings) {
+  static String? phone(String? value, ) {
     if (value == null || value.trim().isEmpty) {
-      return strings.phoneRequired;
+      return tr.phoneRequired;
     }
 
     final phoneRegex = RegExp(r'^\+?[0-9]{8,15}$');
 
     if (!phoneRegex.hasMatch(value.trim())) {
-      return strings.validPhone;
+      return tr.validPhone;
     }
 
     return null;

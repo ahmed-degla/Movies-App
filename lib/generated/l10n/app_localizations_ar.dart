@@ -299,4 +299,10 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get tooManyRequests =>
       'عدد المحاولات كبير جدًا. يرجى المحاولة لاحقًا.';
+
+  @override
+  String get updateProfile => 'تحديث الملف الشخصي';
+
+  @override
+  String get copy => 'نسخ';
 }

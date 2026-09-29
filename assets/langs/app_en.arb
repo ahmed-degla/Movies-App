@@ -91,5 +91,7 @@
   "invalidCredentials": "The email or password is incorrect.",
   "emailAlreadyInUse": "An account already exists for this email.",
   "weakPassword": "Choose a stronger password.",
-  "tooManyRequests": "Too many attempts. Please try again later."
+  "tooManyRequests": "Too many attempts. Please try again later.",
+  "updateProfile": "Update Profile",
+  "copy": "Copy"
 }

@@ -76,7 +76,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                       ),
                       hintText: tr.email,
                       keyboardType: TextInputType.emailAddress,
-                      validator: (value) => AppValidators.email(value, tr),
+                      validator: (value) => AppValidators.email(value),
                     ),
 
                     AppButton(

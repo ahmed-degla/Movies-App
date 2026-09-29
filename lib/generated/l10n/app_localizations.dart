@@ -655,6 +655,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Too many attempts. Please try again later.'**
   String get tooManyRequests;
+
+  /// No description provided for @updateProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Profile'**
+  String get updateProfile;
+
+  /// No description provided for @copy.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get copy;
 }
 
 class _AppLocalizationsDelegate

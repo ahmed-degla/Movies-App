@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:movies/core/theme/theme_extension.dart';
-import 'package:movies/features/profile/presentation/widgets/profile_avatar.dart';
 import 'package:movies/generated/assets/assets.gen.dart';
 import 'package:movies/widgets/app_bottom_sheet.dart';
+import 'package:movies/widgets/profile_avatar.dart';
 
 class PickAvatarBottomSheet {
   const PickAvatarBottomSheet._();

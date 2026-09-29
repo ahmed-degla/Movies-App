@@ -4,10 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:movies/core/theme/theme_extension.dart';
+import 'package:movies/core/utils/localized_error_message.dart';
+import 'package:movies/features/home/domain/entity/movie_entity.dart';
+import 'package:movies/features/home/domain/entity/movies_page_entity.dart';
 import 'package:movies/features/home/presentation/view_model/home_cubit.dart';
 import 'package:movies/generated/assets/assets.gen.dart';
 import 'package:movies/widgets/app/movie_card.dart';
+import 'package:movies/widgets/app_paginated_scroll.dart';
 import 'package:movies/widgets/app_progress_indicator.dart';
+import 'package:movies/widgets/app_snack_bar.dart';
 import 'package:movies/widgets/app_text.dart';
 
 class ExploreTap extends StatelessWidget {
@@ -81,20 +86,37 @@ class ExploreTap extends StatelessWidget {
                   );
                 }
                 return Expanded(
-                  child: GridView.builder(
-                    padding: EdgeInsets.symmetric(horizontal: context.w(16)),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: context.w(20),
-                      mainAxisSpacing: context.h(8),
-                      childAspectRatio: .65,
+                  child: AppPaginatedScroll<MovieEntity>(
+                    items: cubit.filteredMovies,
+                    initialPage: AppPaginatedPage<MovieEntity>(
+                      items: cubit.filteredMovies,
+                      totalCount: cubit.exploreMovieCount,
+                      pageSize: cubit.explorePageSize,
+                      pageNumber: cubit.currentExplorePage,
                     ),
-                    itemCount: cubit.filteredMovies.length,
-                    itemBuilder: (context, index) {
-                      final movie = cubit.filteredMovies[index];
-
-                      return MovieCard(movie: movie);
-                    },
+                    getPaginatedItems: (page) async =>
+                        _toPaginatedPage(await cubit.fetchExplorePage(page)),
+                    onRefresh: () async =>
+                        _toPaginatedPage(await cubit.fetchExplorePage(1)),
+                    onPageChanged: (page, items) =>
+                        cubit.updateExplorePage(_toMoviesPage(page), items),
+                    onError: (context, error, _) => AppSnackBar.show(
+                      message: localizedErrorMessage(context, error.toString()),
+                      type: AppSnackBarType.error,
+                    ),
+                    builder: (context, movies) => GridView.builder(
+                      padding: EdgeInsets.symmetric(horizontal: context.w(16)),
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: context.w(20),
+                        mainAxisSpacing: context.h(8),
+                        childAspectRatio: .65,
+                      ),
+                      itemCount: movies.length,
+                      itemBuilder: (context, index) =>
+                          MovieCard(movie: movies[index]),
+                    ),
                   ),
                 );
               },
@@ -104,4 +126,20 @@ class ExploreTap extends StatelessWidget {
       );
     },
   );
+
+  AppPaginatedPage<MovieEntity> _toPaginatedPage(MoviesPageEntity page) =>
+      AppPaginatedPage<MovieEntity>(
+        items: page.movies,
+        totalCount: page.totalCount,
+        pageSize: page.limit,
+        pageNumber: page.pageNumber,
+      );
+
+  MoviesPageEntity _toMoviesPage(AppPaginatedPage<MovieEntity> page) =>
+      MoviesPageEntity(
+        movies: page.items,
+        totalCount: page.totalCount,
+        limit: page.pageSize,
+        pageNumber: page.pageNumber,
+      );
 }

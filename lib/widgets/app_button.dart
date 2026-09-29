@@ -127,6 +127,7 @@ class AppButton extends StatelessWidget {
     final useGradient = enableGradient && backgroundColor == null && !_outlined;
 
     final button = ElevatedButton(
+
       onPressed: loading ? null : onTap,
       style: ElevatedButton.styleFrom(
         backgroundColor: useGradient
@@ -154,7 +155,7 @@ class AppButton extends StatelessWidget {
         maximumSize: maximumSize,
 
         fixedSize:
-            fixedSize ?? Size(width ?? context.w(358), height ?? context.h(50)),
+            fixedSize ?? Size(width ?? double.infinity, height ?? context.h(50)),
 
         alignment: alignment,
 

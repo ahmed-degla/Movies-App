@@ -27,9 +27,9 @@ class AppBackButton extends StatelessWidget {
         child:
             child ??
             Icon(
-              FontAwesomeIcons.chevronRight.data,
-              color: appColors.primary,
-              size: context.sp(18),
+              FontAwesomeIcons.chevronLeft.data,
+              color: appColors.primaryText,
+              size: context.sp(20),
             ),
       ),
     ),
