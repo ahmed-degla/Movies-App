@@ -87,14 +87,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get movieDetailsTryAgain => 'Try Again';
 
   @override
-  String movieDetailsNameLabel(String name) {
-    return 'Name : $name';
-  }
+  String get movieDetailsNameLabel => 'Name';
 
   @override
-  String movieDetailsCharacterLabel(String character) {
-    return 'Character : $character';
-  }
+  String get movieDetailsCharacterLabel => 'Character';
 
   @override
   String get movieDetailsNoTrailer => 'No trailer is available for this movie.';

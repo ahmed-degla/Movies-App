@@ -25,22 +25,8 @@
   "movieDetailsGenres": "التصنيفات",
   "movieDetailsNotAvailable": "غير متاح",
   "movieDetailsTryAgain": "حاول مرة أخرى",
-  "movieDetailsNameLabel": "الاسم : {name}",
-  "@movieDetailsNameLabel": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
-  "movieDetailsCharacterLabel": "الشخصية : {character}",
-  "@movieDetailsCharacterLabel": {
-    "placeholders": {
-      "character": {
-        "type": "String"
-      }
-    }
-  },
+  "movieDetailsNameLabel": "الاسم",
+  "movieDetailsCharacterLabel": "الشخصية",
   "movieDetailsNoTrailer": "لا يوجد إعلان تشويقي لهذا الفيلم.",
   "movieDetailsTrailerOpenFailed": "تعذر فتح الإعلان التشويقي.",
   "movieDetailsWatchAddedToHistory": "تمت الإضافة إلى سجل المشاهدة.",

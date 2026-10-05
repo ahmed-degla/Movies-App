@@ -66,7 +66,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get movieDetailsWatch => 'مشاهدة';
 
   @override
-  String get movieDetailsScreenShots => 'لقطات الشاشة';
+  String get movieDetailsScreenShots => 'لقطات ';
 
   @override
   String get movieDetailsSimilar => 'أفلام مشابهة';
@@ -87,14 +87,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get movieDetailsTryAgain => 'حاول مرة أخرى';
 
   @override
-  String movieDetailsNameLabel(String name) {
-    return 'الاسم : $name';
-  }
+  String get movieDetailsNameLabel => 'الاسم';
 
   @override
-  String movieDetailsCharacterLabel(String character) {
-    return 'الشخصية : $character';
-  }
+  String get movieDetailsCharacterLabel => 'الشخصية';
 
   @override
   String get movieDetailsNoTrailer => 'لا يوجد إعلان تشويقي لهذا الفيلم.';

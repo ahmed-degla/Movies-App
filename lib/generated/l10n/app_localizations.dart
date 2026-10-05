@@ -257,14 +257,14 @@ abstract class AppLocalizations {
   /// No description provided for @movieDetailsNameLabel.
   ///
   /// In en, this message translates to:
-  /// **'Name : {name}'**
-  String movieDetailsNameLabel(String name);
+  /// **'Name'**
+  String get movieDetailsNameLabel;
 
   /// No description provided for @movieDetailsCharacterLabel.
   ///
   /// In en, this message translates to:
-  /// **'Character : {character}'**
-  String movieDetailsCharacterLabel(String character);
+  /// **'Character'**
+  String get movieDetailsCharacterLabel;
 
   /// No description provided for @movieDetailsNoTrailer.
   ///

@@ -35,7 +35,7 @@ class CastCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AppText(
-                text: tr.movieDetailsNameLabel(cast.name),
+                text: '${tr.movieDetailsNameLabel} : ${cast.name}',
                 fontSize: context.sp(14),
                 fontWeight: FontWeight.bold,
                 maxLines: 1,
@@ -43,7 +43,8 @@ class CastCard extends StatelessWidget {
               ),
               SizedBox(height: context.h(4)),
               AppText(
-                text: tr.movieDetailsCharacterLabel(cast.characterName),
+                text:
+                    '${tr.movieDetailsCharacterLabel} : ${cast.characterName}',
                 fontSize: context.sp(13),
                 color: appColors.primaryText.withValues(alpha: 0.7),
                 maxLines: 1,

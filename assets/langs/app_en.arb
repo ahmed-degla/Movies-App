@@ -25,22 +25,8 @@
   "movieDetailsGenres": "Genres",
   "movieDetailsNotAvailable": "N/A",
   "movieDetailsTryAgain": "Try Again",
-  "movieDetailsNameLabel": "Name : {name}",
-  "@movieDetailsNameLabel": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
-  "movieDetailsCharacterLabel": "Character : {character}",
-  "@movieDetailsCharacterLabel": {
-    "placeholders": {
-      "character": {
-        "type": "String"
-      }
-    }
-  },
+  "movieDetailsNameLabel": "Name",
+  "movieDetailsCharacterLabel": "Character",
   "movieDetailsNoTrailer": "No trailer is available for this movie.",
   "movieDetailsTrailerOpenFailed": "Couldn't open the trailer.",
   "movieDetailsWatchAddedToHistory": "Added to your watch history.",
